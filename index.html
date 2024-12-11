@@ -1,11 +1,9 @@
-<!-- HTML File -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inspection Form</title>
-    <!-- Link external CSS file -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -19,7 +17,6 @@
             <option value="auditor1">Auditor 1</option>
             <option value="auditor2">Auditor 2</option>
         </select>
-        <br>
 
         <label for="ncvs">NCVS</label>
         <select id="ncvs">
@@ -27,19 +24,16 @@
             <option value="ncvs1">NCVS 1</option>
             <option value="ncvs2">NCVS 2</option>
         </select>
-        <br>
 
         <label for="model-name">Model Name</label>
-        <input type="text" id="model-name">
-        <br>
+        <input type="text" id="model-name" placeholder="Enter model name">
 
         <label for="style-number">Style Number</label>
-        <input type="text" id="style-number">
-        <br>
+        <input type="text" id="style-number" placeholder="Enter style number">
     </div>
 
     <!-- Button Section -->
-    <div>
+    <div style="text-align: center;">
         <button class="save-button">SIMPAN</button>
         <button class="ftt-button">FTT</button>
     </div>
@@ -49,7 +43,6 @@
 
     <!-- Grid Section -->
     <div class="grid">
-        <!-- Rework Kiri -->
         <div class="grid-section">
             <h3>Rework Kiri</h3>
             <div class="issue issue-red">OVER CEMENT</div>
@@ -58,10 +51,8 @@
             <div class="issue issue-red">THREAD END</div>
         </div>
 
-        <!-- Blank Column -->
         <div class="grid-section"></div>
 
-        <!-- Rework Kanan -->
         <div class="grid-section">
             <h3>Rework Kanan</h3>
             <div class="issue issue-yellow">WRINKLE</div>
@@ -70,11 +61,9 @@
             <div class="issue issue-yellow">OFF CENTER</div>
         </div>
 
-        <!-- Blank Column -->
         <div class="grid-section"></div>
     </div>
 
-    <!-- Link external JavaScript file -->
     <script src="script.js"></script>
 </body>
 </html>

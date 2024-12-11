@@ -10,4 +10,6 @@ document.querySelector('.ftt-button').addEventListener('click', () => {
     alert('FTT button clicked!');
 });
 
-// Add more JavaScript functionality here if needed
+// Placeholder for JavaScript functionality
+console.log("Script loaded successfully!");
+
