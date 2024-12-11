@@ -1,0 +1,90 @@
+/* Stylesheet for Inspection Form */
+
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+/* Form section styling */
+.form-section {
+    margin-bottom: 20px;
+}
+
+/* Label styling */
+label {
+    display: inline-block;
+    width: 100px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Select and input field styling */
+select, input {
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+/* Button styling */
+button {
+    padding: 10px 20px;
+    margin-right: 10px;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+/* Save button styling */
+.save-button {
+    background-color: #007bff;
+}
+
+/* FTT button styling */
+.ftt-button {
+    background-color: #1a1a8f;
+}
+
+/* Grid layout styling */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+/* Grid section styling */
+.grid-section {
+    background-color: #e6f3ff;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Issue card styling */
+.issue {
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    text-align: center;
+}
+
+/* Specific colors for issue cards */
+.issue-red {
+    background-color: #e74c3c;
+}
+
+.issue-yellow {
+    background-color: #f1c40f;
+}
+
+.issue-blue {
+    background-color: #3498db;
+}
+
+/* QTY Inspect section styling */
+.qty-inspect {
+    background-color: #d4edda;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+}
