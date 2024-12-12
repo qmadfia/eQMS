@@ -1,82 +1,103 @@
+index.html
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Inspection</title>
+    <title>Inspection Form</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="dashboard">
-        <!-- Header Section -->
-        <div class="header">
-            <img src="logo.png" alt="Logo" class="logo">
-            <h1>eQMS Dashboard</h1>
+    <div class="header">
+        <img src="logo.png.png" alt="Logo" class="logo">
+        <h1>eQMS</h1>
+    </div>
+
+    <!-- Form Section -->
+    <div class="form-section">
+        <label for="auditor">Auditor</label>
+        <select id="auditor">
+            <option value="">Select</option>
+            <option value="auditor1">Auditor 1</option>
+            <option value="auditor2">Auditor 2</option>
+        </select>
+
+        <label for="ncvs">NCVS</label>
+        <select id="ncvs">
+            <option value="">Select</option>
+            <option value="ncvs101">NCVS 101</option>
+            <option value="ncvs102">NCVS 102</option>
+            <option value="ncvs103">NCVS 103</option>
+            <option value="ncvs104">NCVS 104</option>
+            <option value="ncvs105">NCVS 105</option>
+            <option value="ncvs106">NCVS 106</option>
+            <option value="ncvs107">NCVS 107</option>
+            <option value="ncvs108">NCVS 108</option>
+            <option value="ncvs109">NCVS 109</option>
+            <option value="ncvs110">NCVS 110</option>
+            <option value="ncvs111">NCVS 111</option>
+            <option value="ncvs112">NCVS 112</option>
+            <option value="ncvs113">NCVS 113</option>
+            <option value="ncvs114">NCVS 114</option>
+            <option value="ncvs115">NCVS 115</option>
+            <option value="ncvs116">NCVS 116</option>
+
+            <!-- plant 2 -->
+            <option value="ncvs201">NCVS 201</option>
+            <option value="ncvs202">NCVS 202</option>
+            <option value="ncvs203">NCVS 203</option>
+            <option value="ncvs204">NCVS 204</option>
+            <option value="ncvs205">NCVS 205</option>
+            <option value="ncvs206">NCVS 206</option>
+            <option value="ncvs207">NCVS 207</option>
+            <option value="ncvs208">NCVS 208</option>
+            <option value="ncvs209">NCVS 209</option>
+            <option value="ncvs210">NCVS 210</option>
+            <option value="ncvs211">NCVS 211</option>
+            <option value="ncvs212">NCVS 212</option>
+            <option value="ncvs213">NCVS 213</option>
+            <option value="ncvs214">NCVS 214</option>
+            <option value="ncvs215">NCVS 215</option>
+        </select>
+
+        <label for="model-name">Model Name</label>
+        <input type="text" id="model-name" placeholder="Enter model name">
+
+        <label for="style-number">Style Number</label>
+        <input type="text" id="style-number" placeholder="Enter style number">
+    </div>
+
+    <!-- Button Section -->
+    <div style="text-align: center;">
+        <button class="save-button">SIMPAN</button>
+        <button class="ftt-button">FTT</button>
+    </div>
+
+    <!-- QTY Inspect Section -->
+    <div class="qty-inspect">QTY INSPECT</div>
+
+    <!-- Grid Section -->
+    <div class="grid">
+        <div class="grid-section">
+            <h3>Rework Kiri</h3>
+            <div class="issue issue-red">OVER CEMENT</div>
+            <div class="issue issue-red">STAIN UPPER</div>
+            <div class="issue issue-red">STAIN OUTSOLE</div>
+            <div class="issue issue-red">THREAD END</div>
         </div>
 
-        <!-- Main Content Section -->
-        <div class="main-content">
-            <!-- Left Container: Input Form -->
-            <div class="container left">
-                <h2>Input Data</h2>
-                <div class="form-section">
-                    <label for="auditor">Auditor</label>
-                    <select id="auditor">
-                        <option value="">Select</option>
-                        <option value="auditor1">Auditor 1</option>
-                        <option value="auditor2">Auditor 2</option>
-                    </select>
+        <div class="grid-section"></div>
 
-                    <label for="ncvs">NCVS</label>
-                    <select id="ncvs">
-                        <option value="">Select</option>
-                        <!-- Add NCVS options dynamically if needed -->
-                        <option value="ncvs101">NCVS 101</option>
-                        <option value="ncvs102">NCVS 102</option>
-                        <option value="ncvs103">NCVS 103</option>
-                    </select>
-
-                    <label for="model-name">Model Name</label>
-                    <input type="text" id="model-name" placeholder="Enter model name">
-
-                    <label for="style-number">Style Number</label>
-                    <input type="text" id="style-number" placeholder="Enter style number">
-
-                    <button class="save-button">Save</button>
-                </div>
-            </div>
-
-            <!-- Right Top Container: FTT Display -->
-            <div class="container right top">
-                <h2>FTT (First Time Through)</h2>
-                <div class="ftt-display">
-                    <p>FTT Percentage:</p>
-                    <h1 id="ftt-percentage">95%</h1>
-                </div>
-            </div>
-
-            <!-- Right Bottom Container: Defect & Inspection Data -->
-            <div class="container right bottom">
-                <h2>Defect & Inspection Data</h2>
-                <div class="defect-input">
-                    <label for="qty-inspect">QTY Inspect</label>
-                    <input type="number" id="qty-inspect" placeholder="Enter QTY Inspect">
-
-                    <label for="defect-type">Defect Type</label>
-                    <select id="defect-type">
-                        <option value="">Select</option>
-                        <option value="over-cement">Over Cement</option>
-                        <option value="stain-upper">Stain Upper</option>
-                        <option value="stain-outsole">Stain Outsole</option>
-                    </select>
-
-                    <label for="defect-count">Defect Count</label>
-                    <input type="number" id="defect-count" placeholder="Enter Defect Count">
-
-                    <button class="submit-button">Submit</button>
-                </div>
-            </div>
+        <div class="grid-section">
+            <h3>Rework Kanan</h3>
+            <div class="issue issue-yellow">WRINKLE</div>
+            <div class="issue issue-yellow">ALIGN UP</div>
+            <div class="issue issue-yellow">OVER BUFFING</div>
+            <div class="issue issue-yellow">OFF CENTER</div>
         </div>
+
+        <div class="grid-section"></div>
     </div>
 
     <script src="script.js"></script>
