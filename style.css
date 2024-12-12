@@ -35,25 +35,20 @@ h1 {
   background: #ffffff;
   border-radius: 15px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Menambahkan jarak antar elemen form */
 }
 
-.form-section:hover {
-  transform: translateY(-5px);
-}
-
-/* Styling Label */
-label {
-  display: block;
+.form-section label {
   font-weight: bold;
-  margin: 10px 0 5px;
   color: #37474F;
   font-size: 1.1em;
 }
 
-/* Styling Input dan Select */
+/* Styling Input dan Select agar Lebar Sama */
 input[type="text"], select {
-  width: 100%;  /* Menetapkan lebar penuh untuk semua input */
+  width: 100%;  /* Memastikan lebar elemen input dan select 100% */
   padding: 10px;
   margin-bottom: 15px;
   border: 2px solid #BBDEFB;
