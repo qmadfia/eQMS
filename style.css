@@ -27,23 +27,48 @@ h1 {
     color: #2196F3;
     margin: 0;
 }
-/* Styling untuk Form Section */
-.form-section {
-  max-width: 600px;
-  margin: 20px auto;
-  padding: 20px;
-  background: #ffffff;
-  border-radius: 15px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  display: flex;
-  flex-direction: column;
-  gap: 15px; /* Menambahkan jarak antar elemen form */
+/* Atur tata letak utama */
+.dashboard {
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* Kolom kiri dan kanan */
+    grid-template-rows: 1fr 1fr; /* Baris atas dan bawah */
+    gap: 20px;
+    height: 100vh; /* Tinggi penuh viewport */
+    padding: 20px;
+    box-sizing: border-box;
 }
 
-.form-section label {
-  font-weight: bold;
-  color: #37474F;
-  font-size: 1.1em;
+/* Form Section (Kiri Bawah) */
+.form-section {
+    grid-column: 1 / 2; /* Kolom pertama */
+    grid-row: 1 / 3; /* Membentang dua baris */
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    overflow-y: auto; /* Jika konten lebih besar dari tinggi container */
+}
+
+/* FTT Section (Kanan Atas) */
+.ftt-section {
+    grid-column: 2 / 3; /* Kolom kedua */
+    grid-row: 1 / 2; /* Baris pertama */
+    background: #2196F3;
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+}
+
+/* Reject Section (Kanan Bawah) */
+.reject-section {
+    grid-column: 2 / 3; /* Kolom kedua */
+    grid-row: 2 / 3; /* Baris kedua */
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
 }
 
 /* Styling Input dan Select agar Lebar Sama */
