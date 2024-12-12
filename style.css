@@ -72,6 +72,31 @@ h1 {
     padding: 15px;
     margin-top: 20px; /* Tambahkan margin untuk jarak ke atas */
 }
+/* Form Section */
+.form-section {
+    position: relative; /* Make this the reference point for absolute positioning */
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 columns layout */
+    gap: 10px;
+    margin: 20px;
+}
+
+/* Button Wrapper */
+.button-wrapper {
+    position: absolute;
+    bottom: -30px; /* Adjust distance from bottom of the form section */
+    right: 0; /* Align to the right of the form section */
+}
+
+/* Save Button */
+.save-button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
 /* Styling Input dan Select agar Lebar Sama */
 input[type="text"], select {
