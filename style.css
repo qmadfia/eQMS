@@ -16,7 +16,7 @@ header {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 logo {
-    max-width: 100px; /* Menentukan lebar maksimal logo */
+    max-width: 10px; /* Menentukan lebar maksimal logo */
     height: auto; /* Agar proporsional */
     margin-right: 20px; /* Menambahkan jarak antara logo dan teks */
 }
