@@ -48,7 +48,7 @@ h1 {
 
 /* Styling Input dan Select agar Lebar Sama */
 input[type="text"], select {
-  width: 100%;  /* Memastikan lebar elemen input dan select 100% */
+  width: 70px;  /* Memastikan lebar elemen input dan select 100% */
   padding: 10px;
   margin-bottom: 15px;
   border: 2px solid #BBDEFB;
