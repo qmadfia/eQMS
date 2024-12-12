@@ -27,45 +27,47 @@ h1 {
     color: #2196F3;
     margin: 0;
 }
-/* Form Section */
+/* Styling untuk Form Section */
 .form-section {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    background: #ffffff;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s ease-in-out;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease-in-out;
 }
 
 .form-section:hover {
-    transform: translateY(-5px);
+  transform: translateY(-5px);
 }
 
+/* Styling Label */
 label {
-    display: block;
-    font-weight: bold;
-    margin: 10px 0 5px;
-    color: #37474F;
-    font-size: 1.1em;
+  display: block;
+  font-weight: bold;
+  margin: 10px 0 5px;
+  color: #37474F;
+  font-size: 1.1em;
 }
 
+/* Styling Input dan Select */
 input[type="text"], select {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 2px solid #BBDEFB;
-    border-radius: 8px;
-    background-color: #f7faff;
-    font-size: 1em;
-    color: #37474F;
-    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
+  width: 100%;  /* Menetapkan lebar penuh untuk semua input */
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 2px solid #BBDEFB;
+  border-radius: 8px;
+  background-color: #f7faff;
+  font-size: 1em;
+  color: #37474F;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 input:focus, select:focus {
-    outline: none;
-    border-color: #42A5F5;
-    box-shadow: 0 0 8px rgba(66, 165, 245, 0.5);
+  outline: none;
+  border-color: #42A5F5;
+  box-shadow: 0 0 8px rgba(66, 165, 245, 0.5);
 }
 
 /* Buttons */
