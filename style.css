@@ -7,7 +7,7 @@ body {
     padding: 0;
 }
 /* Styling untuk Header */
-header {
+.header {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -15,21 +15,18 @@ header {
     background-color: #ffffff;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
-logo {
-    max-width: 10px; /* Menentukan lebar maksimal logo */
-    height: auto; /* Agar proporsional */
-    margin-right: 20px; /* Menambahkan jarak antara logo dan teks */
+
+.logo {
+    max-width: 50px; /* Ukuran logo lebih kecil */
+    height: auto; /* Agar tetap proporsional */
+    margin-right: 15px; /* Mengurangi jarak antara logo dan teks */
 }
 
 h1 {
-    text-align: center;
+    font-size: 2em; /* Ukuran font lebih kecil untuk menyesuaikan */
     color: #2196F3;
-    margin: 20px 0;
-    font-size: 2.5em;
-    font-weight: bold;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 0;
 }
-
 /* Form Section */
 .form-section {
     max-width: 600px;
