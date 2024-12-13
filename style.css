@@ -97,8 +97,9 @@ h1 {
 
 /* Save Button Wrapper */
 .button-wrapper {
-    text-align: right; /* Align the button to the right */
-    margin-top: 10px; /* Add spacing between input and button */
+    position: absolute; /* Allow positioning relative to parent */
+    right: 0; /* Align to the right of the container */
+    bottom: -40px; /* Position below the input field */
 }
 
 /* Save Button Style */
