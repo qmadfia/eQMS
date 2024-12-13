@@ -55,6 +55,7 @@ h1 {
     gap: 20px; /* Memberikan jarak antar elemen */
     width: 100%; /* Memastikan elemen mengisi seluruh lebar */
     justify-content: flex-start; /* Menyusun elemen ke kiri */
+    align-items: flex-start; /* Menjaga kedua elemen sejajar di bagian atas */
 }
 
 /* FTT Section (Kiri) */
@@ -77,9 +78,10 @@ h1 {
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     padding: 15px;
-    margin-top: 20px; /* Menambahkan jarak antara atas dan bawah */
+    margin-top: 0; /* Menghapus margin-top agar sejajar dengan ftt-section */
     width: 100%; /* Mengatur lebar penuh */
 }
+
 
 /* Form Section */
 .form-section {
