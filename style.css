@@ -95,6 +95,21 @@ h1 {
     border-radius: 5px;
 }
 
+/* Save Button Wrapper */
+.button-wrapper {
+    flex-shrink: 0; /* Prevent the button from resizing */
+}
+
+/* Save Button Style */
+.save-button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
 /* Styling Input dan Select agar Lebar Sama */
 input[type="text"], select {
   width: 95%;  /* Memastikan lebar elemen input dan select 100% */
