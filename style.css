@@ -95,12 +95,13 @@ h1 {
     border-radius: 5px;
 }
 
-/* Save Button */
+/* Save Button Wrapper */
 .button-wrapper {
-    margin-top: 20px;
     text-align: right; /* Align the button to the right */
+    margin-top: 10px; /* Add spacing between input and button */
 }
 
+/* Save Button Style */
 .save-button {
     padding: 10px 20px;
     background-color: #4CAF50;
@@ -108,6 +109,13 @@ h1 {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+
+/* Adjust Form Section for Proper Alignment */
+.form-section {
+    display: flex;
+    flex-direction: column; /* Ensure labels and inputs stack vertically */
+    gap: 15px; /* Add space between elements */
 }
 
 /* Styling Input dan Select agar Lebar Sama */
