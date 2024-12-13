@@ -49,10 +49,17 @@ h1 {
     overflow-y: auto; /* Jika konten lebih besar dari tinggi container */
 }
 
-/* FTT Section (Kanan Atas) */
+/* Styling untuk bagian kanan (Right Section) */
+.right-section {
+    display: flex; /* Menggunakan Flexbox untuk menata elemen secara horizontal */
+    gap: 20px; /* Memberikan jarak antar elemen */
+    width: 100%; /* Memastikan elemen mengisi seluruh lebar */
+    justify-content: flex-start; /* Menyusun elemen ke kiri */
+}
+
+/* FTT Section (Kiri) */
 .ftt-section {
-    grid-column: 2 / 3; /* Kolom kedua */
-    grid-row: 1 / 2; /* Baris pertama */
+    flex: 1; /* Membuat ftt-section mengambil ruang yang tersisa */
     background: #2196F3;
     color: white;
     border-radius: 10px;
@@ -60,26 +67,20 @@ h1 {
     padding: 15px;
     text-align: center;
     margin-bottom: 20px; /* Tambahkan margin untuk jarak ke bawah */
-    width: 50%; /* Atur panjang container, bisa disesuaikan */
-    width: 75%; /* Atur panjang container, bisa disesuaikan */
-    margin-left: auto; /* Pusatkan container secara horizontal */
-    margin-right: 0;
+    width: 100%; /* Mengatur lebar penuh */
 }
 
-/* Reject Section (Kanan Bawah) */
+/* Reject Section (Kanan) */
 .reject-section {
-    grid-column: 2 / 3; /* Kolom kedua */
-    grid-row: 2 / 3; /* Baris kedua */
+    flex: 1; /* Membuat reject-section mengambil ruang yang tersisa */
     background: #ffffff;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     padding: 15px;
-    margin-top: 20px; /* Tambahkan margin untuk jarak ke atas */
-    width: 50%; /* Atur panjang container */
-    width: 75%; /* Atur panjang container */
-    margin-left: auto; /* Pusatkan container secara horizontal */
-    margin-right: 0;
+    margin-top: 20px; /* Menambahkan jarak antara atas dan bawah */
+    width: 100%; /* Mengatur lebar penuh */
 }
+
 /* Form Section */
 .form-section {
     display: grid;
