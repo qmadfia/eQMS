@@ -62,7 +62,7 @@ h1 {
     margin-bottom: 20px; /* Tambahkan margin untuk jarak ke bawah */
     width: 50%; /* Atur panjang container, bisa disesuaikan */
     margin-left: auto; /* Pusatkan container secara horizontal */
-    margin-right: auto;
+    margin-right: 0;
 }
 
 /* Reject Section (Kanan Bawah) */
@@ -76,7 +76,7 @@ h1 {
     margin-top: 20px; /* Tambahkan margin untuk jarak ke atas */
     width: 50%; /* Atur panjang container */
     margin-left: auto; /* Pusatkan container secara horizontal */
-    margin-right: auto;
+    margin-right: 0;
 }
 /* Form Section */
 .form-section {
