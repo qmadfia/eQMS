@@ -6,6 +6,7 @@ body {
     margin: 0;
     padding: 0;
 }
+
 /* Styling untuk Header */
 .header {
     display: flex;
@@ -17,88 +18,86 @@ body {
 }
 
 .logo {
-    max-width: 50px; /* Ukuran logo lebih kecil */
-    height: auto; /* Agar tetap proporsional */
-    margin-right: 15px; /* Mengurangi jarak antara logo dan teks */
+    max-width: 50px;
+    height: auto;
+    margin-right: 15px;
 }
 
 h1 {
-    font-size: 2em; /* Ukuran font lebih kecil untuk menyesuaikan */
+    font-size: 2em;
     color: #2196F3;
     margin: 0;
 }
+
 /* Atur tata letak utama */
 .dashboard {
     display: grid;
-    grid-template-columns: 1fr 2fr; /* Kolom kiri dan kanan */
-    grid-template-rows: 1fr 1fr; /* Baris atas dan bawah */
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: auto auto; /* Baris yang fleksibel untuk tinggi elemen */
     gap: 20px;
-    height: 80vh; /* Tinggi penuh viewport */
+    height: auto;
     padding: 20px;
     box-sizing: border-box;
 }
 
-/* Form Section (Kiri Bawah) */
+/* Form Section (Kiri) */
 .form-section {
-    margin-bottom: 10px;
-    grid-column: 1 / 2; /* Kolom pertama */
-    grid-row: 1 / 3; /* Membentang dua baris */
+    grid-column: 1 / 2;
+    grid-row: 1 / 3;
     background: #ffffff;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    overflow-y: auto; /* Jika konten lebih besar dari tinggi container */
+    overflow-y: auto;
 }
 
-/* Styling untuk bagian kanan (Right Section) */
+/* Right Section */
 .right-section {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2; /* Tetap di baris pertama */
+    display: flex;
+    gap: 20px;
     margin-bottom: 0; /* Hilangkan margin bawah */
-    padding-bottom: 0; /* Hilangkan padding bawah */
-    display: flex; /* Menggunakan Flexbox untuk menata elemen secara horizontal */
-    gap: 20px; /* Memberikan jarak antar elemen */
-    width: 100%; /* Memastikan elemen mengisi seluruh lebar */
-    justify-content: flex-start; /* Menyusun elemen ke kiri */
-    align-items: flex-start; /* Menjaga kedua elemen sejajar di bagian atas */
+    padding-bottom: 0;
+    justify-content: flex-start;
+    align-items: flex-start;
 }
 
-/* FTT Section (Kiri) */
+/* FTT Section */
 .ftt-section {
-    flex: 1; /* Membuat ftt-section mengambil ruang yang tersisa */
+    flex: 1;
     background: #2196F3;
     color: white;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     padding: 15px;
     text-align: center;
-    margin-bottom: 20px; /* Tambahkan margin untuk jarak ke bawah */
-    width: 100%; /* Mengatur lebar penuh */
+    width: 100%;
 }
 
-/* Reject Section (Kanan) */
+/* Reject Section */
 .reject-section {
-    flex: 1; /* Membuat reject-section mengambil ruang yang tersisa */
+    flex: 1;
     background: #ffffff;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     padding: 15px;
-    margin-top: 0; /* Menghapus margin-top agar sejajar dengan ftt-section */
-    width: 100%; /* Mengatur lebar penuh */
+    margin-top: 0;
+    width: 100%;
 }
+
 /* Rework Section */
 .rework-section {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3; /* Tetap di baris kedua */
     display: flex;
     gap: 20px;
-    margin-top: 0;
+    margin-top: 0; /* Hilangkan margin atas */
     padding-top: 0;
     justify-content: space-between;
 }
 
-.rework-section, .right-section {
-    margin: 0; /* Pastikan margin 0 */
-    padding: 0; /* Pastikan padding 0 */
-}
-
-/* Rework Left */
+/* Rework Left & Right */
 .rework-left, .rework-right {
     flex: 1;
     background: #ffffff;
@@ -108,6 +107,7 @@ h1 {
     text-align: center;
 }
 
+/* Rework Buttons */
 .rework-left button, .rework-right button {
     background-color: #4CAF50;
     color: white;
@@ -121,13 +121,11 @@ h1 {
     background-color: #45a049;
 }
 
-/* Styling untuk counter (angka) */
 .rework-left p, .rework-right p {
     font-size: 1.5em;
     font-weight: bold;
     margin-top: 10px;
 }
-
 /* Form Section */
 .form-section {
     display: grid;
