@@ -103,7 +103,7 @@ h1 {
 }
 /* Save Button Wrapper */
 .button-wrapper {
-    margin-left: 80%; /* Push the button to the far right */
+    margin-left: 70%; /* Push the button to the far right */
     flex-shrink: 0; /* Prevent the button from resizing */
 }
 
