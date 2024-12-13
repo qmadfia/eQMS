@@ -52,6 +52,8 @@ h1 {
 
 /* Styling untuk bagian kanan (Right Section) */
 .right-section {
+    margin-bottom: 0; /* Hilangkan margin bawah */
+    padding-bottom: 0; /* Hilangkan padding bawah */
     display: flex; /* Menggunakan Flexbox untuk menata elemen secara horizontal */
     gap: 20px; /* Memberikan jarak antar elemen */
     width: 100%; /* Memastikan elemen mengisi seluruh lebar */
@@ -89,6 +91,11 @@ h1 {
     margin-top: 0;
     padding-top: 0;
     justify-content: space-between;
+}
+
+.rework-section, .right-section {
+    margin: 0; /* Pastikan margin 0 */
+    padding: 0; /* Pastikan padding 0 */
 }
 
 /* Rework Left */
