@@ -103,12 +103,14 @@ h1 {
 }
 /* Save Button Wrapper */
 .button-wrapper {
+    margin-left: 500px; /* Push the button to the far right */
     flex-shrink: 0; /* Prevent the button from resizing */
 }
 
 /* Save Button Style */
 .save-button {
     padding: 10px 20px;
+    align-items: center;
     background-color: #4CAF50;
     color: white;
     border: none;
