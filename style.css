@@ -111,13 +111,6 @@ h1 {
     cursor: pointer;
 }
 
-/* Adjust Form Section for Proper Alignment */
-.form-section {
-    display: flex;
-    flex-direction: column; /* Ensure labels and inputs stack vertically */
-    gap: 15px; /* Add space between elements */
-}
-
 /* Styling Input dan Select agar Lebar Sama */
 input[type="text"], select {
   width: 95%;  /* Memastikan lebar elemen input dan select 100% */
