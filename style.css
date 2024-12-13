@@ -81,7 +81,42 @@ h1 {
     margin-top: 0; /* Menghapus margin-top agar sejajar dengan ftt-section */
     width: 100%; /* Mengatur lebar penuh */
 }
+/* Rework Section */
+.rework-section {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
 
+/* Rework Left */
+.rework-left, .rework-right {
+    flex: 1;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    text-align: center;
+}
+
+.rework-left button, .rework-right button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.rework-left button:hover, .rework-right button:hover {
+    background-color: #45a049;
+}
+
+/* Styling untuk counter (angka) */
+.rework-left p, .rework-right p {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-top: 10px;
+}
 
 /* Form Section */
 .form-section {
