@@ -3,91 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-QMS</title>
+    <title>Inspection Form</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="header">
-        <img src="logo.png" alt="Logo" class="logo">
-        <h1>E-QMS</h1>
+        <img src="logo.png.png" alt="Logo" class="logo">
+        <h1>eQMS</h1>
     </div>
 
-    <div class="dashboard">
-        <!-- Form Section -->
-        <div class="form-section">
-            <label for="auditor">Auditor</label>
-            <select id="auditor">
-                <option value="">Select</option>
-                <option value="amalia">Amalia</option>
-                <option value="reyven">Reyven</option>
-                <option value="sopian">Sopian</option>
-                <option value="badrowi">Badrowi</option>
-            </select>
+  <div class="dashboard">
+    <!-- Form Section (Kiri Bawah) -->
+    <div class="form-section">
+        <label for="auditor">Auditor</label>
+        <select id="auditor">
+            <option value="">Select</option>
+            <option value="auditor1">Auditor 1</option>
+            <option value="auditor2">Auditor 2</option>
+        </select>
 
-            <label for="ncvs">NCVS</label>
-            <select id="ncvs">
-                <option value="">Select</option>
-                <script>
-                    for (let i = 101; i <= 116; i++) {
-                        document.write(`<option value="${i}">NCVS ${i}</option>`);
-                    }
-                </script>
-            </select>
+        <label for="ncvs">NCVS</label>
+        <select id="ncvs">
+            <option value="">Select</option>
+            <option value="ncvs101">NCVS 101</option>
+            <option value="ncvs102">NCVS 102</option>
+            <option value="ncvs103">NCVS 103</option>
+            <option value="ncvs104">NCVS 104</option>
+            <option value="ncvs105">NCVS 105</option>
+            <option value="ncvs106">NCVS 106</option>
+            <option value="ncvs107">NCVS 107</option>
+            <option value="ncvs108">NCVS 108</option>
+            <option value="ncvs109">NCVS 109</option>
+            <option value="ncvs110">NCVS 110</option>
+            <option value="ncvs111">NCVS 111</option>
+            <option value="ncvs112">NCVS 112</option>
+            <option value="ncvs113">NCVS 113</option>
+            <option value="ncvs114">NCVS 114</option>
+            <option value="ncvs115">NCVS 115</option>
+            <option value="ncvs116">NCVS 116</option>
 
-            <label for="model-name">Model Name</label>
-            <input type="text" id="model-name" placeholder="Enter model name">
+            <!-- plant 2 -->
+            <option value="ncvs201">NCVS 201</option>
+            <option value="ncvs202">NCVS 202</option>
+            <option value="ncvs203">NCVS 203</option>
+            <option value="ncvs204">NCVS 204</option>
+            <option value="ncvs205">NCVS 205</option>
+            <option value="ncvs206">NCVS 206</option>
+            <option value="ncvs207">NCVS 207</option>
+            <option value="ncvs208">NCVS 208</option>
+            <option value="ncvs209">NCVS 209</option>
+            <option value="ncvs210">NCVS 210</option>
+            <option value="ncvs211">NCVS 211</option>
+            <option value="ncvs212">NCVS 212</option>
+            <option value="ncvs213">NCVS 213</option>
+            <option value="ncvs214">NCVS 214</option>
+            <option value="ncvs215">NCVS 215</option>
+        </select>
 
-            <label for="style-number">Style Number</label>
-            <input type="text" id="style-number" placeholder="Enter style number">
+        <label for="model-name">Model Name</label>
+        <input type="text" id="model-name" placeholder="Enter model name">
 
-            <label for="ftt">FTT (%)</label>
-            <p id="ftt-display">FTT: <span id="ftt-percentage">0%</span></p>
-
-            <button onclick="calculateFTT()">Calculate FTT</button>
+        <label for="style-number">Style Number</label>
+        <input type="text" id="style-number" placeholder="Enter style number">
+    <!-- Wrapper for Save Button -->
+    <div class="button-wrapper">
+        <button class="save-button">SIMPAN</button>
+    </div>
+    </div>
+    
+    <!-- Container Kanan -->
+    <div class="right-section">
+        <!-- FTT (Kanan Atas) -->
+        <div class="ftt-section">
+            <h2>First Time Through (FTT)</h2>
+            <p>Data dan statistik FTT akan muncul di sini.</p>
         </div>
-
-        <!-- Right Section -->
-        <div class="right-section">
-            <div class="summary-section">
-                <h3>Defect Summary</h3>
-                <div id="defect-summary" class="scrollable"></div>
-            </div>
-            <div class="controls">
-                <h3>Defects</h3>
-                <button onclick="updateDefect('OVER_CEMENT', 'add')">+ OVER CEMENT</button>
-                <button onclick="updateDefect('OVER_CEMENT', 'subtract')">- OVER CEMENT</button>
-                <button onclick="updateDefect('RAT_HOLE', 'add')">+ RAT HOLE</button>
-                <button onclick="updateDefect('RAT_HOLE', 'subtract')">- RAT HOLE</button>
-                <!-- Add more defect buttons as needed -->
-            </div>
-        </div>
-
-        <!-- Rework Section -->
-        <div class="rework-section">
-            <h3>QTY Inspect & Rework</h3>
-            <div class="qty-inspect">
-                <label for="qty-inspect">QTY Inspect:</label>
-                <button onclick="updateQty('inspect', 1)">+</button>
-                <button onclick="updateQty('inspect', -1)">-</button>
-                <span id="qty-inspect">0</span>
-            </div>
-
-            <div class="rework-left">
-                <label for="rework-left">Rework Left:</label>
-                <button onclick="updateQty('left', 1)">+</button>
-                <button onclick="updateQty('left', -1)">-</button>
-                <span id="rework-left">0</span>
-            </div>
-
-            <div class="rework-right">
-                <label for="rework-right">Rework Right:</label>
-                <button onclick="updateQty('right', 1)">+</button>
-                <button onclick="updateQty('right', -1)">-</button>
-                <span id="rework-right">0</span>
-            </div>
+        <!-- Rejects (Kanan Bawah) -->
+        <div class="reject-section">
+            <h3>QTY Inspect & Defect</h3>
+            <p>Masukkan data defect, reject, dan jumlah inspeksi.</p>
         </div>
     </div>
+ <!-- Rework Section -->
+    <div class="rework-section">
+    <!-- Rework Left -->
+    <div class="rework-left">
+        <h3>Rework Kiri</h3>
+        <button class="rework-button" onclick="updateCounter('left')">Klik untuk Rework Kiri</button>
+        <p id="left-counter">0</p>
+    </div>
 
+    <!-- Rework Right -->
+    <div class="rework-right">
+        <h3>Rework Kanan</h3>
+        <button class="rework-button" onclick="updateCounter('right')">Klik untuk Rework Kanan</button>
+        <p id="right-counter">0</p>
+    </div>
+</div>
     <script src="script.js"></script>
 </body>
 </html>
