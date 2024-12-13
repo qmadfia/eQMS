@@ -95,6 +95,30 @@ h1 {
     border-radius: 5px;
 }
 
+Untuk memastikan tombol SIMPAN berada di sebelah kanan, di dalam container yang sama dengan input Style Number, Anda dapat mengatur tata letaknya dengan CSS menggunakan pendekatan flexbox. Berikut adalah cara memperbaiki kode Anda.
+
+HTML
+Pastikan struktur HTML sudah benar:
+
+html
+Copy code
+<div class="style-number-container">
+    <label for="style-number">Style Number</label>
+    <input type="text" id="style-number" placeholder="Enter style number">
+    
+    <!-- Wrapper for Save Button -->
+    <div class="button-wrapper">
+        <button class="save-button">SIMPAN</button>
+    </div>
+</div>
+
+/* Style Number Container */
+.style-number-container {
+    display: flex; /* Use flexbox layout */
+    align-items: center; /* Align items vertically */
+    gap: 10px; /* Add space between input and button */
+    margin-bottom: 20px; /* Adds space below the container */
+}
 /* Save Button Wrapper */
 .button-wrapper {
     flex-shrink: 0; /* Prevent the button from resizing */
