@@ -6,7 +6,6 @@ body {
     margin: 0;
     padding: 0;
 }
-
 /* Styling untuk Header */
 .header {
     display: flex;
@@ -28,46 +27,21 @@ h1 {
     color: #2196F3;
     margin: 0;
 }
-
 /* Atur tata letak utama */
 .dashboard {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Membuat dua kolom dengan lebar yang sama */
-    grid-template-rows: 1fr; /* Satu baris */
+    grid-template-columns: 1fr 2fr; /* Kolom kiri dan kanan */
+    grid-template-rows: 1fr 1fr; /* Baris atas dan bawah */
     gap: 20px;
     height: 80vh; /* Tinggi penuh viewport */
     padding: 20px;
     box-sizing: border-box;
 }
 
-/* FTT Section (Kiri) */
-.ftt-section {
-    grid-column: 1 / 2; /* Kolom pertama */
-    background: #2196F3;
-    color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    text-align: center;
-    width: 100%; /* Full width di kolom */
-    margin-bottom: 20px; /* Tambahkan margin untuk jarak ke bawah */
-}
-
-/* Reject Section (Kanan) */
-.reject-section {
-    grid-column: 2 / 3; /* Kolom kedua */
-    background: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    margin-top: 20px; /* Tambahkan margin untuk jarak ke atas */
-    width: 100%; /* Full width di kolom */
-}
-
 /* Form Section (Kiri Bawah) */
 .form-section {
     grid-column: 1 / 2; /* Kolom pertama */
-    grid-row: 2 / 3; /* Baris kedua */
+    grid-row: 1 / 3; /* Membentang dua baris */
     background: #ffffff;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -75,6 +49,37 @@ h1 {
     overflow-y: auto; /* Jika konten lebih besar dari tinggi container */
 }
 
+/* FTT Section (Kanan Atas) */
+.ftt-section {
+    grid-column: 2 / 3; /* Kolom kedua */
+    grid-row: 1 / 2; /* Baris pertama */
+    background: #2196F3;
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    text-align: center;
+    margin-bottom: 20px; /* Tambahkan margin untuk jarak ke bawah */
+    width: 50%; /* Atur panjang container, bisa disesuaikan */
+    width: 75%; /* Atur panjang container, bisa disesuaikan */
+    margin-left: auto; /* Pusatkan container secara horizontal */
+    margin-right: 0;
+}
+
+/* Reject Section (Kanan Bawah) */
+.reject-section {
+    grid-column: 2 / 3; /* Kolom kedua */
+    grid-row: 2 / 3; /* Baris kedua */
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin-top: 20px; /* Tambahkan margin untuk jarak ke atas */
+    width: 50%; /* Atur panjang container */
+    width: 75%; /* Atur panjang container */
+    margin-left: auto; /* Pusatkan container secara horizontal */
+    margin-right: 0;
+}
 /* Form Section */
 .form-section {
     display: grid;
@@ -97,7 +102,6 @@ h1 {
     border: 1px solid #ccc;
     border-radius: 5px;
 }
-
 /* Style Number Container */
 .style-number-container {
     display: flex; /* Use flexbox layout */
@@ -105,7 +109,6 @@ h1 {
     gap: 10px; /* Add space between input and button */
     margin-bottom: 20px; /* Adds space below the container */
 }
-
 /* Save Button Wrapper */
 .button-wrapper {
     margin-left: 70%; /* Push the button to the far right */
@@ -180,4 +183,59 @@ button:active {
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
     text-transform: uppercase;
     letter-spacing: 1.5px;
+}
+
+/* Grid Section */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.grid-section {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease-in-out;
+}
+
+.grid-section:hover {
+    transform: translateY(-5px);
+}
+
+.grid-section h3 {
+    margin-top: 0;
+    color: #2196F3;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.issue {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: bold;
+    text-align: center;
+    transition: transform 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.issue-red {
+    background-color: #FFCDD2;
+    color: #C62828;
+}
+
+.issue-yellow {
+    background-color: #FFF9C4;
+    color: #F57F17;
+}
+
+.issue:hover {
+    transform: scale(1.1);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
 }
