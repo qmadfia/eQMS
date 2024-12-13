@@ -83,7 +83,7 @@ h1 {
 /* Label and Input Styles */
 .form-section label {
     font-weight: bold;
-    margin-bottom: 100px;
+    margin-bottom: 1px;
     display: block; /* Ensure the label takes full width */
 }
 
