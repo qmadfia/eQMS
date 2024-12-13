@@ -74,21 +74,33 @@ h1 {
 }
 /* Form Section */
 .form-section {
-    position: relative; /* Make this the reference point for absolute positioning */
     display: grid;
-    grid-template-columns: 1fr 1fr; /* 2 columns layout */
-    gap: 10px;
+    grid-template-columns: 1fr; /* Single column layout */
+    gap: 15px; /* Space between form groups */
     margin: 20px;
 }
 
-/* Button Wrapper */
-.button-wrapper {
-    position: absolute;
-    bottom: -30px; /* Adjust distance from bottom of the form section */
-    right: 0; /* Align to the right of the form section */
+/* Label and Input Styles */
+.form-section label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block; /* Ensure the label takes full width */
+}
+
+.form-section select,
+.form-section input {
+    width: 100%; /* Full width of the container */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
 /* Save Button */
+.button-wrapper {
+    margin-top: 20px;
+    text-align: right; /* Align the button to the right */
+}
+
 .save-button {
     padding: 10px 20px;
     background-color: #4CAF50;
