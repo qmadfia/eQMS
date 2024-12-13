@@ -33,7 +33,7 @@ h1 {
     grid-template-columns: 1fr 2fr; /* Kolom kiri dan kanan */
     grid-template-rows: 1fr 1fr; /* Baris atas dan bawah */
     gap: 20px;
-    height: 50vh; /* Tinggi penuh viewport */
+    height: 80vh; /* Tinggi penuh viewport */
     padding: 20px;
     box-sizing: border-box;
 }
