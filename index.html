@@ -3,92 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-QMS</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Inspection Form</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <header class="header">
-            <img src="trusted-seller-logo.png" alt="Trusted Seller Logo" class="logo">
-            <h1>E-QMS</h1>
-        </header>
-
-        <div class="form-section">
-            <label for="auditor">Auditor:</label>
-            <select id="auditor">
-                <option value="">Select</option>
-            </select>
-
-            <label for="ncvs">NCVS:</label>
-            <select id="ncvs">
-                <option value="">Select</option>
-            </select>
-
-            <label for="model-name">Model Name:</label>
-            <input type="text" id="model-name">
-
-            <label for="style-number">Style Number:</label>
-            <input type="text" id="style-number">
-        </div>
-
-        <div class="status-section">
-            <div class="ftt">
-                <h2>FTT</h2>
-                <p class="ftt-percentage">50%</p>
-            </div>
-
-            <div class="rework">
-                <div class="rework-left">
-                    <p>Rework Left</p>
-                    <p class="rework-count">1</p>
-                </div>
-                <div class="rework-right">
-                    <p>Rework Right</p>
-                    <p class="rework-count">3</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="defects-section">
-            <button>OVER CEMENT</button>
-            <button>STAIN UPPER</button>
-            <button>STAIN OUTSOLE</button>
-            <button>THREAD END</button>
-            <button>RAT HOLE</button>
-            <button>BOND GAP UPPER</button>
-            <button>WRINKLE</button>
-            <button>ALIGN UP</button>
-            <button>OVER BUFFING</button>
-            <button>OFF CENTER</button>
-            <button>ARIANCE</button>
-            <button>X-RAY</button>
-            <button>BROKEN STITCHING</button>
-            <button>STITCH MARGIN</button>
-            <button>YELLOWING</button>
-            <button>ROCKING</button>
-            <button>PEEL OFF</button>
-            <button>MATERIAL FAILURE</button>
-            <button>COLOR MIGRATION</button>
-            <button>DELAMINATION</button>
-            <button>TOE / HEEL / COLLAR SHAPE</button>
-            <button>BOND GAP MIDSOLE</button>
-            <button>METAL CONTAMINATION</button>
-            <button>TWISTED SHOE</button>
-            <button>LOGO / AIR BAG</button>
-        </div>
-
-        <div class="summary-section">
-            <p>OVER CEMENT : 1</p>
-            <p>RAT HOLE : 5</p>
-            <p>ARIANCE : 1</p>
-        </div>
-
-        <div class="action-buttons">
-            <button class="minus">-</button>
-            <button class="plus">+</button>
-        </div>
+    <div class="header">
+        <img src="logo.png.png" alt="Logo" class="logo">
+        <h1>eQMS</h1>
     </div>
 
+  <div class="dashboard">
+    <!-- Form Section (Kiri Bawah) -->
+    <div class="form-section">
+        <label for="auditor">Auditor</label>
+        <select id="auditor">
+            <option value="">Select</option>
+            <option value="auditor1">Auditor 1</option>
+            <option value="auditor2">Auditor 2</option>
+        </select>
+
+        <label for="ncvs">NCVS</label>
+        <select id="ncvs">
+            <option value="">Select</option>
+            <option value="ncvs101">NCVS 101</option>
+            <option value="ncvs102">NCVS 102</option>
+            <option value="ncvs103">NCVS 103</option>
+            <option value="ncvs104">NCVS 104</option>
+            <option value="ncvs105">NCVS 105</option>
+            <option value="ncvs106">NCVS 106</option>
+            <option value="ncvs107">NCVS 107</option>
+            <option value="ncvs108">NCVS 108</option>
+            <option value="ncvs109">NCVS 109</option>
+            <option value="ncvs110">NCVS 110</option>
+            <option value="ncvs111">NCVS 111</option>
+            <option value="ncvs112">NCVS 112</option>
+            <option value="ncvs113">NCVS 113</option>
+            <option value="ncvs114">NCVS 114</option>
+            <option value="ncvs115">NCVS 115</option>
+            <option value="ncvs116">NCVS 116</option>
+
+            <!-- plant 2 -->
+            <option value="ncvs201">NCVS 201</option>
+            <option value="ncvs202">NCVS 202</option>
+            <option value="ncvs203">NCVS 203</option>
+            <option value="ncvs204">NCVS 204</option>
+            <option value="ncvs205">NCVS 205</option>
+            <option value="ncvs206">NCVS 206</option>
+            <option value="ncvs207">NCVS 207</option>
+            <option value="ncvs208">NCVS 208</option>
+            <option value="ncvs209">NCVS 209</option>
+            <option value="ncvs210">NCVS 210</option>
+            <option value="ncvs211">NCVS 211</option>
+            <option value="ncvs212">NCVS 212</option>
+            <option value="ncvs213">NCVS 213</option>
+            <option value="ncvs214">NCVS 214</option>
+            <option value="ncvs215">NCVS 215</option>
+        </select>
+
+        <label for="model-name">Model Name</label>
+        <input type="text" id="model-name" placeholder="Enter model name">
+
+        <label for="style-number">Style Number</label>
+        <input type="text" id="style-number" placeholder="Enter style number">
+    <!-- Wrapper for Save Button -->
+    <div class="button-wrapper">
+        <button class="save-button">SIMPAN</button>
+    </div>
+    </div>
+    
+    <!-- Container Kanan -->
+    <div class="right-section">
+        <!-- FTT (Kanan Atas) -->
+        <div class="ftt-section">
+            <h2>First Time Through (FTT)</h2>
+            <p>Data dan statistik FTT akan muncul di sini.</p>
+        </div>
+        <!-- Rejects (Kanan Bawah) -->
+        <div class="reject-section">
+            <h3>QTY Inspect & Defect</h3>
+            <p>Masukkan data defect, reject, dan jumlah inspeksi.</p>
+        </div>
+    </div>
+ <!-- Rework Section -->
+    <div class="rework-section">
+    <!-- Rework Left -->
+    <div class="rework-left">
+        <h3>Rework Kiri</h3>
+        <button class="rework-button" onclick="updateCounter('left')">Klik untuk Rework Kiri</button>
+        <p id="left-counter">0</p>
+    </div>
+
+    <!-- Rework Right -->
+    <div class="rework-right">
+        <h3>Rework Kanan</h3>
+        <button class="rework-button" onclick="updateCounter('right')">Klik untuk Rework Kanan</button>
+        <p id="right-counter">0</p>
+    </div>
+</div>
     <script src="script.js"></script>
 </body>
 </html>
