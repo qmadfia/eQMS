@@ -138,7 +138,7 @@ h1 {
     display: grid;
     grid-template-columns: 1fr; /* Single column layout */
     gap: 15px; /* Space between form groups */
-    margin: 20px;
+    margin: 0;
 }
 
 /* Label and Input Styles */
