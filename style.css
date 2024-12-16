@@ -253,3 +253,20 @@ button:active {
 .defect-button:hover {
     background-color: #1976D2;
 }
+/* Summary Defect Section */
+.summary-defect {
+    grid-column: 1 / 2; /* Mengambil satu kolom */
+    margin-top: 20px; /* Jarak atas dari form section */
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+}
+
+.summary-defect h3 {
+    margin: 0 0 10px 0;
+}
+
+.summary-item {
+    margin: 5px 0;
+}
