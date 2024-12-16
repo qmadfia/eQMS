@@ -107,11 +107,11 @@ function handleDefectClick(defectName) {
     }
 
     // Perbarui menu summary defect
-    updateSummary();
+    updateDefectSummary();
 }
 
-// Update summary defect menu
-function updateSummary() {
+// Update defect summary (update counters next to defect items)
+function updateDefectSummary() {
     const summaryList = document.getElementById('summary-list');
     summaryList.innerHTML = ''; // Hapus isi sebelumnya
 
@@ -121,12 +121,17 @@ function updateSummary() {
     const formattedDate = today.toLocaleDateString('id-ID', options);
 
     // Iterasi semua cacat dan jumlah klik dari defectCounts
-    // Iterasi semua cacat dan jumlah klik dari defectCounts
     for (const [defect, count] of Object.entries(defectCounts)) {
         if (count > 0) { // Hanya tampilkan defect yang jumlahnya > 0
             const summaryItem = document.createElement('div'); // Elemen untuk setiap cacat
             summaryItem.className = 'summary-item';
             summaryItem.textContent = `${defect} : ${count}`; // Tampilkan cacat dan jumlahnya
+            const countDisplay = document.createElement('div');
+            countDisplay.className = 'count-display';
+            countDisplay.textContent = count; // Tampilkan jumlah klik
+
+            // Menambahkan jumlah ke summary item
+            summaryItem.appendChild(countDisplay);
             summaryList.appendChild(summaryItem); // Tambahkan ke menu summary
         }
     }
