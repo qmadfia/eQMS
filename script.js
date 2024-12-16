@@ -127,4 +127,50 @@ function fetchData() {
           </tr>`;
         renderData(data.data);
       });
+    // Global object to store defect counts
+const defectCounts = {};
+
+// Function to handle defect button clicks
+function handleDefectClick(defectName) {
+    // Increment the count for the clicked defect
+    if (defectCounts[defectName]) {
+        defectCounts[defectName]++;
+    } else {
+        defectCounts[defectName] = 1;
+    }
+    updateSummary();
+}
+
+// Function to update the summary display
+function updateSummary() {
+    const summaryList = document.getElementById('summary-list');
+    summaryList.innerHTML = ''; // Clear previous summary
+
+    for (const [defect, count] of Object.entries(defectCounts)) {
+        const summaryItem = document.createElement('div');
+        summaryItem.className = 'summary-item';
+        summaryItem.textContent = `${defect} : ${count}`;
+        summaryList.appendChild(summaryItem);
+    }
+}
+
+// Add event listeners to defect buttons
+function setupDefectButtons() {
+    const defectButtons = document.querySelectorAll('.defect-button');
+    defectButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            handleDefectClick(button.textContent);
+        });
+    });
+}
+
+// Modify the init function to include setup for defect buttons
+function init() {
+    fetchData();
+    setupActionButtons();
+    setupDefectButtons(); // Setup defect buttons
+}
+
+// Wait for the DOM to load before initializing
+document.addEventListener('DOMContentLoaded', init);
 }
