@@ -115,6 +115,12 @@ function updateSummary() {
     const summaryList = document.getElementById('summary-list');
     summaryList.innerHTML = ''; // Hapus isi sebelumnya
 
+    // Dapatkan tanggal saat ini
+    const today = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const formattedDate = today.toLocaleDateString('id-ID', options);
+
+    // Iterasi semua cacat dan jumlah klik dari defectCounts
     // Iterasi semua cacat dan jumlah klik dari defectCounts
     for (const [defect, count] of Object.entries(defectCounts)) {
         if (count > 0) { // Hanya tampilkan defect yang jumlahnya > 0
@@ -124,6 +130,12 @@ function updateSummary() {
             summaryList.appendChild(summaryItem); // Tambahkan ke menu summary
         }
     }
+
+    // Tampilkan tanggal di summary
+    const dateItem = document.createElement('div');
+    dateItem.className = 'summary-item';
+    dateItem.textContent = `Tanggal: ${formattedDate}`; // Tampilkan tanggal
+    summaryList.appendChild(dateItem); // Tambahkan tanggal ke menu summary
 }
 
 // Setup defect buttons
