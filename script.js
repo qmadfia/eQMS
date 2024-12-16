@@ -78,6 +78,7 @@ function handleDefectClick(defectName) {
     } else {
         defectCounts[defectName] = 1;
     }
+    console.log(`Defect ${defectName} clicked, count: ${defectCounts[defectName]}`);
     updateSummary();
 }
 
@@ -89,7 +90,7 @@ function updateSummary() {
     for (const [defect, count] of Object.entries(defectCounts)) {
         const summaryItem = document.createElement('div');
         summaryItem.className = 'summary-item';
-        summaryItem.textContent = `${defect} : ${count}`;
+        summaryItem.textContent = `${defect.toUpperCase()} : ${count}`;
         summaryList.appendChild(summaryItem);
     }
 }
@@ -99,7 +100,7 @@ function setupDefectButtons() {
     const defectButtons = document.querySelectorAll('.defect-button');
     defectButtons.forEach(button => {
         button.addEventListener('click', () => {
-            handleDefectClick(button.textContent);
+            handleDefectClick(button.textContent.trim());
         });
     });
 }
@@ -137,19 +138,6 @@ async function submitForm() {
 
 // Setup action buttons for counters
 function setupActionButtons() {
-    const minusButton = document.querySelector('.minus');
-    const plusButton = document.querySelector('.plus');
-
-    minusButton.addEventListener('click', () => {
-        console.log('Minus button clicked');
-        // Add logic for minus button
-    });
-
-    plusButton.addEventListener('click', () => {
-        console.log('Plus button clicked');
-        // Add logic for plus button
-    });
-
     const leftReworkButton = document.getElementById('left-rework');
     const rightReworkButton = document.getElementById('right-rework');
 
