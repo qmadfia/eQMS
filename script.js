@@ -2,7 +2,33 @@
 const scriptURL = 'https://script.google.com/macros/s/AKfycbyGDKUHTehjRu_0uDAMDQh4NbGPZyDRVrzp4Vu83Tk/dev';
 
 // Global object to store defect counts
-const defectCounts = {};
+const defectCounts = {
+    "OVER CEMENT": 0,
+    "STAIN UPPER": 0,
+    "STAIN OUTSOLE": 0,
+    "THREAD END": 0,
+    "RAT HOLE": 0,
+    "BOND GAP UPPER": 0,
+    "WRINKLE": 0,
+    "ALIGN UP": 0,
+    "OVER BUFFING": 0,
+    "OFF CENTER": 0,
+    "ARIANCE": 0,
+    "X-RAY": 0,
+    "BROKEN STITCHING": 0,
+    "TOE / HEEL / COLLAR SHAPE": 0,
+    "STITCH MARGIN / SPI": 0,
+    "YELLOWING": 0,
+    "ROCKING": 0,
+    "BOND GAP MIDSOLE": 0,
+    "MATERIAL FAILURE": 0,
+    "COLOR MIGRATION": 0,
+    "PEEL OFF": 0,
+    "DELAMINATION": 0,
+    "METAL CONTAMINATION": 0,
+    "TWISTED SHOE": 0,
+    "LOGO / AIR BAG": 0
+};
 
 // Function to fetch data from the database
 async function fetchData() {
@@ -73,34 +99,41 @@ function renderData(data) {
 
 // Handle defect button clicks
 function handleDefectClick(defectName) {
-    if (defectCounts[defectName]) {
+    // Tambahkan atau perbarui jumlah klik untuk defect tertentu
+    if (defectCounts.hasOwnProperty(defectName)) {
         defectCounts[defectName]++;
     } else {
-        defectCounts[defectName] = 1;
+        console.warn(`Defect '${defectName}' tidak dikenali.`);
     }
-    console.log(`Defect ${defectName} clicked, count: ${defectCounts[defectName]}`);
+
+    // Perbarui menu summary defect
     updateSummary();
 }
 
 // Update summary defect menu
 function updateSummary() {
     const summaryList = document.getElementById('summary-list');
-    summaryList.innerHTML = ''; // Clear previous summary
+    summaryList.innerHTML = ''; // Hapus isi sebelumnya
 
+    // Iterasi semua cacat dan jumlah klik dari defectCounts
     for (const [defect, count] of Object.entries(defectCounts)) {
-        const summaryItem = document.createElement('div');
-        summaryItem.className = 'summary-item';
-        summaryItem.textContent = `${defect.toUpperCase()} : ${count}`;
-        summaryList.appendChild(summaryItem);
+        if (count > 0) { // Hanya tampilkan defect yang jumlahnya > 0
+            const summaryItem = document.createElement('div'); // Elemen untuk setiap cacat
+            summaryItem.className = 'summary-item';
+            summaryItem.textContent = `${defect} : ${count}`; // Tampilkan cacat dan jumlahnya
+            summaryList.appendChild(summaryItem); // Tambahkan ke menu summary
+        }
     }
 }
 
 // Setup defect buttons
 function setupDefectButtons() {
-    const defectButtons = document.querySelectorAll('.defect-button');
+    const defectButtons = document.querySelectorAll('.defect-button'); // Pilih semua tombol dengan class .defect-button
+
     defectButtons.forEach(button => {
         button.addEventListener('click', () => {
-            handleDefectClick(button.textContent.trim());
+            const defectName = button.textContent.trim(); // Ambil teks dari tombol defect
+            handleDefectClick(defectName); // Panggil fungsi untuk menangani klik
         });
     });
 }
