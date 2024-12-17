@@ -120,11 +120,18 @@ function updateReworkCounter(side) {
 
 // Setup rework buttons
 function setupReworkButtons() {
-    const leftReworkButton = document.getElementById('rework-left');
-    const rightReworkButton = document.getElementById('rework-right');
+    // Menggunakan querySelector untuk memilih tombol berdasarkan ID
+    const leftReworkButton = document.querySelector('#rework-left');
+    const rightReworkButton = document.querySelector('#rework-right');
 
-    leftReworkButton.addEventListener('click', () => updateReworkCounter('left'));
-    rightReworkButton.addEventListener('click', () => updateReworkCounter('right'));
+    // Menambahkan event listener pada tombol kiri dan kanan
+    if (leftReworkButton) {
+        leftReworkButton.addEventListener('click', () => updateReworkCounter('left'));
+    }
+
+    if (rightReworkButton) {
+        rightReworkButton.addEventListener('click', () => updateReworkCounter('right'));
+    }
 }
 
 // =============================
