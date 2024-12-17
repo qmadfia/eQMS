@@ -295,3 +295,27 @@ button:active {
 .summary-item {
     margin: 5px 0;
 }
+.buttons {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.control-button {
+    font-size: 24px;
+    padding: 10px 20px;
+    margin: 0 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.control-button.active {
+    background-color: #45a049;
+}
+
+.control-button:hover {
+    background-color: #3e8e41;
+}
