@@ -26,10 +26,9 @@ const defectCounts = {
     "TWISTED SHOE": 0,
     "LOGO / AIR BAG": 0
 };
-
 let qtyInspectCount = 0; // Untuk Qty Inspect
-let leftClickCount = 0;
-let rightClickCount = 0;
+let leftClickCount = 0; // Untuk Rework Kiri
+let rightClickCount = 0; // Untuk Rework Kanan
 
 // Function to handle defect button clicks
 function handleDefectClick(defectName) {
@@ -49,6 +48,7 @@ function updateDefectSummary() {
     const summaryList = document.getElementById('summary-list');
     summaryList.innerHTML = ''; // Clear previous content
 
+    // Loop through defect counts and display them
     for (const [defect, count] of Object.entries(defectCounts)) {
         if (count > 0) {
             const summaryItem = document.createElement('div');
@@ -57,6 +57,10 @@ function updateDefectSummary() {
             summaryList.appendChild(summaryItem);
         }
     }
+
+    // Update rework counters in summary
+    const reworkSummary = document.getElementById('rework-summary');
+    reworkSummary.textContent = `Rework Kiri: ${leftClickCount} | Rework Kanan: ${rightClickCount}`;
 }
 
 // Setup defect buttons
@@ -81,13 +85,39 @@ function handleQtyInspectClick() {
 // Setup Qty Inspect button
 function setupQtyInspectButton() {
     const inputButton = document.querySelector('.input-button');
-    inputButton.addEventListener('click', handleQtyInspectClick);
+    if (inputButton) {
+        inputButton.addEventListener('click', handleQtyInspectClick);
+    }
+}
+
+// Function to update rework counters (left or right)
+function updateReworkCounter(side) {
+    if (side === 'left') {
+        leftClickCount++;
+        document.getElementById('left-counter').textContent = leftClickCount;
+    } else if (side === 'right') {
+        rightClickCount++;
+        document.getElementById('right-counter').textContent = rightClickCount;
+    }
+
+    // Update rework summary after each click
+    updateDefectSummary();
+}
+
+// Setup rework buttons
+function setupReworkButtons() {
+    const leftReworkButton = document.getElementById('left-rework');
+    const rightReworkButton = document.getElementById('right-rework');
+
+    leftReworkButton.addEventListener('click', () => updateReworkCounter('left'));
+    rightReworkButton.addEventListener('click', () => updateReworkCounter('right'));
 }
 
 // Initialize the app
 function init() {
     setupDefectButtons(); // Setup defect buttons
     setupQtyInspectButton(); // Setup Qty Inspect button
+    setupReworkButtons(); // Setup Rework buttons
 }
 
 // Wait for the DOM to load before initializing
