@@ -253,3 +253,103 @@ document.getElementById('.rework-left').addEventListener('click', function() {
 document.getElementById('.rework-right').addEventListener('click', function() {
     updateReworkCounter('right');
 });
+document.querySelector('.defect-button').addEventListener('click', function() {
+    handleDefectClick('OVER CEMENT');
+});
+
+document.querySelector('.defect-button').addEventListener('click', function() {
+    handleDefectClick('STAIN UPPER');
+});
+
+document.querySelector('.defect-button').addEventListener('click', function() {
+    handleDefectClick('STAIN OUTSOLE');
+});
+
+document.querySelector('.defect-button').addEventListener('click', function() {
+    handleDefectClick('THREAD END');
+});
+
+document.querySelector('.defect-button').addEventListener('click', function() {
+    handleDefectClick('RAT HOLE');
+});
+
+document.querySelector('.defect-button').addEventListener('click', function() {
+    handleDefectClick('BOND GAP UPPER');
+});
+
+document.querySelector('.defect-button').addEventListener('click', function() {
+    handleDefectClick('WRINKLE');
+});
+
+document.querySelector('.defect-button').addEventListener('click', function() {
+    handleDefectClick('ALIGN UP');
+});
+
+document.querySelector('.defect-button').addEventListener('click', function() {
+    handleDefectClick('OVER BUFFING');
+});
+
+document.querySelector('.defect-button').addEventListener('click', function() {
+    handleDefectClick('OFF CENTER');
+});
+
+document.querySelector('.defect-button').addEventListener('click', function() {
+    handleDefectClick('ARIANCE');
+});
+
+document.querySelector('.defect-button').addEventListener('click', function() {
+    handleDefectClick('X-RAY');
+});
+
+document.querySelector('.defect-button').addEventListener('click', function() {
+    handleDefectClick('BROKEN STITCHING');
+});
+
+document.querySelector('.defect-button').addEventListener('click', function() {
+    handleDefectClick('TOE / HEEL / COLLAR SHAPE');
+});
+
+document.querySelector('.defect-button').addEventListener('click', function() {
+    handleDefectClick('STITCH MARGIN / SPI');
+});
+
+document.querySelector('.defect-button').addEventListener('click', function() {
+    handleDefectClick('YELLOWING');
+});
+
+document.querySelector('.defect-button').addEventListener('click', function() {
+    handleDefectClick('ROCKING');
+});
+
+document.querySelector('.defect-button').addEventListener('click', function() {
+    handleDefectClick('BOND GAP MIDSOLE');
+});
+
+document.querySelector('.defect-button').addEventListener('click', function() {
+    handleDefectClick('MATERIAL FAILURE');
+});
+
+document.querySelector('.defect-button').addEventListener('click', function() {
+    handleDefectClick('COLOR MIGRATION');
+});
+
+document.querySelector('.defect-button').addEventListener('click', function() {
+    handleDefectClick('PEEL OFF');
+});
+
+document.querySelector('.defect-button').addEventListener('click', function() {
+    handleDefectClick('DELAMINATION');
+});
+
+document.querySelector('.defect-button').addEventListener('click', function() {
+    handleDefectClick('METAL CONTAMINATION');
+});
+
+document.querySelector('.defect-button').addEventListener('click', function() {
+    handleDefectClick('TWISTED SHOE');
+});
+
+document.querySelector('.defect-button').addEventListener('click', function() {
+    handleDefectClick('LOGO / AIR BAG');
+});
+
