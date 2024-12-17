@@ -158,57 +158,38 @@ let isSubtracting = false; // Flag to track if subtracting is active
 function handlePlusClick() {
     isAdding = true; // Enable adding mode
     isSubtracting = false; // Disable subtracting mode
-    document.getElementById('plus-button').classList.add('active');
-    document.getElementById('plus-button').classList.remove('inactive');
-    document.getElementById('minus-button').classList.remove('active');
-    document.getElementById('minus-button').classList.add('inactive');
+    document.getElementById('plus-button').classList.add('active'); // Highlight Plus button
+    document.getElementById('plus-button').classList.remove('inactive'); // Make Plus button active
+    document.getElementById('minus-button').classList.remove('active'); // Remove highlight from Minus button
+    document.getElementById('minus-button').classList.add('inactive'); // Make Minus button inactive
 }
 
 // Function to handle Minus button click
 function handleMinusClick() {
     isAdding = false; // Disable adding mode
     isSubtracting = true; // Enable subtracting mode
-    document.getElementById('minus-button').classList.add('active');
-    document.getElementById('minus-button').classList.remove('inactive');
-    document.getElementById('plus-button').classList.remove('active');
-    document.getElementById('plus-button').classList.add('inactive');
+    document.getElementById('minus-button').classList.add('active'); // Highlight Minus button
+    document.getElementById('minus-button').classList.remove('inactive'); // Make Minus button active
+    document.getElementById('plus-button').classList.remove('active'); // Remove highlight from Plus button
+    document.getElementById('plus-button').classList.add('inactive'); // Make Plus button inactive
 }
 
-// Generic function to handle increment/decrement
-function handleReworkClick(targetId) {
-    let targetElement = document.getElementById(targetId);
-    let currentCount = parseInt(targetElement.textContent) || 0;
-
+// Function to handle Qty Inspect click based on Plus/Minus state
+function handleQtyInspectClick() {
+    let qtyInspectCount = parseInt(document.getElementById('qtyInspectOutput').textContent) || 0;
+    
     if (isAdding) {
-        currentCount++; // Increment if adding
+        qtyInspectCount++; // Increment if adding
     } else if (isSubtracting) {
-        currentCount--; // Decrement if subtracting
+        qtyInspectCount--; // Decrement if subtracting
     }
 
-    targetElement.textContent = currentCount; // Update the output
-}
-
-// Function to handle Qty Inspect click
-function handleQtyInspectClick() {
-    handleReworkClick('qtyInspectOutput'); // Reuse the generic function
-}
-
-// Function to handle Rework Kiri click
-function handleReworkKiriClick() {
-    handleReworkClick('reworkKiriOutput');
-}
-
-// Function to handle Rework Kanan click
-function handleReworkKananClick() {
-    handleReworkClick('reworkKananOutput');
+    document.getElementById('qtyInspectOutput').textContent = qtyInspectCount; // Update the output
 }
 
 // Event listeners for Plus and Minus buttons
 document.getElementById('plus-button').addEventListener('click', handlePlusClick);
 document.getElementById('minus-button').addEventListener('click', handleMinusClick);
 
-// Event listeners for Qty Inspect, Rework Kiri, and Rework Kanan buttons
+// Event listener for Qty Inspect button (this is the button that does the increment or decrement)
 document.querySelector('.input-button').addEventListener('click', handleQtyInspectClick);
-document.querySelector('.rework-kiri-button').addEventListener('click', handleReworkKiriClick);
-document.querySelector('.rework-kanan-button').addEventListener('click', handleReworkKananClick);
-
