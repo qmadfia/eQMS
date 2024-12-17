@@ -304,18 +304,41 @@ button:active {
     font-size: 24px;
     padding: 10px 20px;
     margin: 0 10px;
-    background-color: #4CAF50;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, opacity 0.3s ease;
+    font-weight: bold;
 }
 
-.control-button.active {
-    background-color: #45a049;
+/* Plus button style */
+#plus-button {
+    background-color: blue;
 }
 
+#plus-button.active {
+    background-color: darkblue;
+}
+
+#plus-button.inactive {
+    background-color: #B0C4DE; /* Light grey color when inactive */
+}
+
+/* Minus button style */
+#minus-button {
+    background-color: red;
+}
+
+#minus-button.active {
+    background-color: darkred;
+}
+
+#minus-button.inactive {
+    background-color: #F08080; /* Light red color when inactive */
+}
+
+/* Hover effect for buttons */
 .control-button:hover {
-    background-color: #3e8e41;
+    opacity: 0.8;
 }
