@@ -314,28 +314,28 @@ button:active {
 
 /* Plus button style */
 #plus-button {
-    background-color: blue;
+    background-color: #77CDFF;
 }
 
 #plus-button.active {
-    background-color: darkblue;
+    background-color: #3D3BF3;
 }
 
 #plus-button.inactive {
-    background-color: #B0C4DE; /* Light grey color when inactive */
+    background-color: #B5C0D0; /* Light grey color when inactive */
 }
 
 /* Minus button style */
 #minus-button {
-    background-color: red;
+    background-color: #FF8383;
 }
 
 #minus-button.active {
-    background-color: darkred;
+    background-color: #FF2929;
 }
 
 #minus-button.inactive {
-    background-color: #F08080; /* Light red color when inactive */
+    background-color: #B5C0D0; /* Light red color when inactive */
 }
 
 /* Hover effect for buttons */
