@@ -53,8 +53,8 @@ function populateFields(data) {
         auditorSelect.innerHTML = '';
         data.auditors.forEach(auditor => {
             const option = document.createElement('option');
-            option.value = auditor;
-            option.textContent = auditor;
+            option.value = auditor.trim();
+            option.textContent = auditor.trim();
             auditorSelect.appendChild(option);
         });
     }
@@ -64,8 +64,8 @@ function populateFields(data) {
         ncvsSelect.innerHTML = '';
         data.ncvs.forEach(ncvs => {
             const option = document.createElement('option');
-            option.value = ncvs;
-            option.textContent = ncvs;
+            option.value = ncvs.trim();
+            option.textContent = ncvs.trim();
             ncvsSelect.appendChild(option);
         });
     }
@@ -87,21 +87,22 @@ function renderData(data) {
     data.forEach(row => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
-            <td>${row.timestamp}</td>
-            <td>${row.auditor}</td>
-            <td>${row.ncvs}</td>
-            <td>${row.model}</td>
-            <td>${row.reworkRight}</td>
-            <td>${row.reworkLeft}</td>`;
+            <td>${row.timestamp || '-'}</td>
+            <td>${row.auditor || '-'}</td>
+            <td>${row.ncvs || '-'}</td>
+            <td>${row.model || '-'}</td>
+            <td>${row.reworkRight || 0}</td>
+            <td>${row.reworkLeft || 0}</td>`;
         table.appendChild(tr);
     });
 }
 
 // Handle defect button clicks
 function handleDefectClick(defectName) {
-    // Tambahkan atau perbarui jumlah klik untuk defect tertentu
+    // Pastikan nama defect ada di defectCounts
     if (defectCounts.hasOwnProperty(defectName)) {
         defectCounts[defectName]++;
+        console.log(`Defect ${defectName} updated to ${defectCounts[defectName]}`);
     } else {
         console.warn(`Defect '${defectName}' tidak dikenali.`);
     }
@@ -115,42 +116,26 @@ function updateDefectSummary() {
     const summaryList = document.getElementById('summary-list');
     summaryList.innerHTML = ''; // Hapus isi sebelumnya
 
-    // Dapatkan tanggal saat ini
-    const today = new Date();
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    const formattedDate = today.toLocaleDateString('id-ID', options);
-
     // Iterasi semua cacat dan jumlah klik dari defectCounts
     for (const [defect, count] of Object.entries(defectCounts)) {
-        if (count > 0) { // Hanya tampilkan defect yang jumlahnya > 0
-            const summaryItem = document.createElement('div'); // Elemen untuk setiap cacat
+        if (count > 0) {
+            const summaryItem = document.createElement('div');
             summaryItem.className = 'summary-item';
-            summaryItem.textContent = `${defect} : ${count}`; // Tampilkan cacat dan jumlahnya
-            const countDisplay = document.createElement('div');
-            countDisplay.className = 'count-display';
-            countDisplay.textContent = count; // Tampilkan jumlah klik
-
-            // Menambahkan jumlah ke summary item
-            summaryItem.appendChild(countDisplay);
-            summaryList.appendChild(summaryItem); // Tambahkan ke menu summary
+            summaryItem.textContent = `${defect}: ${count}`;
+            summaryList.appendChild(summaryItem);
         }
     }
-
-    // Tampilkan tanggal di summary
-    const dateItem = document.createElement('div');
-    dateItem.className = 'summary-item';
-    dateItem.textContent = `Tanggal: ${formattedDate}`; // Tampilkan tanggal
-    summaryList.appendChild(dateItem); // Tambahkan tanggal ke menu summary
 }
 
 // Setup defect buttons
 function setupDefectButtons() {
-    const defectButtons = document.querySelectorAll('.defect-button'); // Pilih semua tombol dengan class .defect-button
-
+    const defectButtons = document.querySelectorAll('.defect-button');
     defectButtons.forEach(button => {
         button.addEventListener('click', () => {
-            const defectName = button.textContent.trim(); // Ambil teks dari tombol defect
-            handleDefectClick(defectName); // Panggil fungsi untuk menangani klik
+            const defectName = button.textContent.trim();
+            handleDefectClick(defectName);
+            button.classList.add('active'); // Visual feedback
+            setTimeout(() => button.classList.remove('active'), 200); // Hilangkan setelah 200ms
         });
     });
 }
@@ -159,9 +144,9 @@ function setupDefectButtons() {
 async function submitForm() {
     const form = document.getElementById('qc-form');
     const formData = {
-        auditor: form.elements['auditor'].value,
-        ncvs: form.elements['ncvs'].value,
-        model: form.elements['model'].value,
+        auditor: form.elements['auditor'].value.trim(),
+        ncvs: form.elements['ncvs'].value.trim(),
+        model: form.elements['model'].value.trim(),
         reworkRight: parseInt(document.getElementById('right-counter').textContent) || 0,
         reworkLeft: parseInt(document.getElementById('left-counter').textContent) || 0,
         defects: defectCounts
@@ -177,7 +162,8 @@ async function submitForm() {
 
         if (data.success) {
             alert('Data berhasil dikirim!');
-            fetchData(); // Refresh data
+            resetForm();
+            fetchData();
         } else {
             alert('Gagal mengirim data!');
         }
@@ -186,13 +172,21 @@ async function submitForm() {
     }
 }
 
+// Reset form and counters
+function resetForm() {
+    document.getElementById('qc-form').reset();
+    Object.keys(defectCounts).forEach(key => defectCounts[key] = 0);
+    updateDefectSummary();
+    document.getElementById('left-counter').textContent = 0;
+    document.getElementById('right-counter').textContent = 0;
+    leftClickCount = 0;
+    rightClickCount = 0;
+}
+
 // Setup action buttons for counters
 function setupActionButtons() {
-    const leftReworkButton = document.getElementById('left-rework');
-    const rightReworkButton = document.getElementById('right-rework');
-
-    leftReworkButton.addEventListener('click', () => updateCounter('left'));
-    rightReworkButton.addEventListener('click', () => updateCounter('right'));
+    document.getElementById('left-rework').addEventListener('click', () => updateCounter('left'));
+    document.getElementById('right-rework').addEventListener('click', () => updateCounter('right'));
 }
 
 let leftClickCount = 0;
