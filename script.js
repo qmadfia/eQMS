@@ -214,6 +214,25 @@ function updateReworkCounter(side) {
     // Update the counter element
     counterElement.textContent = currentCount;
 }
+// Fungsi untuk menangani klik tombol defect
+function handleDefectClick(defectName) {
+    // Pastikan status plus atau minus mempengaruhi perubahan nilai defect
+    if (defectCounts.hasOwnProperty(defectName)) {
+        if (isAdding) {
+            defectCounts[defectName]++;  // Menambah defect jika tombol Plus aktif
+        } else if (isSubtracting) {
+            defectCounts[defectName]--;  // Mengurangi defect jika tombol Minus aktif
+        }
+
+        // Update nilai defect pada tampilan
+        console.log(`Defect ${defectName} updated to ${defectCounts[defectName]}`);
+    } else {
+        console.warn(`Defect '${defectName}' tidak dikenali.`);
+    }
+
+    // Update summary defect
+    updateDefectSummary();
+}
 
 // Event listeners for Plus and Minus buttons
 document.getElementById('plus-button').addEventListener('click', handlePlusClick);
@@ -230,4 +249,9 @@ document.getElementById('.rework-left').addEventListener('click', function() {
 document.getElementById('.rework-right').addEventListener('click', function() {
     updateReworkCounter('right');
 });
+
+document.getElementById('.defect-button').addEventListener('click', function() {
+    updateDefectSummary();
+});
+
 
