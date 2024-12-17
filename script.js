@@ -151,82 +151,45 @@ document.addEventListener('DOMContentLoaded', init);
 // =============================
 // 5. Plus Minus
 // =============================
-let isAdding = false; // Flag untuk menandakan jika mode menambah aktif
-let isSubtracting = false; // Flag untuk menandakan jika mode mengurangi aktif
-let leftClickCount = 0; // Untuk Rework Kiri
-let rightClickCount = 0; // Untuk Rework Kanan
+let isAdding = false; // Flag to track if adding is active
+let isSubtracting = false; // Flag to track if subtracting is active
 
-// Fungsi untuk menangani klik tombol Plus
+// Function to handle Plus button click
 function handlePlusClick() {
-    isAdding = true; // Aktifkan mode menambah
-    isSubtracting = false; // Nonaktifkan mode mengurangi
-    document.getElementById('plus-button').classList.add('active'); // Sorot tombol Plus
-    document.getElementById('plus-button').classList.remove('inactive'); // Buat tombol Plus aktif
-    document.getElementById('minus-button').classList.remove('active'); // Hilangkan sorotan dari tombol Minus
-    document.getElementById('minus-button').classList.add('inactive'); // Buat tombol Minus tidak aktif
+    isAdding = true; // Enable adding mode
+    isSubtracting = false; // Disable subtracting mode
+    document.getElementById('plus-button').classList.add('active'); // Highlight Plus button
+    document.getElementById('plus-button').classList.remove('inactive'); // Make Plus button active
+    document.getElementById('minus-button').classList.remove('active'); // Remove highlight from Minus button
+    document.getElementById('minus-button').classList.add('inactive'); // Make Minus button inactive
 }
 
-// Fungsi untuk menangani klik tombol Minus
+// Function to handle Minus button click
 function handleMinusClick() {
-    isAdding = false; // Nonaktifkan mode menambah
-    isSubtracting = true; // Aktifkan mode mengurangi
-    document.getElementById('minus-button').classList.add('active'); // Sorot tombol Minus
-    document.getElementById('minus-button').classList.remove('inactive'); // Buat tombol Minus aktif
-    document.getElementById('plus-button').classList.remove('active'); // Hilangkan sorotan dari tombol Plus
-    document.getElementById('plus-button').classList.add('inactive'); // Buat tombol Plus tidak aktif
+    isAdding = false; // Disable adding mode
+    isSubtracting = true; // Enable subtracting mode
+    document.getElementById('minus-button').classList.add('active'); // Highlight Minus button
+    document.getElementById('minus-button').classList.remove('inactive'); // Make Minus button active
+    document.getElementById('plus-button').classList.remove('active'); // Remove highlight from Plus button
+    document.getElementById('plus-button').classList.add('inactive'); // Make Plus button inactive
 }
 
-// Fungsi untuk menangani klik Qty Inspect berdasarkan kondisi Plus/Minus
+// Function to handle Qty Inspect click based on Plus/Minus state
 function handleQtyInspectClick() {
     let qtyInspectCount = parseInt(document.getElementById('qtyInspectOutput').textContent) || 0;
-
+    
     if (isAdding) {
-        qtyInspectCount++; // Increment jika menambah
-        updateReworkCounter('right'); // Update Rework Kanan
+        qtyInspectCount++; // Increment if adding
     } else if (isSubtracting) {
-        qtyInspectCount--; // Decrement jika mengurangi
-        updateReworkCounter('left'); // Update Rework Kiri
+        qtyInspectCount--; // Decrement if subtracting
     }
 
-    document.getElementById('qtyInspectOutput').textContent = qtyInspectCount; // Update output qty
+    document.getElementById('qtyInspectOutput').textContent = qtyInspectCount; // Update the output
 }
 
-// Fungsi untuk update counter rework kiri dan kanan
-function updateReworkCounter(side) {
-    if (side === 'left') {
-        leftClickCount++;
-        document.getElementById('left-counter').textContent = leftClickCount; // Update rework kiri
-    } else if (side === 'right') {
-        rightClickCount++;
-        document.getElementById('right-counter').textContent = rightClickCount; // Update rework kanan
-    }
-
-    // Update summary rework setelah setiap klik
-    updateDefectSummary();
-}
-
-// Fungsi untuk setup tombol rework kiri dan kanan
-function setupReworkButtons() {
-    const leftReworkButton = document.querySelector('#rework-left');
-    const rightReworkButton = document.querySelector('#rework-right');
-
-    if (leftReworkButton) {
-        leftReworkButton.addEventListener('click', () => updateReworkCounter('left'));
-    }
-
-    if (rightReworkButton) {
-        rightReworkButton.addEventListener('click', () => updateReworkCounter('right'));
-    }
-}
-
-// Event listeners untuk tombol Plus dan Minus
+// Event listeners for Plus and Minus buttons
 document.getElementById('plus-button').addEventListener('click', handlePlusClick);
 document.getElementById('minus-button').addEventListener('click', handleMinusClick);
 
-// Event listener untuk tombol Qty Inspect (menangani increment atau decrement)
+// Event listener for Qty Inspect button (this is the button that does the increment or decrement)
 document.querySelector('.input-button').addEventListener('click', handleQtyInspectClick);
-
-// Inisialisasi setup rework buttons
-setupReworkButtons();
-
-
