@@ -30,11 +30,6 @@ const defectCounts = {
     "LOGO / AIR BAG": 0
 };
 
-// Variabel untuk menghitung klik pada Qty Inspect
-let qtyInspectCount = 0;
-let leftClickCount = 0;
-let rightClickCount = 0;
-
 // Function to fetch data from the database
 async function fetchData() {
     try {
@@ -53,6 +48,7 @@ function populateFields(data) {
     const auditorSelect = document.getElementById('auditor');
     const ncvsSelect = document.getElementById('ncvs');
 
+    // Populate Auditor dropdown
     if (data.auditors) {
         auditorSelect.innerHTML = '';
         data.auditors.forEach(auditor => {
@@ -63,6 +59,7 @@ function populateFields(data) {
         });
     }
 
+    // Populate NCVS dropdown
     if (data.ncvs) {
         ncvsSelect.innerHTML = '';
         data.ncvs.forEach(ncvs => {
@@ -102,6 +99,7 @@ function renderData(data) {
 
 // Handle defect button clicks
 function handleDefectClick(defectName) {
+    // Tambah jumlah defect yang diklik
     if (defectCounts.hasOwnProperty(defectName)) {
         defectCounts[defectName]++;
         console.log(`Defect ${defectName} updated to ${defectCounts[defectName]}`);
@@ -109,14 +107,16 @@ function handleDefectClick(defectName) {
         console.warn(`Defect '${defectName}' tidak dikenali.`);
     }
 
+    // Perbarui tampilan summary defect
     updateDefectSummary();
 }
 
-// Update defect summary
+// Update defect summary (update counters next to defect items)
 function updateDefectSummary() {
     const summaryList = document.getElementById('summary-list');
-    summaryList.innerHTML = '';
+    summaryList.innerHTML = ''; // Bersihkan isi sebelumnya
 
+    // Tampilkan semua defect yang memiliki nilai > 0
     for (const [defect, count] of Object.entries(defectCounts)) {
         if (count > 0) {
             const summaryItem = document.createElement('div');
@@ -132,86 +132,17 @@ function setupDefectButtons() {
     const defectButtons = document.querySelectorAll('.defect-button');
     defectButtons.forEach(button => {
         button.addEventListener('click', () => {
-            const defectName = button.textContent.trim();
-            handleDefectClick(defectName);
+            const defectName = button.textContent.trim(); // Ambil nama defect dari tombol
+            handleDefectClick(defectName); // Panggil handler
         });
     });
-}
-
-// Submit form data
-async function submitForm() {
-    const form = document.getElementById('qc-form');
-    const formData = {
-        auditor: form.elements['auditor'].value,
-        ncvs: form.elements['ncvs'].value,
-        model: form.elements['model'].value,
-        reworkRight: parseInt(document.getElementById('right-counter').textContent) || 0,
-        reworkLeft: parseInt(document.getElementById('left-counter').textContent) || 0,
-        defects: defectCounts
-    };
-
-    try {
-        const response = await fetch(scriptURL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(formData)
-        });
-        const data = await response.json();
-
-        if (data.success) {
-            alert('Data berhasil dikirim!');
-            fetchData(); // Refresh data
-        } else {
-            alert('Gagal mengirim data!');
-        }
-    } catch (error) {
-        console.error('Error:', error);
-    }
-}
-
-// Setup action buttons for counters
-function setupActionButtons() {
-    const leftReworkButton = document.getElementById('left-rework');
-    const rightReworkButton = document.getElementById('right-rework');
-
-    leftReworkButton.addEventListener('click', () => updateCounter('left'));
-    rightReworkButton.addEventListener('click', () => updateCounter('right'));
-}
-
-function updateCounter(side) {
-    if (side === 'left') {
-        leftClickCount++;
-        document.getElementById('left-counter').textContent = leftClickCount;
-    } else if (side === 'right') {
-        rightClickCount++;
-        document.getElementById('right-counter').textContent = rightClickCount;
-    }
-}
-
-// Fungsi untuk menangani klik tombol Qty Inspect
-function handleQtyInspectClick() {
-    qtyInspectCount++; // Tambah jumlah klik
-    console.log(`Qty Inspect clicked: ${qtyInspectCount} times`);
-
-    // Perbarui kolom output dengan jumlah klik
-    document.getElementById('qtyInspectOutput').textContent = qtyInspectCount;
-}
-
-// Fungsi setup untuk menghubungkan tombol dengan handler
-function setupQtyInspectButton() {
-    const inputButton = document.querySelector('.input-button');
-    if(inputButton) {
-        inputButton.addEventListener('click', handleQtyInspectClick);
-    }
 }
 
 // Initialize the app
 function init() {
     fetchData();
     setupDefectButtons();
-    setupActionButtons();
-    setupQtyInspectButton(); // Setup Qty Inspect button
 }
 
-// Tunggu sampai DOM siap sebelum menjalankan init
+// Wait for the DOM to load before initializing
 document.addEventListener('DOMContentLoaded', init);
