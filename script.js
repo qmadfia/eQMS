@@ -1,3 +1,7 @@
+// =============================
+// 1. Defect Button Handling
+// =============================
+
 // Global object to store defect counts
 const defectCounts = {
     "OVER CEMENT": 0,
@@ -26,9 +30,6 @@ const defectCounts = {
     "TWISTED SHOE": 0,
     "LOGO / AIR BAG": 0
 };
-let qtyInspectCount = 0; // Untuk Qty Inspect
-let leftClickCount = 0; // Untuk Rework Kiri
-let rightClickCount = 0; // Untuk Rework Kanan
 
 // Function to handle defect button clicks
 function handleDefectClick(defectName) {
@@ -76,6 +77,12 @@ function setupDefectButtons() {
     });
 }
 
+// =============================
+// 2. Inspect Button Handling
+// =============================
+
+let qtyInspectCount = 0; // Untuk Qty Inspect
+
 // Function to handle Qty Inspect button click
 function handleQtyInspectClick() {
     qtyInspectCount++;
@@ -89,6 +96,13 @@ function setupQtyInspectButton() {
         inputButton.addEventListener('click', handleQtyInspectClick);
     }
 }
+
+// =============================
+// 3. Rework Button Handling
+// =============================
+
+let leftClickCount = 0; // Untuk Rework Kiri
+let rightClickCount = 0; // Untuk Rework Kanan
 
 // Function to update rework counters (left or right)
 function updateReworkCounter(side) {
@@ -112,6 +126,10 @@ function setupReworkButtons() {
     leftReworkButton.addEventListener('click', () => updateReworkCounter('left'));
     rightReworkButton.addEventListener('click', () => updateReworkCounter('right'));
 }
+
+// =============================
+// 4. App Initialization
+// =============================
 
 // Initialize the app
 function init() {
