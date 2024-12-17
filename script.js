@@ -215,29 +215,6 @@ function updateReworkCounter(side) {
     counterElement.textContent = currentCount;
 }
 
-// Function to handle Defect click with Plus/Minus logic
-function handleDefectClick(defectName) {
-    if (defectCounts.hasOwnProperty(defectName)) {
-        // Get the current defect count
-        let currentCount = defectCounts[defectName];
-
-        // Check Plus/Minus state
-        if (isAdding) {
-            currentCount++; // Increment if adding
-        } else if (isSubtracting) {
-            currentCount--; // Decrement if subtracting
-        }
-
-        // Update the defect count
-        defectCounts[defectName] = currentCount;
-
-        // Log the updated defect count
-        console.log(`Defect ${defectName} updated to ${defectCounts[defectName]}`);
-    } else {
-        console.warn(`Defect '${defectName}' tidak dikenali.`);
-    }
-}
-
 // Event listeners for Plus and Minus buttons
 document.getElementById('plus-button').addEventListener('click', handlePlusClick);
 document.getElementById('minus-button').addEventListener('click', handleMinusClick);
