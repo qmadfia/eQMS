@@ -137,11 +137,29 @@ function setupDefectButtons() {
         });
     });
 }
+// Variabel untuk menghitung klik pada Qty Inspect
+let qtyInspectCount = 0;
+
+// Fungsi untuk menangani klik tombol Qty Inspect
+function handleQtyInspectClick() {
+    qtyInspectCount++; // Tambah jumlah klik
+    console.log(`Qty Inspect clicked: ${qtyInspectCount} times`);
+
+    // Perbarui kolom output dengan jumlah klik
+    document.getElementById('qtyInspectOutput').textContent = qtyInspectCount;
+}
+
+// Fungsi setup untuk menghubungkan tombol dengan handler
+function setupQtyInspectButton() {
+    const inputButton = document.querySelector('.input-button');
+    inputButton.addEventListener('click', handleQtyInspectClick);
+}
 
 // Initialize the app
 function init() {
     fetchData();
     setupDefectButtons();
+    setupQtyInspectButton(); // Setup tombol Qty Inspect
 }
 
 // Wait for the DOM to load before initializing
