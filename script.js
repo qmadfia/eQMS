@@ -223,10 +223,10 @@ document.getElementById('minus-button').addEventListener('click', handleMinusCli
 document.querySelector('.input-button').addEventListener('click', handleQtyInspectClick);
 
 // Event listeners for Rework Kiri and Rework Kanan
-document.getElementById('rework-left').addEventListener('click', function() {
+document.getElementById('.rework-left').addEventListener('click', function() {
     updateReworkCounter('left');
 });
 
-document.getElementById('rework-right').addEventListener('click', function() {
+document.getElementById('.rework-right').addEventListener('click', function() {
     updateReworkCounter('right');
 });
