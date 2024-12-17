@@ -30,6 +30,11 @@ const defectCounts = {
     "LOGO / AIR BAG": 0
 };
 
+// Variabel untuk menghitung klik pada Qty Inspect
+let qtyInspectCount = 0;
+let leftClickCount = 0;
+let rightClickCount = 0;
+
 // Function to fetch data from the database
 async function fetchData() {
     try {
@@ -48,7 +53,6 @@ function populateFields(data) {
     const auditorSelect = document.getElementById('auditor');
     const ncvsSelect = document.getElementById('ncvs');
 
-    // Populate Auditor dropdown
     if (data.auditors) {
         auditorSelect.innerHTML = '';
         data.auditors.forEach(auditor => {
@@ -59,7 +63,6 @@ function populateFields(data) {
         });
     }
 
-    // Populate NCVS dropdown
     if (data.ncvs) {
         ncvsSelect.innerHTML = '';
         data.ncvs.forEach(ncvs => {
@@ -99,7 +102,6 @@ function renderData(data) {
 
 // Handle defect button clicks
 function handleDefectClick(defectName) {
-    // Tambah jumlah defect yang diklik
     if (defectCounts.hasOwnProperty(defectName)) {
         defectCounts[defectName]++;
         console.log(`Defect ${defectName} updated to ${defectCounts[defectName]}`);
@@ -107,16 +109,14 @@ function handleDefectClick(defectName) {
         console.warn(`Defect '${defectName}' tidak dikenali.`);
     }
 
-    // Perbarui tampilan summary defect
     updateDefectSummary();
 }
 
-// Update defect summary (update counters next to defect items)
+// Update defect summary
 function updateDefectSummary() {
     const summaryList = document.getElementById('summary-list');
-    summaryList.innerHTML = ''; // Bersihkan isi sebelumnya
+    summaryList.innerHTML = '';
 
-    // Tampilkan semua defect yang memiliki nilai > 0
     for (const [defect, count] of Object.entries(defectCounts)) {
         if (count > 0) {
             const summaryItem = document.createElement('div');
@@ -132,11 +132,12 @@ function setupDefectButtons() {
     const defectButtons = document.querySelectorAll('.defect-button');
     defectButtons.forEach(button => {
         button.addEventListener('click', () => {
-            const defectName = button.textContent.trim(); // Ambil nama defect dari tombol
-            handleDefectClick(defectName); // Panggil handler
+            const defectName = button.textContent.trim();
+            handleDefectClick(defectName);
         });
     });
 }
+
 // Submit form data
 async function submitForm() {
     const form = document.getElementById('qc-form');
@@ -177,9 +178,6 @@ function setupActionButtons() {
     rightReworkButton.addEventListener('click', () => updateCounter('right'));
 }
 
-let leftClickCount = 0;
-let rightClickCount = 0;
-
 function updateCounter(side) {
     if (side === 'left') {
         leftClickCount++;
@@ -189,8 +187,6 @@ function updateCounter(side) {
         document.getElementById('right-counter').textContent = rightClickCount;
     }
 }
-// Variabel untuk menghitung klik pada Qty Inspect
-let qtyInspectCount = 0;
 
 // Fungsi untuk menangani klik tombol Qty Inspect
 function handleQtyInspectClick() {
@@ -204,7 +200,9 @@ function handleQtyInspectClick() {
 // Fungsi setup untuk menghubungkan tombol dengan handler
 function setupQtyInspectButton() {
     const inputButton = document.querySelector('.input-button');
-    inputButton.addEventListener('click', handleQtyInspectClick);
+    if(inputButton) {
+        inputButton.addEventListener('click', handleQtyInspectClick);
+    }
 }
 
 // Initialize the app
