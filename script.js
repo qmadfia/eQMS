@@ -138,15 +138,6 @@ function setupDefectButtons() {
     });
 }
 
-// Initialize the app
-function init() {
-    fetchData();
-    setupDefectButtons();
-}
-
-// Tunggu sampai DOM siap sebelum menjalankan init
-document.addEventListener('DOMContentLoaded', init);
-
 // Variabel untuk menghitung klik pada Qty Inspect
 let qtyInspectCount = 0;
 
@@ -165,9 +156,11 @@ function setupQtyInspectButton() {
     inputButton.addEventListener('click', handleQtyInspectClick);
 }
 
-// Inisialisasi aplikasi
+// Initialize the app
 function init() {
-    setupQtyInspectButton(); // Setup tombol Qty Inspect
+    fetchData();
+    setupDefectButtons();
+    setupQtyInspectButton(); // Setup Qty Inspect button
 }
 
 // Tunggu sampai DOM siap sebelum menjalankan init
