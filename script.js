@@ -160,7 +160,9 @@ function handlePlusClick() {
     isAdding = true;
     isSubtracting = false; // Disable subtracting when adding is active
     document.getElementById('plus-button').classList.add('active'); // Highlight Plus button
+    document.getElementById('plus-button').classList.remove('inactive'); // Make Plus button active
     document.getElementById('minus-button').classList.remove('active'); // Remove highlight from Minus button
+    document.getElementById('minus-button').classList.add('inactive'); // Make Minus button inactive
 }
 
 // Function to handle Minus button click
@@ -168,25 +170,12 @@ function handleMinusClick() {
     isAdding = false; // Disable adding when subtracting is active
     isSubtracting = true;
     document.getElementById('minus-button').classList.add('active'); // Highlight Minus button
+    document.getElementById('minus-button').classList.remove('inactive'); // Make Minus button active
     document.getElementById('plus-button').classList.remove('active'); // Remove highlight from Plus button
-}
-
-// Function to handle Qty Inspect click based on Plus/Minus state
-function handleQtyInspectClick() {
-    let qtyInspectCount = parseInt(document.getElementById('qtyInspectOutput').textContent) || 0;
-    
-    if (isAdding) {
-        qtyInspectCount++; // Increment if adding
-    } else if (isSubtracting) {
-        qtyInspectCount--; // Decrement if subtracting
-    }
-
-    document.getElementById('qtyInspectOutput').textContent = qtyInspectCount; // Update the output
+    document.getElementById('plus-button').classList.add('inactive'); // Make Plus button inactive
 }
 
 // Event listeners for Plus and Minus buttons
 document.getElementById('plus-button').addEventListener('click', handlePlusClick);
 document.getElementById('minus-button').addEventListener('click', handleMinusClick);
 
-// Event listener for Qty Inspect button
-document.querySelector('.input-button').addEventListener('click', handleQtyInspectClick);
