@@ -137,7 +137,58 @@ function setupDefectButtons() {
         });
     });
 }
+// Submit form data
+async function submitForm() {
+    const form = document.getElementById('qc-form');
+    const formData = {
+        auditor: form.elements['auditor'].value,
+        ncvs: form.elements['ncvs'].value,
+        model: form.elements['model'].value,
+        reworkRight: parseInt(document.getElementById('right-counter').textContent) || 0,
+        reworkLeft: parseInt(document.getElementById('left-counter').textContent) || 0,
+        defects: defectCounts
+    };
 
+    try {
+        const response = await fetch(scriptURL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
+        });
+        const data = await response.json();
+
+        if (data.success) {
+            alert('Data berhasil dikirim!');
+            fetchData(); // Refresh data
+        } else {
+            alert('Gagal mengirim data!');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+// Setup action buttons for counters
+function setupActionButtons() {
+    const leftReworkButton = document.getElementById('left-rework');
+    const rightReworkButton = document.getElementById('right-rework');
+
+    leftReworkButton.addEventListener('click', () => updateCounter('left'));
+    rightReworkButton.addEventListener('click', () => updateCounter('right'));
+}
+
+let leftClickCount = 0;
+let rightClickCount = 0;
+
+function updateCounter(side) {
+    if (side === 'left') {
+        leftClickCount++;
+        document.getElementById('left-counter').textContent = leftClickCount;
+    } else if (side === 'right') {
+        rightClickCount++;
+        document.getElementById('right-counter').textContent = rightClickCount;
+    }
+}
 // Variabel untuk menghitung klik pada Qty Inspect
 let qtyInspectCount = 0;
 
@@ -160,6 +211,7 @@ function setupQtyInspectButton() {
 function init() {
     fetchData();
     setupDefectButtons();
+    setupActionButtons();
     setupQtyInspectButton(); // Setup Qty Inspect button
 }
 
