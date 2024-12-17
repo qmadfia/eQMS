@@ -1,6 +1,3 @@
-// URL Google Apps Script Web App
-const scriptURL = 'https://script.google.com/macros/s/AKfycbyGDKUHTehjRu_0uDAMDQh4NbGPZyDRVrzp4Vu83Tk/dev';
-
 // Global object to store defect counts
 const defectCounts = {
     "OVER CEMENT": 0,
@@ -30,76 +27,12 @@ const defectCounts = {
     "LOGO / AIR BAG": 0
 };
 
-// Function to fetch data from the database
-async function fetchData() {
-    try {
-        const response = await fetch(scriptURL);
-        const data = await response.json();
-        console.log('Data fetched successfully:', data);
-        populateFields(data);
-        renderData(data.data);
-    } catch (error) {
-        console.error('Error fetching data:', error);
-    }
-}
+let qtyInspectCount = 0; // Untuk Qty Inspect
+let leftClickCount = 0;
+let rightClickCount = 0;
 
-// Populate dropdown fields
-function populateFields(data) {
-    const auditorSelect = document.getElementById('auditor');
-    const ncvsSelect = document.getElementById('ncvs');
-
-    // Populate Auditor dropdown
-    if (data.auditors) {
-        auditorSelect.innerHTML = '';
-        data.auditors.forEach(auditor => {
-            const option = document.createElement('option');
-            option.value = auditor.trim();
-            option.textContent = auditor.trim();
-            auditorSelect.appendChild(option);
-        });
-    }
-
-    // Populate NCVS dropdown
-    if (data.ncvs) {
-        ncvsSelect.innerHTML = '';
-        data.ncvs.forEach(ncvs => {
-            const option = document.createElement('option');
-            option.value = ncvs.trim();
-            option.textContent = ncvs.trim();
-            ncvsSelect.appendChild(option);
-        });
-    }
-}
-
-// Render data into a table
-function renderData(data) {
-    const table = document.getElementById('data-table');
-    table.innerHTML = `
-        <tr>
-            <th>Timestamp</th>
-            <th>Auditor</th>
-            <th>NCVS</th>
-            <th>Model</th>
-            <th>Rework Kanan</th>
-            <th>Rework Kiri</th>
-        </tr>`;
-
-    data.forEach(row => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-            <td>${row.timestamp || '-'}</td>
-            <td>${row.auditor || '-'}</td>
-            <td>${row.ncvs || '-'}</td>
-            <td>${row.model || '-'}</td>
-            <td>${row.reworkRight || 0}</td>
-            <td>${row.reworkLeft || 0}</td>`;
-        table.appendChild(tr);
-    });
-}
-
-// Handle defect button clicks
+// Function to handle defect button clicks
 function handleDefectClick(defectName) {
-    // Tambah jumlah defect yang diklik
     if (defectCounts.hasOwnProperty(defectName)) {
         defectCounts[defectName]++;
         console.log(`Defect ${defectName} updated to ${defectCounts[defectName]}`);
@@ -107,21 +40,20 @@ function handleDefectClick(defectName) {
         console.warn(`Defect '${defectName}' tidak dikenali.`);
     }
 
-    // Perbarui tampilan summary defect
+    // Update the defect summary
     updateDefectSummary();
 }
 
-// Update defect summary (update counters next to defect items)
+// Update the defect summary
 function updateDefectSummary() {
     const summaryList = document.getElementById('summary-list');
-    summaryList.innerHTML = ''; // Bersihkan isi sebelumnya
+    summaryList.innerHTML = ''; // Clear previous content
 
-    // Tampilkan semua defect yang memiliki nilai > 0
     for (const [defect, count] of Object.entries(defectCounts)) {
         if (count > 0) {
             const summaryItem = document.createElement('div');
             summaryItem.className = 'summary-item';
-            summaryItem.textContent = `${defect} : ${count}`;
+            summaryItem.textContent = `${defect}: ${count}`;
             summaryList.appendChild(summaryItem);
         }
     }
@@ -132,16 +64,30 @@ function setupDefectButtons() {
     const defectButtons = document.querySelectorAll('.defect-button');
     defectButtons.forEach(button => {
         button.addEventListener('click', () => {
-            const defectName = button.textContent.trim(); // Ambil nama defect dari tombol
-            handleDefectClick(defectName); // Panggil handler
+            const defectName = button.textContent.trim();
+            handleDefectClick(defectName);
+            button.classList.add('active');
+            setTimeout(() => button.classList.remove('active'), 200);
         });
     });
 }
 
+// Function to handle Qty Inspect button click
+function handleQtyInspectClick() {
+    qtyInspectCount++;
+    document.getElementById('qtyInspectOutput').textContent = qtyInspectCount;
+}
+
+// Setup Qty Inspect button
+function setupQtyInspectButton() {
+    const inputButton = document.querySelector('.input-button');
+    inputButton.addEventListener('click', handleQtyInspectClick);
+}
+
 // Initialize the app
 function init() {
-    fetchData();
-    setupDefectButtons();
+    setupDefectButtons(); // Setup defect buttons
+    setupQtyInspectButton(); // Setup Qty Inspect button
 }
 
 // Wait for the DOM to load before initializing
