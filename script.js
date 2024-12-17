@@ -187,9 +187,46 @@ function handleQtyInspectClick() {
     document.getElementById('qtyInspectOutput').textContent = qtyInspectCount; // Update the output
 }
 
+// Function to update rework counters (left or right)
+function updateReworkCounter(side) {
+    let counterElement;
+    let currentCount;
+
+    // Determine which counter to update
+    if (side === 'left') {
+        counterElement = document.getElementById('left-counter');
+    } else if (side === 'right') {
+        counterElement = document.getElementById('right-counter');
+    } else {
+        return; // Exit if side is invalid
+    }
+
+    // Get the current count from the counter element
+    currentCount = parseInt(counterElement.textContent) || 0;
+
+    // Check Plus/Minus state
+    if (isAdding) {
+        currentCount++; // Increment
+    } else if (isSubtracting) {
+        currentCount--; // Decrement
+    }
+
+    // Update the counter element
+    counterElement.textContent = currentCount;
+}
+
 // Event listeners for Plus and Minus buttons
 document.getElementById('plus-button').addEventListener('click', handlePlusClick);
 document.getElementById('minus-button').addEventListener('click', handleMinusClick);
 
 // Event listener for Qty Inspect button (this is the button that does the increment or decrement)
 document.querySelector('.input-button').addEventListener('click', handleQtyInspectClick);
+
+// Event listeners for Rework Kiri and Rework Kanan
+document.getElementById('rework-left').addEventListener('click', function() {
+    updateReworkCounter('left');
+});
+
+document.getElementById('rework-right').addEventListener('click', function() {
+    updateReworkCounter('right');
+});
