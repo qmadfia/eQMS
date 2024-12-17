@@ -120,8 +120,8 @@ function updateReworkCounter(side) {
 
 // Setup rework buttons
 function setupReworkButtons() {
-    const leftReworkButton = document.getElementById('left-rework');
-    const rightReworkButton = document.getElementById('right-rework');
+    const leftReworkButton = document.getElementById('rework-left');
+    const rightReworkButton = document.getElementById('rework-right');
 
     leftReworkButton.addEventListener('click', () => updateReworkCounter('left'));
     rightReworkButton.addEventListener('click', () => updateReworkCounter('right'));
