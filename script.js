@@ -51,7 +51,7 @@ function updateDefectSummary() {
 
     // Loop through defect counts and display them
     for (const [defect, count] of Object.entries(defectCounts)) {
-        if (count > 0) {
+       {
             const summaryItem = document.createElement('div');
             summaryItem.className = 'summary-item';
             summaryItem.textContent = `${defect}: ${count}`;
