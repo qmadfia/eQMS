@@ -74,7 +74,7 @@ function populateFields(data) {
 // Render data into a table
 function renderData(data) {
     const table = document.getElementById('data-table');
-    table.innerHTML = 
+    table.innerHTML = `
         <tr>
             <th>Timestamp</th>
             <th>Auditor</th>
@@ -82,46 +82,46 @@ function renderData(data) {
             <th>Model</th>
             <th>Rework Kanan</th>
             <th>Rework Kiri</th>
-        </tr>;
+        </tr>`;
 
     data.forEach(row => {
         const tr = document.createElement('tr');
-        tr.innerHTML = 
+        tr.innerHTML = `
             <td>${row.timestamp || '-'}</td>
             <td>${row.auditor || '-'}</td>
             <td>${row.ncvs || '-'}</td>
             <td>${row.model || '-'}</td>
             <td>${row.reworkRight || 0}</td>
-            <td>${row.reworkLeft || 0}</td>;
+            <td>${row.reworkLeft || 0}</td>`;
         table.appendChild(tr);
     });
 }
 
 // Handle defect button clicks
 function handleDefectClick(defectName) {
-    // Pastikan nama defect ada di defectCounts
+    // Tambah jumlah defect yang diklik
     if (defectCounts.hasOwnProperty(defectName)) {
         defectCounts[defectName]++;
-        console.log(Defect ${defectName} updated to ${defectCounts[defectName]});
+        console.log(`Defect ${defectName} updated to ${defectCounts[defectName]}`);
     } else {
-        console.warn(Defect '${defectName}' tidak dikenali.);
+        console.warn(`Defect '${defectName}' tidak dikenali.`);
     }
 
-    // Perbarui menu summary defect
+    // Perbarui tampilan summary defect
     updateDefectSummary();
 }
 
 // Update defect summary (update counters next to defect items)
 function updateDefectSummary() {
     const summaryList = document.getElementById('summary-list');
-    summaryList.innerHTML = ''; // Hapus isi sebelumnya
+    summaryList.innerHTML = ''; // Bersihkan isi sebelumnya
 
-    // Iterasi semua cacat dan jumlah klik dari defectCounts
+    // Tampilkan semua defect yang memiliki nilai > 0
     for (const [defect, count] of Object.entries(defectCounts)) {
         if (count > 0) {
             const summaryItem = document.createElement('div');
             summaryItem.className = 'summary-item';
-            summaryItem.textContent = ${defect}: ${count};
+            summaryItem.textContent = `${defect} : ${count}`;
             summaryList.appendChild(summaryItem);
         }
     }
@@ -132,80 +132,17 @@ function setupDefectButtons() {
     const defectButtons = document.querySelectorAll('.defect-button');
     defectButtons.forEach(button => {
         button.addEventListener('click', () => {
-            const defectName = button.textContent.trim();
-            handleDefectClick(defectName);
-            button.classList.add('active'); // Visual feedback
-            setTimeout(() => button.classList.remove('active'), 200); // Hilangkan setelah 200ms
+            const defectName = button.textContent.trim(); // Ambil nama defect dari tombol
+            handleDefectClick(defectName); // Panggil handler
         });
     });
-}
-
-// Submit form data
-async function submitForm() {
-    const form = document.getElementById('qc-form');
-    const formData = {
-        auditor: form.elements['auditor'].value.trim(),
-        ncvs: form.elements['ncvs'].value.trim(),
-        model: form.elements['model'].value.trim(),
-        reworkRight: parseInt(document.getElementById('right-counter').textContent) || 0,
-        reworkLeft: parseInt(document.getElementById('left-counter').textContent) || 0,
-        defects: defectCounts
-    };
-
-    try {
-        const response = await fetch(scriptURL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(formData)
-        });
-        const data = await response.json();
-
-        if (data.success) {
-            alert('Data berhasil dikirim!');
-            resetForm();
-            fetchData();
-        } else {
-            alert('Gagal mengirim data!');
-        }
-    } catch (error) {
-        console.error('Error:', error);
-    }
-}
-
-// Reset form and counters
-function resetForm() {
-    document.getElementById('qc-form').reset();
-    Object.keys(defectCounts).forEach(key => defectCounts[key] = 0);
-    updateDefectSummary();
-    document.getElementById('left-counter').textContent = 0;
-    document.getElementById('right-counter').textContent = 0;
-    leftClickCount = 0;
-    rightClickCount = 0;
-}
-
-// Setup action buttons for counters
-function setupActionButtons() {
-    document.getElementById('left-rework').addEventListener('click', () => updateCounter('left'));
-    document.getElementById('right-rework').addEventListener('click', () => updateCounter('right'));
-}
-
-let leftClickCount = 0;
-let rightClickCount = 0;
-
-function updateCounter(side) {
-    if (side === 'left') {
-        leftClickCount++;
-        document.getElementById('left-counter').textContent = leftClickCount;
-    } else if (side === 'right') {
-        rightClickCount++;
-        document.getElementById('right-counter').textContent = rightClickCount;
-    }
 }
 
 // Initialize the app
 function init() {
     fetchData();
-    setupActionButtons();
     setupDefectButtons();
 }
 
+// Wait for the DOM to load before initializing
+document.addEventListener('DOMContentLoaded', init);
