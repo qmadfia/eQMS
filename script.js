@@ -143,6 +143,9 @@ function init() {
     fetchData();
     setupDefectButtons();
 }
+
+// Wait for the DOM to load before initializing
+document.addEventListener('DOMContentLoaded', init);
 // Variabel untuk menghitung klik pada Qty Inspect
 let qtyInspectCount = 0;
 
@@ -167,7 +170,4 @@ function init() {
 }
 
 // Tunggu sampai DOM siap sebelum menjalankan init
-document.addEventListener('DOMContentLoaded', init);
-
-// Wait for the DOM to load before initializing
 document.addEventListener('DOMContentLoaded', init);
