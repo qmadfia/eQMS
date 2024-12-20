@@ -243,109 +243,14 @@ document.getElementById('minus-button').addEventListener('click', handleMinusCli
 document.querySelector('.input-button').addEventListener('click', handleQtyInspectClick);
 
 // Event listeners for Rework Kiri and Rework Kanan
-document.getElementById('rework-left').addEventListener('click', function() {
+document.getElementById('.rework-left').addEventListener('click', function() {
     updateReworkCounter('left');
 });
 
-document.getElementById('rework-right').addEventListener('click', function() {
+document.getElementById('.rework-right').addEventListener('click', function() {
     updateReworkCounter('right');
 });
 
 document.getElementById('.defect-button').addEventListener('click', function() {
     updateDefectSummary();
 });
-
-// ==============================
-// 1. Update FTT Calculation
-// ==============================
-
-// Function to calculate and update FTT (First Time Through) percentage
-function calculateFTT() {
-    if (qtyInspectCount === 0) {
-        // Avoid division by zero
-        return 0;
-    }
-    // Formula: FTT = (Qty Inspect - (Rework Kiri + Rework Kanan) / 2) / Qty Inspect
-    const ftt = (qtyInspectCount - (leftClickCount + rightClickCount) / 2) / qtyInspectCount;
-    return (ftt * 100).toFixed(2); // Return FTT in percentage format
-}
-
-// ==============================
-// 2. FTT Output Update
-// ==============================
-
-// Function to update the FTT output display
-function updateFTTOutput() {
-    const fttPercentage = calculateFTT(); // Calculate FTT percentage
-    const fttOutput = document.getElementById('fttOutput');
-    fttOutput.textContent = `${fttPercentage}%`; // Display FTT percentage
-
-    // Change the FTT output color based on the percentage value
-    if (fttPercentage >= 80) {
-        fttOutput.style.color = 'green'; // Good FTT (>80%)
-    } else if (fttPercentage >= 50) {
-        fttOutput.style.color = 'orange'; // Average FTT (50-80%)
-    } else {
-        fttOutput.style.color = 'red'; // Poor FTT (<50%)
-    }
-}
-
-// ==============================
-// 3. Update Rework Counts
-// ==============================
-
-// Function to update the Rework counters (left or right)
-function updateReworkCounter(side) {
-    if (side === 'left') {
-        leftClickCount++;
-        document.getElementById('left-counter').textContent = leftClickCount;
-    } else if (side === 'right') {
-        rightClickCount++;
-        document.getElementById('right-counter').textContent = rightClickCount;
-    }
-
-    // After updating rework counters, recalculate FTT
-    updateFTTOutput();
-}
-
-// ==============================
-// 4. Update Qty Inspect Count
-// ==============================
-
-// Function to update the Qty Inspect count
-function updateQtyInspectCount(amount) {
-    qtyInspectCount += amount; // Add or subtract from qtyInspectCount
-    document.getElementById('qtyInspectOutput').textContent = qtyInspectCount; // Update display
-
-    // After updating Qty Inspect, recalculate FTT
-    updateFTTOutput();
-}
-
-// ==============================
-// 5. Event Listeners
-// ==============================
-
-// Event listener for Rework Kiri and Rework Kanan buttons
-document.getElementById('rework-left').addEventListener('click', () => updateReworkCounter('left'));
-document.getElementById('rework-right').addEventListener('click', () => updateReworkCounter('right'));
-
-// Event listener for Qty Inspect buttons (this is an example, adjust as needed)
-document.getElementById('qtyInspectPlus').addEventListener('click', () => updateQtyInspectCount(1));
-document.getElementById('qtyInspectMinus').addEventListener('click', () => updateQtyInspectCount(-1));
-
-// ==============================
-// 6. Initial Setup
-// ==============================
-
-// Initialize the page with initial values
-function init() {
-    // Initialize the FTT output to 0% on page load
-    document.getElementById('fttOutput').textContent = "0%";
-    document.getElementById('qtyInspectOutput').textContent = "0";
-    document.getElementById('left-counter').textContent = "0";
-    document.getElementById('right-counter').textContent = "0";
-}
-
-// Run the initialization function when the page loads
-document.addEventListener('DOMContentLoaded', init);
-
