@@ -253,3 +253,22 @@ document.getElementById('.rework-right').addEventListener('click', function() {
 document.getElementById('.defect-button').addEventListener('click', function() {
     updateDefectSummary();
 });
+
+// Initialize counters
+        let qtyInspect = 50;
+        let reworkLeft = 20;
+        let reworkRight = 30;
+
+        // Function to calculate FTT
+        function calculateFTT() {
+            if (qtyInspect > 0) {
+                const ftt = ((qtyInspect - (reworkLeft + reworkRight) / 2) / qtyInspect) * 100;
+                document.getElementById('ftt-output').textContent = `FTT: ${ftt.toFixed(2)}%`;
+                document.getElementById('qty-inspect').textContent = qtyInspect;
+                document.getElementById('rework-left').textContent = reworkLeft;
+                document.getElementById('rework-right').textContent = reworkRight;
+            }
+        }
+
+        // Calculate FTT initially
+        calculateFTT();
