@@ -144,11 +144,6 @@ function init() {
     setupDefectButtons(); // Setup defect buttons
     setupQtyInspectButton(); // Setup Qty Inspect button
     setupReworkButtons(); // Setup Rework buttons
-    // Initialize the FTT output to 0% on page load
-    document.getElementById('fttOutput').textContent = "0%";
-    document.getElementById('qtyInspectOutput').textContent = "0";
-    document.getElementById('left-counter').textContent = "0";
-    document.getElementById('right-counter').textContent = "0";
 }
 
 // Wait for the DOM to load before initializing
