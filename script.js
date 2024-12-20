@@ -253,4 +253,3 @@ document.getElementById('.rework-right').addEventListener('click', function() {
 document.getElementById('.defect-button').addEventListener('click', function() {
     updateDefectSummary();
 });
-
