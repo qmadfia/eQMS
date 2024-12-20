@@ -255,13 +255,21 @@ document.getElementById('.defect-button').addEventListener('click', function() {
     updateDefectSummary();
 });
 // ==============================
-// 1. Perhitungan FTT (First Time Through)
+// 1. Variabel Global
+// ==============================
+let qtyInspectCount = 0; // Untuk qty inspect
+let leftClickCount = 0; // Untuk Rework Kiri
+let rightClickCount = 0; // Untuk Rework Kanan
+
+// ==============================
+// 2. Perhitungan FTT (First Time Through)
 // ==============================
 
 // Fungsi untuk menghitung FTT
 function calculateFTT() {
     // Jika qtyInspectCount masih 0, hindari pembagian dengan 0
     if (qtyInspectCount === 0) {
+        console.log("qtyInspectCount is 0, returning 0 FTT"); // Debug log
         return 0; 
     }
 
@@ -269,12 +277,15 @@ function calculateFTT() {
     const totalRework = (leftClickCount + rightClickCount) / 2;
     const ftt = ((qtyInspectCount - totalRework) / qtyInspectCount) * 100;
 
+    console.log(`qtyInspectCount: ${qtyInspectCount}, leftClickCount: ${leftClickCount}, rightClickCount: ${rightClickCount}`);
+    console.log(`Calculated FTT: ${ftt}`); // Debug log
+
     // Kembalikan nilai FTT dengan dua angka desimal
     return ftt.toFixed(2); 
 }
 
 // ==============================
-// 2. Pembaruan Output FTT
+// 3. Pembaruan Output FTT
 // ==============================
 
 // Fungsi untuk memperbarui tampilan FTT
@@ -294,12 +305,37 @@ function updateFTTOutput() {
 }
 
 // ==============================
-// 3. Inisialisasi FTT (Setelah DOM Dimuat)
+// 4. Event Listener untuk Qty Inspect (Plus dan Minus)
 // ==============================
 
-// Pastikan untuk memanggil updateFTTOutput setiap kali ada perubahan pada qtyInspectCount, leftClickCount, atau rightClickCount
+document.getElementById('qtyInspectPlus').addEventListener('click', function() {
+    qtyInspectCount++; // Update qtyInspectCount
+    updateFTTOutput(); // Update FTT setelah perubahan
+});
+
+document.getElementById('qtyInspectMinus').addEventListener('click', function() {
+    qtyInspectCount--; // Update qtyInspectCount
+    updateFTTOutput(); // Update FTT setelah perubahan
+});
+
+// ==============================
+// 5. Event Listener untuk Rework Kiri dan Rework Kanan
+// ==============================
+
+document.getElementById('rework-left').addEventListener('click', function() {
+    leftClickCount++; // Update leftClickCount
+    updateFTTOutput(); // Update FTT setelah perubahan
+});
+
+document.getElementById('rework-right').addEventListener('click', function() {
+    rightClickCount++; // Update rightClickCount
+    updateFTTOutput(); // Update FTT setelah perubahan
+});
+
+// ==============================
+// 6. Inisialisasi FTT (Setelah DOM Dimuat)
+// ==============================
+
 document.addEventListener('DOMContentLoaded', function() {
     updateFTTOutput(); // Memperbarui FTT saat halaman dimuat
 });
-
-// Pastikan untuk memanggil updateFTTOutput di bagian lain kode saat qtyInspectCount, leftClickCount, atau rightClickCount diperbarui
