@@ -254,37 +254,3 @@ document.getElementById('.defect-button').addEventListener('click', function() {
     updateDefectSummary();
 });
 
-// Initialize counters
-        let qtyInspect = 0;
-        let reworkLeft = 0;
-        let reworkRight = 0;
-
-        // Function to calculate FTT
-        function calculateFTT() {
-            if (qtyInspect > 0) {
-                const ftt = ((qtyInspect - (reworkLeft + reworkRight) / 2) / qtyInspect) * 100;
-                document.getElementById('ftt-output').textContent = `FTT: ${ftt.toFixed(2)}%`;
-                document.getElementById('qty-inspect').textContent = qtyInspect;
-                document.getElementById('rework-left').textContent = reworkLeft;
-                document.getElementById('rework-right').textContent = reworkRight;
-            }
-        }
-
-        // Add event listeners for buttons
-        document.getElementById('increment-inspect').addEventListener('click', () => {
-            qtyInspect++;
-            calculateFTT();
-        });
-
-        document.getElementById('increment-rework-left').addEventListener('click', () => {
-            reworkLeft++;
-            calculateFTT();
-        });
-
-        document.getElementById('increment-rework-right').addEventListener('click', () => {
-            reworkRight++;
-            calculateFTT();
-        });
-
-        // Initial calculation
-        calculateFTT();
