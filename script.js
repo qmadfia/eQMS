@@ -257,10 +257,10 @@ document.getElementById('.defect-button').addEventListener('click', function() {
 
 
 
-// Deklarasi Variabel Global
-let totalInspected = 0;
-let totalDefects = 0;
-let totalReworks = 0;
+// Variabel Global
+let totalInspected = 0; // Total barang yang diinspeksi
+let totalDefects = 0;   // Total barang cacat
+let totalReworks = 0;   // Total rework
 
 // Elemen DOM
 const fttOutput = document.getElementById('fttOutput');
@@ -268,51 +268,45 @@ const qtyInspectOutput = document.getElementById('qtyInspectOutput');
 const leftCounter = document.getElementById('left-counter');
 const rightCounter = document.getElementById('right-counter');
 
-// Tombol Qty Inspect
-const qtyInspectButton = document.querySelector('#input-section .input-button');
-qtyInspectButton?.addEventListener('click', () => {
-    console.log('Qty Inspect button clicked');
+// Event Listener untuk "Qty Inspect"
+const qtyInspectButton = document.querySelector('.input-button');
+qtyInspectButton.addEventListener('click', () => {
     totalInspected++;
     qtyInspectOutput.textContent = totalInspected;
     updateFTT();
 });
 
-// Tombol Rework (Kiri)
+// Event Listener untuk "Rework Kiri"
 const reworkLeftButton = document.getElementById('rework-left');
-reworkLeftButton?.addEventListener('click', () => {
-    console.log('Rework Left button clicked');
+reworkLeftButton.addEventListener('click', () => {
     totalReworks++;
     leftCounter.textContent = totalReworks;
     updateFTT();
 });
 
-// Tombol Rework (Kanan)
+// Event Listener untuk "Rework Kanan"
 const reworkRightButton = document.getElementById('rework-right');
-reworkRightButton?.addEventListener('click', () => {
-    console.log('Rework Right button clicked');
+reworkRightButton.addEventListener('click', () => {
     totalReworks++;
     rightCounter.textContent = totalReworks;
     updateFTT();
 });
 
-// Tombol Defect
+// Event Listener untuk Semua Defect Buttons
 const defectButtons = document.querySelectorAll('.defect-button');
 defectButtons.forEach(button => {
     button.addEventListener('click', () => {
-        console.log('Defect button clicked: ', button.textContent);
         totalDefects++;
         updateFTT();
     });
 });
 
-// Fungsi Menghitung dan Update FTT
+// Fungsi untuk Menghitung FTT
 function updateFTT() {
-    console.log(`Calculating FTT: Inspected=${totalInspected}, Defects=${totalDefects}, Reworks=${totalReworks}`);
     if (totalInspected === 0) {
         fttOutput.textContent = '0%';
         return;
     }
     const fttValue = ((totalInspected - totalDefects - totalReworks) / totalInspected) * 100;
-    fttOutput.textContent = `${fttValue.toFixed(2)}%`;
+    fttOutput.textContent = `${Math.max(0, fttValue.toFixed(2))}%`; // Nilai FTT tidak boleh negatif
 }
-
