@@ -344,19 +344,4 @@ document.getElementById('rework-right').addEventListener('click', () => updateRe
 document.getElementById('qtyInspectPlus').addEventListener('click', () => updateQtyInspectCount(1));
 document.getElementById('qtyInspectMinus').addEventListener('click', () => updateQtyInspectCount(-1));
 
-// ==============================
-// 6. Initial Setup
-// ==============================
-
-// Initialize the page with initial values
-function init() {
-    // Initialize the FTT output to 0% on page load
-    document.getElementById('fttOutput').textContent = "0%";
-    document.getElementById('qtyInspectOutput').textContent = "0";
-    document.getElementById('left-counter').textContent = "0";
-    document.getElementById('right-counter').textContent = "0";
-}
-
-// Run the initialization function when the page loads
-document.addEventListener('DOMContentLoaded', init);
 
