@@ -139,15 +139,6 @@ function setupReworkButtons() {
 // =============================
 
 // Initialize the app
-function init() {
-    setupDefectButtons(); // Setup defect buttons
-    setupQtyInspectButton(); // Setup Qty Inspect button
-    setupReworkButtons(); // Setup Rework buttons
-    updateFTTOutput();
-}
-
-// Wait for the DOM to load before initializing
-document.addEventListener('DOMContentLoaded', init);
 
 // =============================
 // 5. Plus Minus
@@ -303,3 +294,21 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Pastikan untuk memanggil updateFTTOutput di bagian lain kode saat qtyInspectCount, leftClickCount, atau rightClickCount diperbarui
+
+document.addEventListener('DOMContentLoaded', function() {
+    init(); // Panggil fungsi init setelah DOM dimuat
+});
+
+function init() {
+    setupDefectButtons(); // Setup tombol defect
+    setupQtyInspectButton(); // Setup tombol Qty Inspect
+    setupReworkButtons(); // Setup tombol Rework
+    updateFTTOutput(); // Update tampilan FTT
+    updateDefectSummary(); // Update tampilan summary defect
+
+    // Setel nilai awal untuk elemen yang ditampilkan
+    document.getElementById('fttOutput').textContent = "0%";
+    document.getElementById('qtyInspectOutput').textContent = "0";
+    document.getElementById('left-counter').textContent = "0";
+    document.getElementById('right-counter').textContent = "0";
+}
