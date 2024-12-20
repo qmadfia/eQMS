@@ -257,59 +257,58 @@ document.getElementById('.defect-button').addEventListener('click', function() {
 
 
 
-// ==============================
-// Fungsi Perhitungan FTT
-// ==============================
-function calculateFTT() {
-    if (qtyInspectCount === 0) return 0; // Hindari pembagian dengan nol
-    const totalRework = (leftClickCount + rightClickCount) / 2; // Hitung rata-rata rework
-    return (((qtyInspectCount - totalRework) / qtyInspectCount) * 100).toFixed(2); // Hitung FTT dalam persen
-}
 
-// ==============================
-// Fungsi Pembaruan Tampilan FTT
-// ==============================
-function updateFTTOutput() {
-    const fttPercentage = calculateFTT(); // Hitung FTT
-    const fttOutput = document.getElementById('fttOutput'); // Elemen output FTT
-    fttOutput.textContent = `${fttPercentage}%`; // Tampilkan FTT di elemen HTML
+// Deklarasi Variabel Global
+let totalInspected = 0;
+let totalDefects = 0;
+let totalReworks = 0;
 
-    // Atur warna output berdasarkan nilai FTT
-    if (fttPercentage >= 80) {
-        fttOutput.style.color = 'green'; // Hijau untuk FTT bagus
-    } else if (fttPercentage >= 50) {
-        fttOutput.style.color = 'orange'; // Oranye untuk FTT sedang
-    } else {
-        fttOutput.style.color = 'red'; // Merah untuk FTT buruk
+// Elemen DOM
+const fttOutput = document.getElementById('fttOutput');
+const qtyInspectOutput = document.getElementById('qtyInspectOutput');
+const leftCounter = document.getElementById('left-counter');
+const rightCounter = document.getElementById('right-counter');
+
+// Tombol Qty Inspect
+const qtyInspectButton = document.querySelector('#input-section .input-button');
+qtyInspectButton.addEventListener('click', () => {
+    totalInspected++;
+    qtyInspectOutput.textContent = totalInspected;
+    updateFTT();
+});
+
+// Tombol Rework (Kiri)
+const reworkLeftButton = document.getElementById('rework-left');
+reworkLeftButton.addEventListener('click', () => {
+    totalReworks++;
+    leftCounter.textContent = totalReworks;
+    updateFTT();
+});
+
+// Tombol Rework (Kanan)
+const reworkRightButton = document.getElementById('rework-right');
+reworkRightButton.addEventListener('click', () => {
+    totalReworks++;
+    rightCounter.textContent = totalReworks;
+    updateFTT();
+});
+
+// Tombol Defect
+const defectButtons = document.querySelectorAll('.defect-button');
+defectButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        totalDefects++;
+        updateFTT();
+    });
+});
+
+// Fungsi Menghitung dan Update FTT
+function updateFTT() {
+    if (totalInspected === 0) {
+        fttOutput.textContent = '0%';
+        return;
     }
+    const fttValue = ((totalInspected - totalDefects - totalReworks) / totalInspected) * 100;
+    fttOutput.textContent = `${fttValue.toFixed(2)}%`;
 }
 
-// ==============================
-// Event Listener untuk Pembaruan Data
-// ==============================
-document.getElementById('qtyInspectPlus').addEventListener('click', function() {
-    qtyInspectCount++; // Tambah jumlah inspeksi
-    updateFTTOutput(); // Perbarui FTT
-});
-
-document.getElementById('qtyInspectMinus').addEventListener('click', function() {
-    qtyInspectCount--; // Kurangi jumlah inspeksi
-    updateFTTOutput(); // Perbarui FTT
-});
-
-document.getElementById('rework-left').addEventListener('click', function() {
-    leftClickCount++; // Tambah jumlah rework kiri
-    updateFTTOutput(); // Perbarui FTT
-});
-
-document.getElementById('rework-right').addEventListener('click', function() {
-    rightClickCount++; // Tambah jumlah rework kanan
-    updateFTTOutput(); // Perbarui FTT
-});
-
-// ==============================
-// Inisialisasi FTT (Setelah DOM Dimuat)
-// ==============================
-document.addEventListener('DOMContentLoaded', function() {
-    updateFTTOutput(); // Inisialisasi tampilan FTT saat halaman dimuat
-});
