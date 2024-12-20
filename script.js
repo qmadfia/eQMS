@@ -1,4 +1,3 @@
-
 // =============================
 // 1. Defect Button Handling
 // =============================
@@ -254,3 +253,52 @@ document.getElementById('.rework-right').addEventListener('click', function() {
 document.getElementById('.defect-button').addEventListener('click', function() {
     updateDefectSummary();
 });
+// ==============================
+// 1. Perhitungan FTT (First Time Through)
+// ==============================
+
+// Fungsi untuk menghitung FTT
+function calculateFTT() {
+    // Jika qtyInspectCount masih 0, hindari pembagian dengan 0
+    if (qtyInspectCount === 0) {
+        return 0; 
+    }
+
+    // Formula: FTT = (Qty Inspect - (Rework Kiri + Rework Kanan) / 2) / Qty Inspect
+    const totalRework = (leftClickCount + rightClickCount) / 2;
+    const ftt = ((qtyInspectCount - totalRework) / qtyInspectCount) * 100;
+
+    // Kembalikan nilai FTT dengan dua angka desimal
+    return ftt.toFixed(2); 
+}
+
+// ==============================
+// 2. Pembaruan Output FTT
+// ==============================
+
+// Fungsi untuk memperbarui tampilan FTT
+function updateFTTOutput() {
+    const fttPercentage = calculateFTT(); // Hitung FTT
+    const fttOutput = document.getElementById('fttOutput');
+    fttOutput.textContent = `${fttPercentage}%`; // Tampilkan FTT di elemen dengan ID 'fttOutput'
+
+    // Ubah warna output FTT berdasarkan nilai persentase
+    if (fttPercentage >= 80) {
+        fttOutput.style.color = 'green'; // FTT bagus (>80%)
+    } else if (fttPercentage >= 50) {
+        fttOutput.style.color = 'orange'; // FTT sedang (50-80%)
+    } else {
+        fttOutput.style.color = 'red'; // FTT buruk (<50%)
+    }
+}
+
+// ==============================
+// 3. Inisialisasi FTT (Setelah DOM Dimuat)
+// ==============================
+
+// Pastikan untuk memanggil updateFTTOutput setiap kali ada perubahan pada qtyInspectCount, leftClickCount, atau rightClickCount
+document.addEventListener('DOMContentLoaded', function() {
+    updateFTTOutput(); // Memperbarui FTT saat halaman dimuat
+});
+
+// Pastikan untuk memanggil updateFTTOutput di bagian lain kode saat qtyInspectCount, leftClickCount, atau rightClickCount diperbarui
