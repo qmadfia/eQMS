@@ -254,88 +254,61 @@ document.getElementById('.rework-right').addEventListener('click', function() {
 document.getElementById('.defect-button').addEventListener('click', function() {
     updateDefectSummary();
 });
-// ==============================
-// 1. Variabel Global
-// ==============================
-let qtyInspectCount = 0; // Untuk qty inspect
-let leftClickCount = 0; // Untuk Rework Kiri
-let rightClickCount = 0; // Untuk Rework Kanan
+
 
 // ==============================
-// 2. Perhitungan FTT (First Time Through)
+// Fungsi Perhitungan FTT
 // ==============================
-
-// Fungsi untuk menghitung FTT
 function calculateFTT() {
-    // Jika qtyInspectCount masih 0, hindari pembagian dengan 0
-    if (qtyInspectCount === 0) {
-        console.log("qtyInspectCount is 0, returning 0 FTT"); // Debug log
-        return 0; 
-    }
-
-    // Formula: FTT = (Qty Inspect - (Rework Kiri + Rework Kanan) / 2) / Qty Inspect
-    const totalRework = (leftClickCount + rightClickCount) / 2;
-    const ftt = ((qtyInspectCount - totalRework) / qtyInspectCount) * 100;
-
-    console.log(`qtyInspectCount: ${qtyInspectCount}, leftClickCount: ${leftClickCount}, rightClickCount: ${rightClickCount}`);
-    console.log(`Calculated FTT: ${ftt}`); // Debug log
-
-    // Kembalikan nilai FTT dengan dua angka desimal
-    return ftt.toFixed(2); 
+    if (qtyInspectCount === 0) return 0; // Hindari pembagian dengan nol
+    const totalRework = (leftClickCount + rightClickCount) / 2; // Hitung rata-rata rework
+    return (((qtyInspectCount - totalRework) / qtyInspectCount) * 100).toFixed(2); // Hitung FTT dalam persen
 }
 
 // ==============================
-// 3. Pembaruan Output FTT
+// Fungsi Pembaruan Tampilan FTT
 // ==============================
-
-// Fungsi untuk memperbarui tampilan FTT
 function updateFTTOutput() {
     const fttPercentage = calculateFTT(); // Hitung FTT
-    const fttOutput = document.getElementById('fttOutput');
-    fttOutput.textContent = `${fttPercentage}%`; // Tampilkan FTT di elemen dengan ID 'fttOutput'
+    const fttOutput = document.getElementById('fttOutput'); // Elemen output FTT
+    fttOutput.textContent = `${fttPercentage}%`; // Tampilkan FTT di elemen HTML
 
-    // Ubah warna output FTT berdasarkan nilai persentase
+    // Atur warna output berdasarkan nilai FTT
     if (fttPercentage >= 80) {
-        fttOutput.style.color = 'green'; // FTT bagus (>80%)
+        fttOutput.style.color = 'green'; // Hijau untuk FTT bagus
     } else if (fttPercentage >= 50) {
-        fttOutput.style.color = 'orange'; // FTT sedang (50-80%)
+        fttOutput.style.color = 'orange'; // Oranye untuk FTT sedang
     } else {
-        fttOutput.style.color = 'red'; // FTT buruk (<50%)
+        fttOutput.style.color = 'red'; // Merah untuk FTT buruk
     }
 }
 
 // ==============================
-// 4. Event Listener untuk Qty Inspect (Plus dan Minus)
+// Event Listener untuk Pembaruan Data
 // ==============================
-
 document.getElementById('qtyInspectPlus').addEventListener('click', function() {
-    qtyInspectCount++; // Update qtyInspectCount
-    updateFTTOutput(); // Update FTT setelah perubahan
+    qtyInspectCount++; // Tambah jumlah inspeksi
+    updateFTTOutput(); // Perbarui FTT
 });
 
 document.getElementById('qtyInspectMinus').addEventListener('click', function() {
-    qtyInspectCount--; // Update qtyInspectCount
-    updateFTTOutput(); // Update FTT setelah perubahan
+    qtyInspectCount--; // Kurangi jumlah inspeksi
+    updateFTTOutput(); // Perbarui FTT
 });
 
-// ==============================
-// 5. Event Listener untuk Rework Kiri dan Rework Kanan
-// ==============================
-
 document.getElementById('rework-left').addEventListener('click', function() {
-    leftClickCount++; // Update leftClickCount
-    updateFTTOutput(); // Update FTT setelah perubahan
+    leftClickCount++; // Tambah jumlah rework kiri
+    updateFTTOutput(); // Perbarui FTT
 });
 
 document.getElementById('rework-right').addEventListener('click', function() {
-    rightClickCount++; // Update rightClickCount
-    updateFTTOutput(); // Update FTT setelah perubahan
+    rightClickCount++; // Tambah jumlah rework kanan
+    updateFTTOutput(); // Perbarui FTT
 });
 
 // ==============================
-// 6. Inisialisasi FTT (Setelah DOM Dimuat)
+// Inisialisasi FTT (Setelah DOM Dimuat)
 // ==============================
-
 document.addEventListener('DOMContentLoaded', function() {
-    updateFTTOutput(); // Memperbarui FTT saat halaman dimuat
+    updateFTTOutput(); // Inisialisasi tampilan FTT saat halaman dimuat
 });
