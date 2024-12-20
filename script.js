@@ -248,24 +248,17 @@ document.getElementById('minus-button').addEventListener('click', handleMinusCli
 document.querySelector('.input-button').addEventListener('click', handleQtyInspectClick);
 
 // Event listeners for Rework Kiri and Rework Kanan
-document.getElementById('.rework-left').addEventListener('click', function() {
+document.getElementById('rework-left').addEventListener('click', function() {
     updateReworkCounter('left');
 });
 
-document.getElementById('.rework-right').addEventListener('click', function() {
+document.getElementById('rework-right').addEventListener('click', function() {
     updateReworkCounter('right');
 });
 
-document.getElementById('.defect-button').addEventListener('click', function() {
+document.getElementById('defect-button').addEventListener('click', function() {
     updateDefectSummary();
 });
-
-// ==============================
-// Global Variables
-// ==============================
-let qtyInspectCount = 0; // For Qty Inspect count
-let leftClickCount = 0; // For Rework Kiri count
-let rightClickCount = 0; // For Rework Kanan count
 
 // ==============================
 // 1. Update FTT Calculation
