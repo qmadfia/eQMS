@@ -256,6 +256,14 @@ document.getElementById('.defect-button').addEventListener('click', function() {
 });
 
 
+
+// ==============================
+// Variabel Global untuk FTT
+// ==============================
+let qtyInspectCount = 0; // Untuk jumlah inspeksi
+let leftClickCount = 0; // Untuk jumlah rework kiri
+let rightClickCount = 0; // Untuk jumlah rework kanan
+
 // ==============================
 // Fungsi Perhitungan FTT
 // ==============================
