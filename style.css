@@ -80,6 +80,20 @@ h1 {
     justify-content: center;
 }
 
+#output-ftt-section {
+    margin-top: 20px;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+#fttOutput {
+    font-size: 20px;
+    font-weight: bold;
+    color: #2196F3;
+}
+
 
 #reject-section {
     margin-top: 20px;
