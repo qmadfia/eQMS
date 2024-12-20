@@ -143,6 +143,7 @@ function init() {
     setupDefectButtons(); // Setup defect buttons
     setupQtyInspectButton(); // Setup Qty Inspect button
     setupReworkButtons(); // Setup Rework buttons
+    updateFTTOutput();
 }
 
 // Wait for the DOM to load before initializing
