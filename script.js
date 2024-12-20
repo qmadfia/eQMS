@@ -1,8 +1,13 @@
 // =============================
-// 1. Defect Button Handling
+// Global Variables
 // =============================
+let qtyInspectCount = 0; // For Qty Inspect count
+let leftClickCount = 0; // For Rework Kiri count
+let rightClickCount = 0; // For Rework Kanan count
 
-// Global object to store defect counts
+// =============================
+// Defect Button Handling
+// =============================
 const defectCounts = {
     "OVER CEMENT": 0,
     "STAIN UPPER": 0,
@@ -40,7 +45,6 @@ function handleDefectClick(defectName) {
         console.warn(`Defect '${defectName}' tidak dikenali.`);
     }
 
-    // Update the defect summary
     updateDefectSummary();
 }
 
@@ -49,9 +53,8 @@ function updateDefectSummary() {
     const summaryList = document.getElementById('summary-list');
     summaryList.innerHTML = ''; // Clear previous content
 
-    // Loop through defect counts and display them
     for (const [defect, count] of Object.entries(defectCounts)) {
-       if (count !== 0) {
+        if (count !== 0) {
             const summaryItem = document.createElement('div');
             summaryItem.className = 'summary-item';
             summaryItem.textContent = `${defect}: ${count}`;
@@ -59,7 +62,6 @@ function updateDefectSummary() {
         }
     }
 
-    // Update rework counters in summary
     const reworkSummary = document.getElementById('rework-summary');
     reworkSummary.textContent = `Rework Kiri: ${leftClickCount} | Rework Kanan: ${rightClickCount}`;
 }
@@ -78,12 +80,8 @@ function setupDefectButtons() {
 }
 
 // =============================
-// 2. Inspect Button Handling
+// Inspect Button Handling
 // =============================
-
-let qtyInspectCount = 0; // Untuk Qty Inspect
-
-// Function to handle Qty Inspect button click
 function handleQtyInspectClick() {
     qtyInspectCount++;
     document.getElementById('qtyInspectOutput').textContent = qtyInspectCount;
@@ -98,13 +96,8 @@ function setupQtyInspectButton() {
 }
 
 // =============================
-// 3. Rework Button Handling
+// Rework Button Handling
 // =============================
-
-let leftClickCount = 0; // Untuk Rework Kiri
-let rightClickCount = 0; // Untuk Rework Kanan
-
-// Function to update rework counters (left or right)
 function updateReworkCounter(side) {
     if (side === 'left') {
         leftClickCount++;
@@ -114,17 +107,14 @@ function updateReworkCounter(side) {
         document.getElementById('right-counter').textContent = rightClickCount;
     }
 
-    // Update rework summary after each click
     updateDefectSummary();
 }
 
 // Setup rework buttons
 function setupReworkButtons() {
-    // Menggunakan querySelector untuk memilih tombol berdasarkan ID
     const leftReworkButton = document.querySelector('#rework-left');
     const rightReworkButton = document.querySelector('#rework-right');
 
-    // Menambahkan event listener pada tombol kiri dan kanan
     if (leftReworkButton) {
         leftReworkButton.addEventListener('click', () => updateReworkCounter('left'));
     }
@@ -135,206 +125,59 @@ function setupReworkButtons() {
 }
 
 // =============================
-// 4. App Initialization
+// App Initialization
 // =============================
-
-// Initialize the app
 function init() {
-    setupDefectButtons(); // Setup defect buttons
-    setupQtyInspectButton(); // Setup Qty Inspect button
-    setupReworkButtons(); // Setup Rework buttons
-}
-
-// Wait for the DOM to load before initializing
-document.addEventListener('DOMContentLoaded', init);
-
-// =============================
-// 5. Plus Minus
-// =============================
-let isAdding = false; // Flag to track if adding is active
-let isSubtracting = false; // Flag to track if subtracting is active
-
-// Function to handle Plus button click
-function handlePlusClick() {
-    isAdding = true; // Enable adding mode
-    isSubtracting = false; // Disable subtracting mode
-    document.getElementById('plus-button').classList.add('active'); // Highlight Plus button
-    document.getElementById('plus-button').classList.remove('inactive'); // Make Plus button active
-    document.getElementById('minus-button').classList.remove('active'); // Remove highlight from Minus button
-    document.getElementById('minus-button').classList.add('inactive'); // Make Minus button inactive
-}
-
-// Function to handle Minus button click
-function handleMinusClick() {
-    isAdding = false; // Disable adding mode
-    isSubtracting = true; // Enable subtracting mode
-    document.getElementById('minus-button').classList.add('active'); // Highlight Minus button
-    document.getElementById('minus-button').classList.remove('inactive'); // Make Minus button active
-    document.getElementById('plus-button').classList.remove('active'); // Remove highlight from Plus button
-    document.getElementById('plus-button').classList.add('inactive'); // Make Plus button inactive
-}
-
-// Function to handle Qty Inspect click based on Plus/Minus state
-function handleQtyInspectClick() {
-    let qtyInspectCount = parseInt(document.getElementById('qtyInspectOutput').textContent) || 0;
-    
-    if (isAdding) {
-        qtyInspectCount++; // Increment if adding
-    } else if (isSubtracting) {
-        qtyInspectCount--; // Decrement if subtracting
-    }
-
-    document.getElementById('qtyInspectOutput').textContent = qtyInspectCount; // Update the output
-}
-
-// Function to update rework counters (left or right)
-function updateReworkCounter(side) {
-    let counterElement;
-    let currentCount;
-
-    // Determine which counter to update
-    if (side === 'left') {
-        counterElement = document.getElementById('left-counter');
-    } else if (side === 'right') {
-        counterElement = document.getElementById('right-counter');
-    } else {
-        return; // Exit if side is invalid
-    }
-
-    // Get the current count from the counter element
-    currentCount = parseInt(counterElement.textContent) || 0;
-
-    // Check Plus/Minus state
-    if (isAdding) {
-        currentCount++; // Increment
-    } else if (isSubtracting) {
-        currentCount--; // Decrement
-    }
-
-    // Update the counter element
-    counterElement.textContent = currentCount;
-}
-// Fungsi untuk menangani klik tombol defect
-function handleDefectClick(defectName) {
-    // Pastikan status plus atau minus mempengaruhi perubahan nilai defect
-    if (defectCounts.hasOwnProperty(defectName)) {
-        if (isAdding) {
-            defectCounts[defectName]++;  // Menambah defect jika tombol Plus aktif
-        } else if (isSubtracting) {
-            defectCounts[defectName]--;  // Mengurangi defect jika tombol Minus aktif
-        }
-
-        // Update nilai defect pada tampilan
-        console.log(`Defect ${defectName} updated to ${defectCounts[defectName]}`);
-    } else {
-        console.warn(`Defect '${defectName}' tidak dikenali.`);
-    }
-
-    // Update summary defect
-    updateDefectSummary();
-}
-
-// Event listeners for Plus and Minus buttons
-document.getElementById('plus-button').addEventListener('click', handlePlusClick);
-document.getElementById('minus-button').addEventListener('click', handleMinusClick);
-
-// Event listener for Qty Inspect button (this is the button that does the increment or decrement)
-document.querySelector('.input-button').addEventListener('click', handleQtyInspectClick);
-
-// Event listeners for Rework Kiri and Rework Kanan
-document.getElementById('.rework-left').addEventListener('click', function() {
-    updateReworkCounter('left');
-});
-
-document.getElementById('.rework-right').addEventListener('click', function() {
-    updateReworkCounter('right');
-});
-
-document.getElementById('.defect-button').addEventListener('click', function() {
-    updateDefectSummary();
-});
-
-
-// ==============================
-// Global Variables
-// ==============================
-let qtyInspectCount = 0; // For Qty Inspect count
-let leftClickCount = 0; // For Rework Kiri count
-let rightClickCount = 0; // For Rework Kanan count
-
-// ==============================
-// 1. Update FTT Calculation
-// ==============================
-
-// Function to calculate and update FTT (First Time Through) percentage
-function calculateFTT() {
-    if (qtyInspectCount === 0) {
-        // Avoid division by zero
-        return 0;
-    }
-    // Formula: FTT = (Qty Inspect - (Rework Kiri + Rework Kanan) / 2) / Qty Inspect
-    const ftt = (qtyInspectCount - (leftClickCount + rightClickCount) / 2) / qtyInspectCount;
-    return (ftt * 100).toFixed(2); // Return FTT in percentage format
-}
-
-// ==============================
-// 2. FTT Output Update
-// ==============================
-
-// Function to update the FTT output display
-function updateFTTOutput() {
-    const fttPercentage = calculateFTT(); // Calculate FTT percentage
-    const fttOutput = document.getElementById('fttOutput');
-    fttOutput.textContent = `${fttPercentage}%`; // Display FTT percentage
-
-    // Change the FTT output color based on the percentage value
-    if (fttPercentage >= 80) {
-        fttOutput.style.color = 'green'; // Good FTT (>80%)
-    } else if (fttPercentage >= 50) {
-        fttOutput.style.color = 'orange'; // Average FTT (50-80%)
-    } else {
-        fttOutput.style.color = 'red'; // Poor FTT (<50%)
-    }
-}
-
-// ==============================
-// 3. Update Rework Counts
-// ==============================
-
-// Function to update the Rework counters (left or right)
-function updateReworkCounter(side) {
-    if (side === 'left') {
-        leftClickCount++;
-        document.getElementById('left-counter').textContent = leftClickCount;
-    } else if (side === 'right') {
-        rightClickCount++;
-        document.getElementById('right-counter').textContent = rightClickCount;
-    }
-
-    // After updating rework counters, recalculate FTT
-    updateFTTOutput();
-}
-
-// ==============================
-// 4. Event Listeners
-// ==============================
-
-// Event listener for Rework Kiri and Rework Kanan buttons
-document.getElementById('rework-left').addEventListener('click', () => updateReworkCounter('left'));
-document.getElementById('rework-right').addEventListener('click', () => updateReworkCounter('right'));
-
-// ==============================
-// 5. Initial Setup
-// ==============================
-
-// Initialize the page with initial values
-function init() {
-    // Initialize the FTT output to 0% on page load
-    document.getElementById('fttOutput').textContent = "0%";
-    document.getElementById('qtyInspectOutput').textContent = "0";
-    document.getElementById('left-counter').textContent = "0";
-    document.getElementById('right-counter').textContent = "0";
+    setupDefectButtons();
+    setupQtyInspectButton();
+    setupReworkButtons();
 }
 
 // Wait for DOM to load before initializing
 document.addEventListener('DOMContentLoaded', init);
+
+// =============================
+// Plus/Minus Button Handling
+// =============================
+let isAdding = false;
+let isSubtracting = false;
+
+function handlePlusClick() {
+    isAdding = true;
+    isSubtracting = false;
+    document.getElementById('plus-button').classList.add('active');
+    document.getElementById('minus-button').classList.remove('active');
+}
+
+function handleMinusClick() {
+    isAdding = false;
+    isSubtracting = true;
+    document.getElementById('minus-button').classList.add('active');
+    document.getElementById('plus-button').classList.remove('active');
+}
+
+document.getElementById('plus-button').addEventListener('click', handlePlusClick);
+document.getElementById('minus-button').addEventListener('click', handleMinusClick);
+
+// ==============================
+// FTT Calculation
+// ==============================
+function calculateFTT() {
+    if (qtyInspectCount === 0) return 0;
+    const ftt = (qtyInspectCount - (leftClickCount + rightClickCount) / 2) / qtyInspectCount;
+    return (ftt * 100).toFixed(2);
+}
+
+function updateFTTOutput() {
+    const fttPercentage = calculateFTT();
+    const fttOutput = document.getElementById('fttOutput');
+    fttOutput.textContent = `${fttPercentage}%`;
+
+    if (fttPercentage >= 80) {
+        fttOutput.style.color = 'green';
+    } else if (fttPercentage >= 50) {
+        fttOutput.style.color = 'orange';
+    } else {
+        fttOutput.style.color = 'red';
+    }
+}
