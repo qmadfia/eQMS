@@ -143,7 +143,6 @@ function init() {
     setupDefectButtons(); // Setup defect buttons
     setupQtyInspectButton(); // Setup Qty Inspect button
     setupReworkButtons(); // Setup Rework buttons
-    updateFTTOutput();
 }
 
 // Wait for the DOM to load before initializing
@@ -271,7 +270,8 @@ const rightCounter = document.getElementById('right-counter');
 
 // Tombol Qty Inspect
 const qtyInspectButton = document.querySelector('#input-section .input-button');
-qtyInspectButton.addEventListener('click', () => {
+qtyInspectButton?.addEventListener('click', () => {
+    console.log('Qty Inspect button clicked');
     totalInspected++;
     qtyInspectOutput.textContent = totalInspected;
     updateFTT();
@@ -279,7 +279,8 @@ qtyInspectButton.addEventListener('click', () => {
 
 // Tombol Rework (Kiri)
 const reworkLeftButton = document.getElementById('rework-left');
-reworkLeftButton.addEventListener('click', () => {
+reworkLeftButton?.addEventListener('click', () => {
+    console.log('Rework Left button clicked');
     totalReworks++;
     leftCounter.textContent = totalReworks;
     updateFTT();
@@ -287,7 +288,8 @@ reworkLeftButton.addEventListener('click', () => {
 
 // Tombol Rework (Kanan)
 const reworkRightButton = document.getElementById('rework-right');
-reworkRightButton.addEventListener('click', () => {
+reworkRightButton?.addEventListener('click', () => {
+    console.log('Rework Right button clicked');
     totalReworks++;
     rightCounter.textContent = totalReworks;
     updateFTT();
@@ -297,6 +299,7 @@ reworkRightButton.addEventListener('click', () => {
 const defectButtons = document.querySelectorAll('.defect-button');
 defectButtons.forEach(button => {
     button.addEventListener('click', () => {
+        console.log('Defect button clicked: ', button.textContent);
         totalDefects++;
         updateFTT();
     });
@@ -304,6 +307,7 @@ defectButtons.forEach(button => {
 
 // Fungsi Menghitung dan Update FTT
 function updateFTT() {
+    console.log(`Calculating FTT: Inspected=${totalInspected}, Defects=${totalDefects}, Reworks=${totalReworks}`);
     if (totalInspected === 0) {
         fttOutput.textContent = '0%';
         return;
