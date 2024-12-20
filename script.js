@@ -255,9 +255,9 @@ document.getElementById('.defect-button').addEventListener('click', function() {
 });
 
 // Initialize counters
-        let qtyInspect = 50;
-        let reworkLeft = 20;
-        let reworkRight = 30;
+        let qtyInspect = 0;
+        let reworkLeft = 0;
+        let reworkRight = 0;
 
         // Function to calculate FTT
         function calculateFTT() {
@@ -270,5 +270,21 @@ document.getElementById('.defect-button').addEventListener('click', function() {
             }
         }
 
-        // Calculate FTT initially
+        // Add event listeners for buttons
+        document.getElementById('increment-inspect').addEventListener('click', () => {
+            qtyInspect++;
+            calculateFTT();
+        });
+
+        document.getElementById('increment-rework-left').addEventListener('click', () => {
+            reworkLeft++;
+            calculateFTT();
+        });
+
+        document.getElementById('increment-rework-right').addEventListener('click', () => {
+            reworkRight++;
+            calculateFTT();
+        });
+
+        // Initial calculation
         calculateFTT();
