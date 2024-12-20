@@ -64,36 +64,33 @@ h1 {
     align-items: flex-start;
 }
 
-/* FTT Section */
-.ftt-section {
-    flex: 1;
-    background: #2196F3;
-    color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    text-align: center;
-    width: 100%;
-    height: 40%; /* Tambahkan properti height */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-#output-ftt-section {
-    margin-top: 20px;
+/* FTT Section Styling */
+.section {
+    margin-bottom: 20px;
     padding: 10px;
-    border: 2px solid #ddd;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    background-color: #fff;
+    background-color: #f9f9f9;
 }
 
-#fttOutput {
-    font-size: 20px;
+.section label {
     font-weight: bold;
-    color: #2196F3;
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
 }
 
+.counter {
+    font-size: 24px;
+    font-weight: bold;
+    color: #4CAF50; /* Green color for FTT percentage */
+    text-align: center;
+    padding: 10px;
+    border: 2px solid #4CAF50;
+    border-radius: 5px;
+    width: 100px;
+    margin-top: 10px;
+}
 
 #reject-section {
     margin-top: 20px;
