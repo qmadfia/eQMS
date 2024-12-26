@@ -18,9 +18,8 @@ const rightCounter = document.getElementById('right-counter');
 // =============================
 const qtyInspectButton = document.querySelector('.input-button');
 qtyInspectButton.addEventListener('click', () => {
-    totalInspected++;
-    qtyInspectOutput.textContent = totalInspected;
-    updateFTT();
+    updateQuantity('qtyInspectOutput', 1); // Tambah Qty Inspect
+    updateFTT(); // Perbarui FTT
 });
 
 // =============================
@@ -28,16 +27,14 @@ qtyInspectButton.addEventListener('click', () => {
 // =============================
 const reworkLeftButton = document.getElementById('rework-left');
 reworkLeftButton.addEventListener('click', () => {
-    totalReworkLeft++;
-    leftCounter.textContent = totalReworkLeft;
-    updateFTT();
+    updateQuantity('left-counter', 1); // Tambah Rework Kiri
+    updateFTT(); // Perbarui FTT
 });
 
 const reworkRightButton = document.getElementById('rework-right');
 reworkRightButton.addEventListener('click', () => {
-    totalReworkRight++;
-    rightCounter.textContent = totalReworkRight;
-    updateFTT();
+    updateQuantity('right-counter', 1); // Tambah Rework Kanan
+    updateFTT(); // Perbarui FTT
 });
 
 // =============================
@@ -54,85 +51,39 @@ function updateFTT() {
 }
 
 // =============================
-// 5. Fungsi Plus dan Minus
+// 5. Fungsi untuk Mengupdate Kuantitas
 // =============================
-function handlePlusClick() {
-    isAdding = true; // Aktifkan mode penambahan
-    isSubtracting = false; // Nonaktifkan mode pengurangan
-    document.getElementById('plus-button').classList.add('active');
-    document.getElementById('minus-button').classList.remove('active');
-}
+function updateQuantity(counterId, change) {
+    const counterElement = document.getElementById(counterId);
+    let currentValue = parseInt(counterElement.textContent) || 0; // Ambil nilai saat ini
 
-function handleMinusClick() {
-    isAdding = false; // Nonaktifkan mode penambahan
-    isSubtracting = true; // Aktifkan mode pengurangan
-    document.getElementById('minus-button').classList.add('active');
-    document.getElementById('plus-button').classList.remove('active');
-}
-
-// Fungsi untuk menangani klik Qty Inspect berdasarkan status Plus/Minus
-function handleQtyInspectClick() {
-    let qtyInspectCount = parseInt(qtyInspectOutput.textContent) || 0;
-
+    // Tambah atau kurangi nilai berdasarkan mode
     if (isAdding) {
-        qtyInspectCount++; // Tambah jika mode penambahan aktif
+        currentValue++; // Tambah jika mode penambahan aktif
     } else if (isSubtracting) {
-        qtyInspectCount--; // Kurangi jika mode pengurangan aktif
+        currentValue--; // Kurangi jika mode pengurangan aktif
     }
 
-    qtyInspectOutput.textContent = qtyInspectCount; // Perbarui output
-    totalInspected = qtyInspectCount; // Perbarui totalInspected untuk FTT
-    updateFTT(); // Perbarui FTT
+    // Pastikan nilai tidak kurang dari 0
+    if (currentValue < 0) {
+        currentValue = 0;
+    }
+
+    // Perbarui elemen counter
+    counterElement.textContent = currentValue;
+
+    // Perbarui totalInspected dan totalRework
+    if (counterId === 'qtyInspectOutput') {
+        totalInspected = currentValue; // Perbarui totalInspected
+    } else if (counterId === 'left-counter') {
+        totalReworkLeft = currentValue; // Perbarui totalReworkLeft
+    } else if (counterId === 'right-counter') {
+        totalReworkRight = currentValue; // Perbarui totalReworkRight
+    }
 }
 
 // =============================
-// 6. Fungsi untuk Mengupdate Counter Rework
-// =============================
-function updateReworkCounter(side) {
-    let counterElement;
-    let currentCount;
-
-    if (side === 'left') {
-        counterElement = leftCounter;
-    } else if (side === 'right') {
-        counterElement = rightCounter;
-    } else {
-        return; // Keluar jika sisi tidak valid
-    }
-
-    currentCount = parseInt(counterElement.textContent) || 0;
-
-    if (isAdding) {
-        currentCount++; // Tambah
-    } else if (isSubtracting) {
-        currentCount--; // Kurangi
-    }
-
-    counterElement.textContent = currentCount; // Perbarui elemen counter
-}
-
-// =============================
-// 7. Event Listeners untuk Plus dan Minus Buttons
-// =============================
-document.getElementById('plus-button').addEventListener('click', handlePlusClick);
-document.getElementById('minus-button').addEventListener('click', handleMinusClick);
-
-// Event listener untuk Qty Inspect button (ini adalah tombol yang melakukan penambahan atau pengurangan)
-qtyInspectButton.addEventListener('click', handleQtyInspectClick);
-
-// Event listeners untuk Rework Kiri dan Rework Kanan
-reworkLeftButton.addEventListener('click', () => {
-    updateReworkCounter('left');
-    updateFTT(); // Perbarui FTT setelah rework
-});
-
-reworkRightButton.addEventListener('click', () => {
-    updateReworkCounter('right');
-    updateFTT(); // Perbarui FTT setelah rework
-});
-
-// =============================
-// 8. Fungsi untuk menangani klik tombol defect
+// 6. Fungsi untuk menangani klik tombol defect
 // =============================
 const defectCounts = {
     "OVER CEMENT": 0,
@@ -211,11 +162,57 @@ function updateDefectSummary() {
 }
 
 // =============================
-// 9. Inisialisasi Aplikasi
+// 7. Event Listeners untuk Plus dan Minus Buttons
+// =============================
+document.getElementById('plus-button').addEventListener('click', () => {
+    isAdding = true; // Aktifkan mode penambahan
+    isSubtracting = false; // Nonaktifkan mode pengurangan
+});
+
+document.getElementById('minus-button').addEventListener('click', () => {
+    isAdding = false; // Nonaktifkan mode penambahan
+    isSubtracting = true; // Aktifkan mode pengurangan
+});
+
+// =============================
+// 8. Inisialisasi Aplikasi
 // =============================
 function init() {
     setupDefectButtons(); // Setup defect buttons
+    setupQuantityButtons(); // Setup quantity buttons
 }
 
 // Tunggu hingga DOM dimuat sebelum menginisialisasi
 document.addEventListener('DOMContentLoaded', init);
+
+// =============================
+// 9. Setup Quantity Buttons
+// =============================
+function setupQuantityButtons() {
+    // Qty Inspect
+    document.getElementById('plus-qty').addEventListener('click', function() {
+        updateQuantity('qtyInspectOutput', 1);
+    });
+
+    document.getElementById('minus-qty').addEventListener('click', function() {
+        updateQuantity('qtyInspectOutput', -1);
+    });
+
+    // Rework Kiri
+    document.getElementById('plus-rework-kiri').addEventListener('click', function() {
+        updateQuantity('left-counter', 1);
+    });
+
+    document.getElementById('minus-rework-kiri').addEventListener('click', function() {
+        updateQuantity('left-counter', -1);
+    });
+
+    // Rework Kanan
+    document.getElementById('plus-rework-kanan').addEventListener('click', function() {
+        updateQuantity('right-counter', 1);
+    });
+
+    document.getElementById('minus-rework-kanan').addEventListener('click', function() {
+        updateQuantity('right-counter', -1);
+    });
+}
