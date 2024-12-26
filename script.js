@@ -259,8 +259,8 @@ document.getElementById('.defect-button').addEventListener('click', function() {
 
 // Variabel Global
 let totalInspected = 0; // Total barang yang diinspeksi
-let totalDefects = 0;   // Total barang cacat
-let totalReworks = 0;   // Total rework
+let totalReworkLeft = 0; // Total rework kiri
+let totalReworkRight = 0; // Total rework kanan
 
 // Elemen DOM
 const fttOutput = document.getElementById('fttOutput');
@@ -279,26 +279,17 @@ qtyInspectButton.addEventListener('click', () => {
 // Event Listener untuk "Rework Kiri"
 const reworkLeftButton = document.getElementById('rework-left');
 reworkLeftButton.addEventListener('click', () => {
-    totalReworks++;
-    leftCounter.textContent = totalReworks;
+    totalReworkLeft++;
+    leftCounter.textContent = totalReworkLeft;
     updateFTT();
 });
 
 // Event Listener untuk "Rework Kanan"
 const reworkRightButton = document.getElementById('rework-right');
 reworkRightButton.addEventListener('click', () => {
-    totalReworks++;
-    rightCounter.textContent = totalReworks;
+    totalReworkRight++;
+    rightCounter.textContent = totalReworkRight;
     updateFTT();
-});
-
-// Event Listener untuk Semua Defect Buttons
-const defectButtons = document.querySelectorAll('.defect-button');
-defectButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        totalDefects++;
-        updateFTT();
-    });
 });
 
 // Fungsi untuk Menghitung FTT
@@ -307,6 +298,7 @@ function updateFTT() {
         fttOutput.textContent = '0%';
         return;
     }
-    const fttValue = ((totalInspected - totalDefects - totalReworks) / totalInspected) * 100;
+    const averageRework = (totalReworkLeft + totalReworkRight) / 2;
+    const fttValue = ((totalInspected - averageRework) / totalInspected) * 100;
     fttOutput.textContent = `${Math.max(0, fttValue.toFixed(2))}%`; // Nilai FTT tidak boleh negatif
 }
