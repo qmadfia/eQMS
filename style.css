@@ -46,7 +46,7 @@ h1 {
 }
 
 /* ============================= */
-/* 4. Form Section (Left Side)   */
+/* 4. Form Section              */
 /* ============================= */
 .form-section {
     grid-column: 1 / 2;
@@ -58,20 +58,21 @@ h1 {
     overflow-y: auto;
 }
 
-/* ============================= */
-/* 5. Right Section              */
-/* ============================= */
-.right-section {
-    grid-column: 2 / 3;
-    grid-row: 1 / 2;
-    display: flex;
-    gap: 20px;
-    justify-content: flex-start;
-    align-items: flex-start;
+.form-section label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-section select,
+.form-section input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
 /* ============================= */
-/* 6. FTT Section               */
+/* 5. FTT Section               */
 /* ============================= */
 .section {
     margin-bottom: 20px;
@@ -100,15 +101,8 @@ h1 {
     margin-top: 10px;
 }
 
-#reject-section {
-    margin-top: 20px;
-    padding: 15px;
-    background-color: #f7f7f7;
-    border-radius: 5px;
-}
-
 /* ============================= */
-/* 7. Input Section              */
+/* 6. Qty Inspect Section        */
 /* ============================= */
 #input-section {
     margin-bottom: 15px;
@@ -128,9 +122,6 @@ h1 {
     background-color: #45a049;
 }
 
-/* ============================= */
-/* 8. Output Section             */
-/* ============================= */
 #output-section {
     padding: 10px;
     border: 2px solid #ddd;
@@ -145,7 +136,7 @@ h1 {
 }
 
 /* ============================= */
-/* 9. Rework Section            */
+/* 7. Rework Section            */
 /* ============================= */
 .rework-section {
     grid-column: 2 / 3;
@@ -162,7 +153,6 @@ h1 {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     padding: 15px;
     text-align: center;
-    height: 50%;
 }
 
 .rework-left button, .rework-right button {
@@ -185,104 +175,7 @@ h1 {
 }
 
 /* ============================= */
-/* 10. Form Layout              */
-/* ============================= */
-.form-section {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 15px;
-}
-
-.form-section label {
-    font-weight: bold;
-    margin-bottom: 1px;
-}
-
-.form-section select,
-.form-section input {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-/* ============================= */
-/* 11. Style Number Container   */
-/* ============================= */
-.style-number-container {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-/* ============================= */
-/* 12. Save Button Styling      */
-/* ============================= */
-.button-wrapper {
-    margin-left: 70%;
-    flex-shrink: 0;
-}
-
-.save-button {
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-/* ============================= */
-/* 13. Input and Select Styling */
-/* ============================= */
-input[type="text"], select {
-    width: 95%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 2px solid #BBDEFB;
-    border-radius: 8px;
-    background-color: #f7faff;
-    font-size: 1em;
-    color: #37474F;
-    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
-}
-
-input:focus, select:focus {
-    outline: none;
-    border-color: #42A5F5;
-    box-shadow: 0 0 8px rgba(66, 165, 245, 0.5);
-}
-
-/* ============================= */
-/* 14. Button Styles            */
-/* ============================= */
-button {
-    display: inline-block;
-    padding: 12px 20px;
-    font-size: 1em;
-    color: #ffffff;
-    background-color: #2196F3;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    margin: 10px 5px;
-    transition: background-color 0.3s ease, transform 0.2s ease-in-out;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-button:hover {
-    background-color: #1976D2;
-    transform: translateY(-3px);
-}
-
-button:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-/* ============================= */
-/* 15. Defect Menu Section      */
+/* 8. Defect Menu Section       */
 /* ============================= */
 .defect-menu {
     grid-column: 1 / 3;
@@ -314,7 +207,7 @@ button:active {
 }
 
 /* ============================= */
-/* 16. Summary Defect Section   */
+/* 9. Summary Defect Section    */
 /* ============================= */
 .summary-defect {
     grid-column: 1 / 2;
@@ -334,7 +227,7 @@ button:active {
 }
 
 /* ============================= */
-/* 17. Control Buttons          */
+/* 10. Plus and Minus Buttons    */
 /* ============================= */
 .buttons {
     margin-bottom: 20px;
@@ -353,31 +246,28 @@ button:active {
     font-weight: bold;
 }
 
-/* ============================= */
-/* 18. Plus and Minus Buttons   */
-/* ============================= */
 #plus-button {
-    background-color: #77CDFF;
+    background-color: #77CDFF; /* Warna cerah saat aktif */
 }
 
 #plus-button.active {
-    background-color: #3D3BF3;
+    background-color: #3D3BF3; /* Warna saat aktif */
 }
 
 #plus-button.inactive {
-    background-color: #B5C0D0;
+    background-color: #B5C0D0; /* Warna saat tidak aktif */
 }
 
 #minus-button {
-    background-color: #FF8383;
+    background-color: #FF8383; /* Warna cerah saat aktif */
 }
 
 #minus-button.active {
-    background-color: #FF2929;
+    background-color: #FF2929; /* Warna saat aktif */
 }
 
 #minus-button.inactive {
-    background-color: #B5C0D0;
+    background-color: #B5C0D0; /* Warna saat tidak aktif */
 }
 
 .control-button:hover {
