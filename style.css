@@ -247,7 +247,7 @@ h1 {
 }
 
 #plus-button {
-    background-color: #77CDFF; /* Warna cerah saat aktif */
+    background-color: #C6E7FF; /* Warna cerah saat aktif */
 }
 
 #plus-button.active {
@@ -255,11 +255,11 @@ h1 {
 }
 
 #plus-button.inactive {
-    background-color: #B5C0D0; /* Warna saat tidak aktif */
+    background-color: #A6AEBF; /* Warna saat tidak aktif */
 }
 
 #minus-button {
-    background-color: #FF8383; /* Warna cerah saat aktif */
+    background-color: #FD8A8A; /* Warna cerah saat aktif */
 }
 
 #minus-button.active {
@@ -267,7 +267,7 @@ h1 {
 }
 
 #minus-button.inactive {
-    background-color: #B5C0D0; /* Warna saat tidak aktif */
+    background-color: #A6AEBF; /* Warna saat tidak aktif */
 }
 
 .control-button:hover {
