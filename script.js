@@ -1,7 +1,11 @@
-// Variabel Global
+// =============================
+// 1. Variabel Global
+// =============================
 let totalInspected = 0; // Total barang yang diinspeksi
 let totalReworkLeft = 0; // Total rework kiri
 let totalReworkRight = 0; // Total rework kanan
+let isAdding = false; // Flag untuk menandakan mode penambahan
+let isSubtracting = false; // Flag untuk menandakan mode pengurangan
 
 // Elemen DOM
 const fttOutput = document.getElementById('fttOutput');
@@ -9,7 +13,9 @@ const qtyInspectOutput = document.getElementById('qtyInspectOutput');
 const leftCounter = document.getElementById('left-counter');
 const rightCounter = document.getElementById('right-counter');
 
-// Event Listener untuk "Qty Inspect"
+// =============================
+// 2. Event Listener untuk Qty Inspect
+// =============================
 const qtyInspectButton = document.querySelector('.input-button');
 qtyInspectButton.addEventListener('click', () => {
     totalInspected++;
@@ -17,7 +23,9 @@ qtyInspectButton.addEventListener('click', () => {
     updateFTT();
 });
 
-// Event Listener untuk "Rework Kiri"
+// =============================
+// 3. Event Listener untuk Rework
+// =============================
 const reworkLeftButton = document.getElementById('rework-left');
 reworkLeftButton.addEventListener('click', () => {
     totalReworkLeft++;
@@ -25,7 +33,6 @@ reworkLeftButton.addEventListener('click', () => {
     updateFTT();
 });
 
-// Event Listener untuk "Rework Kanan"
 const reworkRightButton = document.getElementById('rework-right');
 reworkRightButton.addEventListener('click', () => {
     totalReworkRight++;
@@ -33,7 +40,9 @@ reworkRightButton.addEventListener('click', () => {
     updateFTT();
 });
 
-// Fungsi untuk Menghitung FTT
+// =============================
+// 4. Fungsi untuk Menghitung FTT
+// =============================
 function updateFTT() {
     if (totalInspected === 0) {
         fttOutput.textContent = '0%';
@@ -44,7 +53,87 @@ function updateFTT() {
     fttOutput.textContent = `${Math.max(0, fttValue.toFixed(2))}%`; // Nilai FTT tidak boleh negatif
 }
 
-// Fungsi untuk menangani klik tombol defect
+// =============================
+// 5. Fungsi Plus dan Minus
+// =============================
+function handlePlusClick() {
+    isAdding = true; // Aktifkan mode penambahan
+    isSubtracting = false; // Nonaktifkan mode pengurangan
+    document.getElementById('plus-button').classList.add('active');
+    document.getElementById('minus-button').classList.remove('active');
+}
+
+function handleMinusClick() {
+    isAdding = false; // Nonaktifkan mode penambahan
+    isSubtracting = true; // Aktifkan mode pengurangan
+    document.getElementById('minus-button').classList.add('active');
+    document.getElementById('plus-button').classList.remove('active');
+}
+
+// Fungsi untuk menangani klik Qty Inspect berdasarkan status Plus/Minus
+function handleQtyInspectClick() {
+    let qtyInspectCount = parseInt(qtyInspectOutput.textContent) || 0;
+
+    if (isAdding) {
+        qtyInspectCount++; // Tambah jika mode penambahan aktif
+    } else if (isSubtracting) {
+        qtyInspectCount--; // Kurangi jika mode pengurangan aktif
+    }
+
+    qtyInspectOutput.textContent = qtyInspectCount; // Perbarui output
+    totalInspected = qtyInspectCount; // Perbarui totalInspected untuk FTT
+    updateFTT(); // Perbarui FTT
+}
+
+// =============================
+// 6. Fungsi untuk Mengupdate Counter Rework
+// =============================
+function updateReworkCounter(side) {
+    let counterElement;
+    let currentCount;
+
+    if (side === 'left') {
+        counterElement = leftCounter;
+    } else if (side === 'right') {
+        counterElement = rightCounter;
+    } else {
+        return; // Keluar jika sisi tidak valid
+    }
+
+    currentCount = parseInt(counterElement.textContent) || 0;
+
+    if (isAdding) {
+        currentCount++; // Tambah
+    } else if (isSubtracting) {
+        currentCount--; // Kurangi
+    }
+
+    counterElement.textContent = currentCount; // Perbarui elemen counter
+}
+
+// =============================
+// 7. Event Listeners untuk Plus dan Minus Buttons
+// =============================
+document.getElementById('plus-button').addEventListener('click', handlePlusClick);
+document.getElementById('minus-button').addEventListener('click', handleMinusClick);
+
+// Event listener untuk Qty Inspect button (ini adalah tombol yang melakukan penambahan atau pengurangan)
+qtyInspectButton.addEventListener('click', handleQtyInspectClick);
+
+// Event listeners untuk Rework Kiri dan Rework Kanan
+reworkLeftButton.addEventListener('click', () => {
+    updateReworkCounter('left');
+    updateFTT(); // Perbarui FTT setelah rework
+});
+
+reworkRightButton.addEventListener('click', () => {
+    updateReworkCounter('right');
+    updateFTT(); // Perbarui FTT setelah rework
+});
+
+// =============================
+// 8. Fungsi untuk menangani klik tombol defect
+// =============================
 const defectCounts = {
     "OVER CEMENT": 0,
     "STAIN UPPER": 0,
@@ -89,13 +178,19 @@ function setupDefectButtons() {
 // Function to handle defect button clicks
 function handleDefectClick(defectName) {
     if (defectCounts.hasOwnProperty(defectName)) {
-        defectCounts[defectName]++;
+        if (isAdding) {
+            defectCounts[defectName]++;  // Menambah defect jika tombol Plus aktif
+        } else if (isSubtracting) {
+            defectCounts[defectName]--;  // Mengurangi defect jika tombol Minus aktif
+        }
+
+        // Update nilai defect pada tampilan
         console.log(`Defect ${defectName} updated to ${defectCounts[defectName]}`);
     } else {
         console.warn(`Defect '${defectName}' tidak dikenali.`);
     }
 
-    // Update the defect summary
+    // Update summary defect
     updateDefectSummary();
 }
 
@@ -115,10 +210,12 @@ function updateDefectSummary() {
     }
 }
 
-// Initialize the app
+// =============================
+// 9. Inisialisasi Aplikasi
+// =============================
 function init() {
     setupDefectButtons(); // Setup defect buttons
 }
 
-// Wait for the DOM to load before initializing
+// Tunggu hingga DOM dimuat sebelum menginisialisasi
 document.addEventListener('DOMContentLoaded', init);
