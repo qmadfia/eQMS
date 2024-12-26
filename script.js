@@ -212,6 +212,35 @@ function setupQuantityButtons() {
         updateQuantity('right-counter', 1);
     });
 
+    // =============================
+// 7. Event Listeners untuk Plus dan Minus Buttons
+// =============================
+document.getElementById('plus-button').addEventListener('click', () => {
+    isAdding = true; // Aktifkan mode penambahan
+    isSubtracting = false; // Nonaktifkan mode pengurangan
+
+    // Ubah kelas untuk tombol plus
+    document.getElementById('plus-button').classList.add('active');
+    document.getElementById('plus-button').classList.remove('inactive');
+
+    // Ubah kelas untuk tombol minus
+    document.getElementById('minus-button').classList.remove('active');
+    document.getElementById('minus-button').classList.add('inactive');
+});
+
+document.getElementById('minus-button').addEventListener('click', () => {
+    isAdding = false; // Nonaktifkan mode penambahan
+    isSubtracting = true; // Aktifkan mode pengurangan
+
+    // Ubah kelas untuk tombol minus
+    document.getElementById('minus-button').classList.add('active');
+    document.getElementById('minus-button').classList.remove('inactive');
+
+    // Ubah kelas untuk tombol plus
+    document.getElementById('plus-button').classList.remove('active');
+    document.getElementById('plus-button').classList.add('inactive');
+});
+
     document.getElementById('minus-rework-kanan').addEventListener('click', function() {
         updateQuantity('right-counter', -1);
     });
