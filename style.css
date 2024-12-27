@@ -115,7 +115,7 @@ h1 {
 /* 5. FTT Section               */
 /* ============================= */
 .section {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -251,11 +251,13 @@ h1 {
 /* ============================= */
 .summary-defect {
     grid-column: 1 / 2;
-    margin-top: 20px;
+    margin-top: 10px;
     background: #ffffff;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 15px;
+    padding: 20px;
+  height: 150px; /* Atur tinggi sesuai kebutuhan */
+   overflow-y: auto; /* Tambahkan scroll jika konten melebihi tinggi maksimum */
 }
 
 .summary-defect h3 {
