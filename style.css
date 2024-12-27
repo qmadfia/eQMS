@@ -1,317 +1,156 @@
-/* ============================= */
-/* 1. Global Styles              */
-/* ============================= */
-body {
-    font-family: 'Roboto', sans-serif;
-    background: linear-gradient(to right, #e3f2fd, #bbdefb);
-    color: #333;
-    margin: 0;
-    padding: 0;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inspection Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="header">
+        <img src="logo.png" alt="Logo" class="logo">
+        <h1>eQMS</h1>
+    </div>
+    <div class="dashboard">
+        <!-- Form Section (Kiri Bawah) -->
+        <div class="form-section">
+            <label for="auditor">Auditor</label>
+            <select id="auditor">
+                <option value="">Select</option>
+                <option value="auditor1">Auditor 1</option>
+                <option value="auditor2">Auditor 2</option>
+            </select>
 
-/* ============================= */
-/* 2. Header Styling             */
-/* ============================= */
-.header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    background-color: #ffffff;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
+            <label for="ncvs">NCVS</label>
+            <select id="ncvs">
+                <option value="">Select</option>
+                <option value="ncvs101">NCVS 101</option>
+                <option value="ncvs102">NCVS 102</option>
+                <option value="ncvs103">NCVS 103</option>
+                <option value="ncvs104">NCVS 104</option>
+                <option value="ncvs105">NCVS 105</option>
+                <option value="ncvs106">NCVS 106</option>
+                <option value="ncvs107">NCVS 107</option>
+                <option value="ncvs108">NCVS 108</option>
+                <option value="ncvs109">NCVS 109</option>
+                <option value="ncvs110">NCVS 110</option>
+                <option value="ncvs111">NCVS 111</option>
+                <option value="ncvs112">NCVS 112</option>
+                <option value="ncvs113">NCVS 113</option>
+                <option value="ncvs114">NCVS 114</option>
+                <option value="ncvs115">NCVS 115</option>
+                <option value="ncvs116">NCVS 116</option>
+                <option value="ncvs201">NCVS 201</option>
+                <option value="ncvs202">NCVS 202</option>
+                <option value="ncvs203">NCVS 203</option>
+                <option value="ncvs204">NCVS 204</option>
+                <option value="ncvs205">NCVS 205</option>
+                <option value="ncvs206">NCVS 206</option>
+                <option value="ncvs207">NCVS 207</option>
+                <option value="ncvs208">NCVS 208</option>
+                <option value="ncvs209">NCVS 209</option>
+                <option value="ncvs210">NCVS 210</option>
+                <option value="ncvs211">NCVS 211</option>
+                <option value="ncvs212">NCVS 212</option>
+                <option value="ncvs213">NCVS 213</option>
+                <option value="ncvs214">NCVS 214</option>
+                <option value="ncvs215">NCVS 215</option>
+            </select>
 
-.logo {
-    max-width: 50px;
-    height: auto;
-    margin-right: 15px;
-}
+            <label for="model-name">Model Name</label>
+            <input type="text" id="model-name" placeholder="Enter model name">
 
-h1 {
-    font-size: 2em;
-    color: #2196F3;
-    margin: 0;
-}
+            <label for="style-number">Style Number</label>
+            <input type="text" id="style-number" placeholder="Enter style number">
+            <!-- Wrapper for Save Button -->
+            <div class="button-wrapper">
+                <button class="save-button">SIMPAN</button>
+            </div>
+        </div>
+               <!-- FTT Section -->
+            <div class="section">
+                <label for="ftt">FTT (First Time Through):</label>
+                <div id="fttOutput" class="counter">0%</div>
+            </div>
+               <!-- Summary Defect Section -->
+            <div class="summary-defect">
+                <h3>Summary Defect</h3>
+                <div id="summary-list">
+                    <!-- Summary akan ditampilkan di sini -->
+                </div>
+            </div>
+        <!-- Container Kanan -->
+        <div class="right-section">
+           
+            <!-- Bagian Reject Section dengan Input dan Output -->
+            <div id="reject-section">
+                <h3>Reject Section</h3>
+                <!-- Menu Input (Qty Inspect) -->
+                <div id="input-section">
+                    <button class="input-button">Qty Inspect</button>
+                </div>
 
-/* ============================= */
-/* 3. Dashboard Layout           */
-/* ============================= */
-.dashboard {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    grid-template-rows: auto auto; /* Flexible row height */
-    gap: 20px;
-    padding: 20px;
-    box-sizing: border-box;
-}
+             <!-- Output Kolom -->
+                <div id="output-section">
+                    <h4>Output:</h4>
+                    <div id="qtyInspectOutput">0</div> <!-- Menampilkan hasil klik -->
+                </div>
+            </div>
 
-/* ============================= */
-/* 4. Form Section              */
-/* ============================= */
-.form-section {
-    grid-column: 1 / 2;
-    grid-row: 1 / 3;
-    background: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    overflow-y: auto;
-    position: relative; /* Added to position the button */
-}
+            <!-- Rework Section -->
+            <div class="rework-section">
+                <!-- Rework Left -->
+                <div class="rework-left">
+                    <h3>Rework Kiri</h3>
+                    <button id="rework-left" class="rework-button">Klik untuk Rework Kiri</button>
+                    <p id="left-counter">0</p>
+                </div>
+                <!-- Rework Right -->
+                <div class="rework-right">
+                    <h3>Rework Kanan</h3>
+                    <button id="rework-right" class="rework-button">Klik untuk Rework Kanan</button>
+                    <p id="right-counter">0</p>
+                </div>
+            </div>
 
-.form-section:hover {
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-}
-
-.form-section label {
-    font-weight: bold;
-    margin-bottom: 5px;
-    color: #333;
-}
-
-.form-section select,
-.form-section input {
-    width: 95%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 15px; /* Add space between inputs */
-    transition: border-color 0.3s ease;
-}
-
-.form-section select:focus,
-.form-section input:focus {
-    border-color: #4CAF50; /* Change border color on focus */
-    outline: none; /* Remove default outline */
-}
-
-.button-wrapper {
-    display: flex; /* Use flexbox for alignment */
-    justify-content: flex-end; /* Align button to the right */
-    margin-top: 20px; /* Add space above the button */
-}
-
-.save-button {
-    background-color: #4CAF50; /* Green background */
-    color: white; /* White text */
-    padding: 10px 20px; /* Padding for the button */
-    border: none; /* Remove border */
-    border-radius: 5px; /* Rounded corners */
-    cursor: pointer; /* Pointer cursor on hover */
-    font-size: 16px; /* Font size */
-    transition: background-color 0.3s ease, transform 0.1s ease; /* Transition for hover and click effects */
-}
-
-.save-button:hover {
-    background-color: #45a049; /* Darker green on hover */
-}
-
-.save-button:active {
-    transform: scale(0.95); /* Scale down on click */
-}
-
-
-/* ============================= */
-/* 5. FTT Section               */
-/* ============================= */
-.section {
-    margin-bottom: 10px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-}
-
-.section label {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 8px;
-    font-size: 14px;
-}
-
-.counter {
-    font-size: 24px;
-    font-weight: bold;
-    color: #4CAF50;
-    text-align: center;
-    padding: 10px;
-    border: 2px solid #4CAF50;
-    border-radius: 5px;
-    width: 100px;
-    margin-top: 10px;
-}
-
-/* ============================= */
-/* 6. Qty Inspect Section        */
-/* ============================= */
-#input-section {
-    margin-bottom: 15px;
-}
-
-.input-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.input-button:hover {
-    background-color: #45a049;
-}
-
-#output-section {
-    padding: 10px;
-    border: 2px solid #ddd;
-    border-radius: 5px;
-    background-color: #fff;
-}
-
-#qtyInspectOutput {
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
-}
-
-/* ============================= */
-/* 7. Rework Section            */
-/* ============================= */
-.rework-section {
-    grid-column: 2 / 3;
-    grid-row: 2 / 3;
-    display: flex;
-    gap: 20px;
-    justify-content: space-between;
-}
-
-.rework-left, .rework-right {
-    flex: 1;
-    background: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    text-align: center;
-}
-
-.rework-left button, .rework-right button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.rework-left button:hover, .rework-right button:hover {
-    background-color: #45a049;
-}
-
-.rework-left p, .rework-right p {
-    font-size: 1.5em;
-    font-weight: bold;
-    margin-top: 10px;
-}
-
-/* ============================= */
-/* 8. Defect Menu Section       */
-/* ============================= */
-.defect-menu {
-    grid-column: 1 / 3;
-    margin-top: 20px;
-    background: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-}
-
-.defect-items {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-}
-
-.defect-button {
-    background-color: #2196F3;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-}
-
-.defect-button:hover {
-    background-color: #1976D2;
-}
-
-/* ============================= */
-/* 9. Summary Defect Section    */
-/* ============================= */
-.summary-defect {
-    grid-column: 1 / 2;
-    margin-top: 10px;
-    background: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-  height: 400px; /* Atur tinggi sesuai kebutuhan */
-   overflow-y: auto; /* Tambahkan scroll jika konten melebihi tinggi maksimum */
-}
-
-.summary-defect h3 {
-    margin: 0 0 10px 0;
-}
-
-.summary-item {
-    margin: 5px 0;
-}
-
-/* ============================= */
-/* 10. Plus and Minus Buttons    */
-/* ============================= */
-.buttons {
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.control-button {
-    font-size: 24px;
-    padding: 10px 20px;
-    margin: 0 10px;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s, opacity 0.3s ease;
-    font-weight: bold;
-}
-
-#plus-button {
-    background-color: #C6E7FF; /* Warna cerah saat aktif */
-}
-
-#plus-button.active {
-    background-color: #3D3BF3; /* Warna saat aktif */
-}
-
-#plus-button.inactive {
-    background-color: #A6AEBF; /* Warna saat tidak aktif */
-}
-
-#minus-button {
-    background-color: #FD8A8A; /* Warna cerah saat aktif */
-}
-
-#minus-button.active {
-    background-color: #FF2929; /* Warna saat aktif */
-}
-
-#minus-button.inactive {
-    background-color: #A6AEBF; /* Warna saat tidak aktif */
-}
-
-.control-button:hover {
-    opacity: 0.8;
-}
+            <!-- Defect Menu Section -->
+            <div class="defect-menu">
+                <h3>Defect Menu</h3>
+                <div class="defect-items">
+                    <button class="defect-button">OVER CEMENT</button>
+                    <button class="defect-button">STAIN UPPER</button>
+                    <button class="defect-button">STAIN OUTSOLE</button>
+                    <button class="defect-button">THREAD END</button>
+                    <button class="defect-button">RAT HOLE</button>
+                    <button class="defect-button">BOND GAP UPPER</button>
+                    <button class="defect-button">WRINKLE</button>
+                    <button class="defect-button">ALIGN UP</button>
+                    <button class="defect-button">OVER BUFFING</button>
+                    <button class="defect-button">OFF CENTER</button>
+                    <button class="defect-button">ARIANCE</button>
+                    <button class="defect-button">X-RAY</button>
+                    <button class="defect-button">BROKEN STITCHING</button>
+                    <button class="defect-button">TOE / HEEL / COLLAR SHAPE</button>
+                    <button class="defect-button">STITCH MARGIN / SPI</button>
+                    <button class="defect-button">YELLOWING</button>
+                    <button class="defect-button">ROCKING</button>
+                    <button class="defect-button">BOND GAP MIDSOLE</button>
+                    <button class="defect-button">MATERIAL FAILURE</button>
+                    <button class="defect-button">COLOR MIGRATION</button>
+                    <button class="defect-button">PEEL OFF</button>
+                    <button class="defect-button">DELAMINATION</button>
+                    <button class="defect-button">METAL CONTAMINATION</button>
+                    <button class="defect-button">TWISTED SHOE</button>
+                    <button class="defect-button">LOGO / AIR BAG</button>
+                </div>
+            </div>
+           <!-- Plus and Minus Buttons -->
+            <div class="buttons">
+                <button id="plus-button" class="control-button">+</button>
+                <button id="minus-button" class="control-button">-</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
