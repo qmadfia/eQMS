@@ -256,7 +256,7 @@ h1 {
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
-  height: 150px; /* Atur tinggi sesuai kebutuhan */
+  height: 400px; /* Atur tinggi sesuai kebutuhan */
    overflow-y: auto; /* Tambahkan scroll jika konten melebihi tinggi maksimum */
 }
 
