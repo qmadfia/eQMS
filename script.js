@@ -227,6 +227,52 @@ function setupQuantityButtons() {
     document.getElementById('plus-rework-kanan').addEventListener('click', function() {
         updateQuantity('right-counter', 1);
     });
+// =============================
+// 10. Kirim Data ke Google Sheets via Web App
+// =============================
+
+document.getElementById('submit-button').addEventListener('click', function() {
+    const auditor = document.getElementById('auditor').value;
+    const ncv = document.getElementById('ncv').value;
+    const model = document.getElementById('model').value;
+    const reworkLeft = document.getElementById('left-counter').textContent;
+    const reworkRight = document.getElementById('right-counter').textContent;
+
+    // Mengirim data ke Google Sheets
+    sendDataToGoogleSheets(auditor, ncv, model, reworkLeft, reworkRight, defectCounts);
+});
+
+// Fungsi untuk mengirimkan data ke Google Sheets menggunakan fetch
+function sendDataToGoogleSheets(auditor, ncv, model, reworkLeft, reworkRight, defectFindings) {
+    const data = {
+        auditor: auditor,
+        ncv: ncv,
+        model: model,
+        reworkLeft: reworkLeft,
+        reworkRight: reworkRight,
+        defectFindings: defectFindings
+    };
+
+    // URL Web App Google Apps Script yang terhubung ke spreadsheet
+    const url = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec'; // Ganti YOUR_SCRIPT_ID dengan ID Web App Anda
+
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.text()) // Mengambil response text dari Web App
+    .then(result => {
+        console.log('Data berhasil dikirim:', result); // Menampilkan hasil di console log
+        alert('Data berhasil dikirim ke Google Sheets');
+    })
+    .catch(error => {
+        console.error('Terjadi kesalahan saat mengirim data:', error); // Menangani kesalahan
+        alert('Terjadi kesalahan, coba lagi.');
+    });
+}
 
         document.getElementById('minus-rework-kanan').addEventListener('click', function() {
         updateQuantity('right-counter', -1);
