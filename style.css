@@ -367,6 +367,14 @@ h1:hover {
     text-align: center;
     transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    
+    min-width: 120px; /* Menentukan lebar minimal tombol */
+    min-height: 50px; /* Menentukan tinggi minimal tombol */
+    width: auto; /* Memungkinkan tombol menyesuaikan lebar, tetapi tidak lebih kecil dari min-width */
+
+    overflow: hidden; /* Menyembunyikan teks yang keluar dari batas tombol */
+    white-space: normal; /* Membiarkan teks membungkus ke baris berikutnya */
+    word-wrap: break-word; /* Membiarkan teks panjang membungkus ke baris berikutnya */
 }
 
 .defect-button:hover {
@@ -378,6 +386,7 @@ h1:hover {
 .defect-button:active {
     transform: scale(0.95);
 }
+
 
 /* ============================= */
 /* 9. Summary Defect Section    */
