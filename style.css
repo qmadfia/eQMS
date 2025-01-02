@@ -62,7 +62,7 @@ h1:hover {
     display: grid;
     grid-template-columns: 1fr 2fr;
     grid-template-rows: auto auto; /* Flexible row height */
-    gap: 20px;
+    gap: 15px;
     padding: 20px;
     box-sizing: border-box;
 }
@@ -91,7 +91,7 @@ h1:hover {
     font-weight: bold;
     margin-bottom: 8px;
     color: #444;
-    font-size: 14px;
+    font-size: 20px;
     display: block;
 }
 
@@ -150,7 +150,7 @@ h1:hover {
 /* 5. FTT Section               */
 /* ============================= */
 .section {
-    margin-bottom: 15px;
+    margin-bottom: 0;
     padding: 15px;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -166,9 +166,10 @@ h1:hover {
 
 .section label {
     font-weight: bold;
+  text-align: center;
     display: block;
     margin-bottom: 10px;
-    font-size: 15px;
+    font-size:20px;
     color: #333;
 }
 
@@ -201,7 +202,7 @@ h1:hover {
     border: 2px solid #ccc;
     border-radius: 10px;
     background: linear-gradient(145deg, #ffffff, #f7f7f7);
-    margin-bottom: 10px;
+    margin-bottom: 0;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease;
 }
@@ -331,12 +332,14 @@ h1:hover {
 .defect-menu {
     grid-column: 2 / 3;
     grid-row: 4 / 5;
-    margin-top: 20px;
+    margin-top: 0;
     background: linear-gradient(145deg, #ffffff, #f3f3f3);
     border-radius: 15px;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
     padding: 20px;
     transition: box-shadow 0.3s ease, transform 0.3s ease;
+  font-size: 20px;
+  text-align: center;
 }
 
 .defect-menu:hover {
@@ -381,7 +384,7 @@ h1:hover {
 /* ============================= */
 .summary-defect {
     grid-column: 1 / 2;
-    margin-top: 20px;
+    margin-top: 0;
     background: linear-gradient(145deg, #ffffff, #f7f7f7);
     border-radius: 15px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
@@ -389,6 +392,7 @@ h1:hover {
     height: 400px; /* Adjust height as needed */
     overflow-y: auto; /* Add scroll if content exceeds max height */
     transition: box-shadow 0.3s ease, transform 0.3s ease;
+  text-align: center;
 }
 
 .summary-defect:hover {
@@ -427,7 +431,7 @@ h1:hover {
 .buttons {
     grid-column: 1 / 2;
     text-align: center;
-    margin: 20px 0;
+    margin: px 0;
 }
 
 .control-button {
