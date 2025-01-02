@@ -254,7 +254,7 @@ function sendDataToGoogleSheets(auditor, ncv, model, reworkLeft, reworkRight, de
     };
 
     // URL Web App Google Apps Script yang terhubung ke spreadsheet
-    const url = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec'; // Ganti YOUR_SCRIPT_ID dengan ID Web App Anda
+    const url = 'https://script.google.com/macros/s/AKfycbxJJebO9mlVR9mmGRysxaA6iSSzIP1q4zP82hy07OfhdssXu5jwpqSydDw6RanGRLNuQQ/exec'; // Ganti YOUR_SCRIPT_ID dengan ID Web App Anda
 
     fetch(url, {
         method: 'POST',
