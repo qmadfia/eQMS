@@ -240,7 +240,7 @@ document.querySelector(".save-button").addEventListener("click", async () => {
   const ncvs = document.getElementById("ncvs").value;
   const modelName = document.getElementById("model-name").value;
   const styleNumber = document.getElementById("style-number").value;
-  const ftt = document.getElementById("fttOutput").value;
+  const ftt = document.getElementById("fttOutput").innerText;
   const qtyInspect = document.getElementById("qtyInspectOutput").innerText; // Ambil nilai dari output
 
   if (!auditor || !ncvs || !modelName || !styleNumber || !ftt || !qtyInspect) {
@@ -253,7 +253,7 @@ document.querySelector(".save-button").addEventListener("click", async () => {
     ncvs,
     modelName,
     styleNumber,
-    ftt: parseInt(document.getElementById("fttOutput").innerText, 10),
+    ftt: parseInt(fttOutput, 10),
     qtyInspect: parseInt(qtyInspect, 10),
     reworkKanan: parseInt(document.getElementById("right-counter").innerText, 10),
     reworkKiri: parseInt(document.getElementById("left-counter").innerText, 10),
