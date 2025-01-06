@@ -240,7 +240,7 @@ document.querySelector(".save-button").addEventListener("click", async () => {
   const ncvs = document.getElementById("ncvs").value;
   const modelName = document.getElementById("model-name").value;
   const styleNumber = document.getElementById("style-number").value;
-  const ftt = document.getElementById("fttOutput").innerText;
+  const ftt = document.getElementById("fttOutput").innerText.replace("%", "").trim();
   const qtyInspect = document.getElementById("qtyInspectOutput").innerText; // Ambil nilai dari output
 
   if (!auditor || !ncvs || !modelName || !styleNumber || !ftt || !qtyInspect) {
