@@ -234,3 +234,53 @@ function setupQuantityButtons() {
 // =============================
 // 10. Kirim Data ke Google Sheets via Web App
 // =============================
+
+document.querySelector(".save-button").addEventListener("click", function () {
+  // Ambil data dari elemen HTML
+  const auditor = document.getElementById("auditor").value;
+  const ncvs = document.getElementById("ncvs").value;
+  const modelName = document.getElementById("model-name").value;
+  const styleNumber = document.getElementById("style-number").value;
+  const qtyInspect = document.getElementById("qtyInspectOutput").textContent; // Ambil dari output
+  const reworkKanan = document.getElementById("right-counter").textContent; // Rework kanan
+  const reworkKiri = document.getElementById("left-counter").textContent;  // Rework kiri
+
+  // Validasi sederhana
+  if (!auditor || !ncvs || !modelName || !styleNumber) {
+    alert("Mohon lengkapi semua kolom sebelum menyimpan.");
+    return;
+  }
+
+  // Data yang akan dikirim
+  const data = {
+    auditor,
+    ncvs,
+    modelName,
+    styleNumber,
+    qtyInspect,
+    reworkKanan,
+    reworkKiri
+  };
+
+  // URL Web App Anda
+  const url = "https://script.google.com/macros/s/AKfycbyxrRigG0FwB-hfdtJAo4TT94Y7dBuyyPhgBiNi5QtUmaeavtK5RZZlI2vYKnCCoCq8xA/exec"; // Ganti dengan URL aplikasi web Apps Script Anda
+
+  // Kirim data ke server menggunakan POST
+  fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  })
+    .then((response) => response.text())
+    .then((result) => {
+      console.log(result);
+      alert("Data berhasil disimpan ke Google Sheets!");
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      alert("Terjadi kesalahan saat menyimpan data.");
+    });
+});
+
