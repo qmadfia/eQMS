@@ -245,6 +245,17 @@ document.querySelector(".save-button").addEventListener("click", function () {
   const reworkKanan = document.getElementById("right-counter").textContent; // Rework kanan
   const reworkKiri = document.getElementById("left-counter").textContent;  // Rework kiri
 
+  // Log data sebelum mengirim
+  console.log("Data yang akan dikirim:", {
+    auditor,
+    ncvs,
+    modelName,
+    styleNumber,
+    qtyInspect,
+    reworkKanan,
+    reworkKiri
+  });
+
   // Validasi sederhana
   if (!auditor || !ncvs || !modelName || !styleNumber) {
     alert("Mohon lengkapi semua kolom sebelum menyimpan.");
@@ -263,7 +274,7 @@ document.querySelector(".save-button").addEventListener("click", function () {
   };
 
   // URL Web App Anda
-  const url = "https://script.google.com/macros/s/AKfycbyxrRigG0FwB-hfdtJAo4TT94Y7dBuyyPhgBiNi5QtUmaeavtK5RZZlI2vYKnCCoCq8xA/exec"; // Ganti dengan URL aplikasi web Apps Script Anda
+  const url = "YOUR_WEB_APP_URL_HERE"; // Ganti dengan URL aplikasi web Apps Script Anda
 
   // Kirim data ke server menggunakan POST
   fetch(url, {
@@ -283,4 +294,5 @@ document.querySelector(".save-button").addEventListener("click", function () {
       alert("Terjadi kesalahan saat menyimpan data.");
     });
 });
+
 
