@@ -240,8 +240,8 @@ document.querySelector(".save-button").addEventListener("click", async () => {
   const ncvs = document.getElementById("ncvs").value;
   const modelName = document.getElementById("model-name").value;
   const styleNumber = document.getElementById("style-number").value;
-  const ftt = document.getElementById("fttOutput").innerText.replace("%", "").trim();
-  const qtyInspect = document.getElementById("qtyInspectOutput").innerText;
+  const ftt = document.getElementById("fttOutput").innerText;
+  const qtyInspect = document.getElementById("qtyInspectOutput").innerText; // Ambil nilai dari output
 
   if (!auditor || !ncvs || !modelName || !styleNumber || !ftt || !qtyInspect) {
     alert("Semua data harus diisi!");
@@ -253,14 +253,14 @@ document.querySelector(".save-button").addEventListener("click", async () => {
     ncvs,
     modelName,
     styleNumber,
-    ftt: parseInt(ftt, 10), // Pastikan ftt adalah angka
+    ftt: parseInt(ftt, 10),
     qtyInspect: parseInt(qtyInspect, 10),
     reworkKanan: parseInt(document.getElementById("right-counter").innerText, 10),
     reworkKiri: parseInt(document.getElementById("left-counter").innerText, 10),
   };
 
   try {
-    const response = await fetch("YOUR_WEB_APP_URL_HERE", {
+    const response = await fetch("https://script.google.com/macros/s/AKfycbz4fclKPmhZ3WtO41Ktx1YHzXDIQmJFnYRuswDylG3XzjxGlCKZuaK13XTFva1QKIoQzg/exec", {
       method: "POST",
       body: JSON.stringify(data),
     });
