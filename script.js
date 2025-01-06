@@ -274,7 +274,7 @@ document.querySelector(".save-button").addEventListener("click", function () {
   };
 
   // URL Web App Anda
-  const url = "YOUR_WEB_APP_URL_HERE"; // Ganti dengan URL aplikasi web Apps Script Anda
+  const url = "https://script.google.com/macros/s/AKfycbyxrRigG0FwB-hfdtJAo4TT94Y7dBuyyPhgBiNi5QtUmaeavtK5RZZlI2vYKnCCoCq8xA/exec"; // Ganti dengan URL aplikasi web Apps Script Anda
 
   // Kirim data ke server menggunakan POST
   fetch(url, {
