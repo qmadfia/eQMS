@@ -227,8 +227,10 @@ function setupQuantityButtons() {
     document.getElementById('plus-rework-kanan').addEventListener('click', function() {
         updateQuantity('right-counter', 1);
     });
+            document.getElementById('minus-rework-kanan').addEventListener('click', function() {
+        updateQuantity('right-counter', -1);
+    });
+}
 // =============================
 // 10. Kirim Data ke Google Sheets via Web App
 // =============================
-
-
