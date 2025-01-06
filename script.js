@@ -253,7 +253,7 @@ document.querySelector(".save-button").addEventListener("click", async () => {
     ncvs,
     modelName,
     styleNumber,
-    ftt,
+    ftt: parseInt(document.getElementById("fttOutput").innerText, 10),
     qtyInspect: parseInt(qtyInspect, 10),
     reworkKanan: parseInt(document.getElementById("right-counter").innerText, 10),
     reworkKiri: parseInt(document.getElementById("left-counter").innerText, 10),
