@@ -43,11 +43,21 @@ reworkRightButton.addEventListener('click', () => {
 function updateFTT() {
     if (totalInspected === 0) {
         fttOutput.textContent = '0%';
+        fttOutput.className = 'counter'; // Set default class (light blue)
         return;
     }
     const averageRework = (totalReworkLeft + totalReworkRight) / 2;
     const fttValue = ((totalInspected - averageRework) / totalInspected) * 100;
     fttOutput.textContent = `${Math.max(0, fttValue.toFixed(2))}%`; // Nilai FTT tidak boleh negatif
+
+    // Update color based on FTT value
+    if (fttValue >= 92) {
+        fttOutput.className = 'counter high-ftt'; // Green
+    } else if (fttValue >= 80) {
+        fttOutput.className = 'counter medium-ftt'; // Yellow
+    } else {
+        fttOutput.className = 'counter low-ftt'; // Red
+    }
 }
 
 // =============================
