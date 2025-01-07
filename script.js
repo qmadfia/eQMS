@@ -235,12 +235,12 @@ function setupQuantityButtons() {
 // 10. Kirim Data ke Google Sheets via Web App
 // =============================
 document.querySelector(".save-button").addEventListener("click", async () => {
-  const fttElement = document.getElementById("fttOutput");
-  const fttRaw = fttElement ? fttElement.innerText.replace("%", "").trim() : "0";
+  const fttRaw = document.getElementById("fttOutput").innerText.replace("%", "").trim();
   const ftt = parseFloat(fttRaw) / 100; // Konversi ke desimal
 
   if (isNaN(ftt)) {
-    alert("FTT value is invalid!");
+    alert("FTT value is invalid or missing!");
+    console.log("Invalid FTT value: ", fttRaw);
     return;
   }
 
@@ -255,16 +255,19 @@ document.querySelector(".save-button").addEventListener("click", async () => {
     reworkKiri: parseInt(document.getElementById("left-counter").innerText, 10),
   };
 
+  console.log("Data Sent: ", data);
+
   try {
-    const response = await fetch("https://script.google.com/macros/s/AKfycbz4fclKPmhZ3WtO41Ktx1YHzXDIQmJFnYRuswDylG3XzjxGlCKZuaK13XTFva1QKIoQzg/exec", {
+    const response = await fetch("https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec", {
       method: "POST",
       body: JSON.stringify(data),
     });
 
     const result = await response.text();
+    console.log("Response from Server: ", result);
     alert(result);
   } catch (error) {
-    alert("Terjadi kesalahan saat menyimpan data.");
+    alert("Error saving data.");
     console.error(error);
   }
 });
