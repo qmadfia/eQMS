@@ -188,21 +188,21 @@ h1:hover {
 }
 
 .counter.low-ftt {
-    background-color: #f8d7da;
-    border-color: #f5c6cb;
-    color: #721c24; /* Red */
+    background-color: #ff0000;
+    border-color: #ff0000;
+    color: #ff0000; /* Red */
 }
 
 .counter.medium-ftt {
-    background-color: #fff3cd;
-    border-color: #ffeeba;
-    color: #856404; /* Yellow */
+    background-color: #ffff00;
+    border-color: #ffff00;
+    color: #ffff00; /* Yellow */
 }
 
 .counter.high-ftt {
-    background-color: #d4edda;
-    border-color: #c3e6cb;
-    color: #155724; /* Green */
+    background-color: #adff2f;
+    border-color: #adff2f;
+    color: #adff2f; /* Green */
 }
 
 .counter:hover {
