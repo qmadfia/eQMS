@@ -234,23 +234,22 @@ function setupQuantityButtons() {
 // =============================
 // 10. Kirim Data ke Google Sheets via Web App
 // =============================
-
 document.querySelector(".save-button").addEventListener("click", async () => {
-  const fttOutputElement = document.getElementById("fttOutput");
-  if (!fttOutputElement || !fttOutputElement.innerText.trim()) {
-    alert("FTT value is missing!");
+  const fttElement = document.getElementById("fttOutput");
+  const fttRaw = fttElement ? fttElement.innerText.replace("%", "").trim() : "0";
+  const ftt = parseFloat(fttRaw) / 100; // Konversi ke desimal
+
+  if (isNaN(ftt)) {
+    alert("FTT value is invalid!");
     return;
   }
-  const ftt = fttOutputElement.innerText.replace("%", "").trim();
-
-  console.log("FTT Value (before sending):", ftt);
 
   const data = {
     auditor: document.getElementById("auditor").value,
     ncvs: document.getElementById("ncvs").value,
     modelName: document.getElementById("model-name").value,
     styleNumber: document.getElementById("style-number").value,
-    ftt: ftt + "%",
+    ftt, // Kirim nilai desimal
     qtyInspect: parseInt(document.getElementById("qtyInspectOutput").innerText, 10),
     reworkKanan: parseInt(document.getElementById("right-counter").innerText, 10),
     reworkKiri: parseInt(document.getElementById("left-counter").innerText, 10),
