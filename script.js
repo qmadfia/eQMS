@@ -250,6 +250,8 @@ document.querySelector(".save-button").addEventListener("click", async () => {
     return { type: type.trim(), count: parseInt(count.trim(), 10) };
   });
 
+  console.log("Defects array: ", defects); // Pastikan array defects berisi data yang benar
+
   const data = {
     auditor: document.getElementById("auditor").value,
     ncvs: document.getElementById("ncvs").value,
@@ -275,3 +277,5 @@ document.querySelector(".save-button").addEventListener("click", async () => {
     console.error(error);
   }
 });
+
+
