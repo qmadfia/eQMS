@@ -147,36 +147,11 @@ h1:hover {
 
 
 /* ============================= */
-/* 5. FTT Section               */
+/* FTT Section - Styles           */
 /* ============================= */
-.section {
-    margin-bottom: 0;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background: linear-gradient(145deg, #ffffff, #f3f3f3);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.section:hover {
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    transform: translateY(-3px);
-}
-
-.section label {
-    font-weight: bold;
-  text-align: center;
-    display: block;
-    margin-bottom: 10px;
-    font-size:20px;
-    color: #333;
-}
-
 .counter {
     font-size: 28px;
     font-weight: bold;
-    color: #4CAF50;
     text-align: center;
     padding: 12px;
     border: 2px solid #4CAF50;
@@ -186,6 +161,25 @@ h1:hover {
     background: linear-gradient(145deg, #e8f5e9, #ffffff);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    color: #0000FF; /* Default to light blue */
+}
+
+.counter.low-ftt {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24; /* Red */
+}
+
+.counter.medium-ftt {
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+    color: #856404; /* Yellow */
+}
+
+.counter.high-ftt {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724; /* Green */
 }
 
 .counter:hover {
