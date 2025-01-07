@@ -194,15 +194,15 @@ h1:hover {
 }
 
 .counter.medium-ftt {
-    background-color: #ffff00;
-    border-color: #ffff00;
-    color: #ffff00; /* Yellow */
+    background-color: #ffe135;
+    border-color: #ffe135;
+    color: #ffe135; /* Yellow */
 }
 
 .counter.high-ftt {
-    background-color: #adff2f;
-    border-color: #adff2f;
-    color: #adff2f; /* Green */
+    background-color: #32cd32;
+    border-color: #32cd32;
+    color: #32cd32; /* Green */
 }
 
 .counter:hover {
