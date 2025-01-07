@@ -164,6 +164,15 @@ h1:hover {
     color: #0000FF; /* Default to light blue */
 }
 
+.section label {
+    font-weight: bold;
+  text-align: center;
+    display: block;
+    margin-bottom: 10px;
+    font-size:20px;
+    color: #333;
+}
+
 .counter.low-ftt {
     background-color: #f8d7da;
     border-color: #f5c6cb;
