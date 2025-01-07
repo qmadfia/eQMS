@@ -236,25 +236,22 @@ function setupQuantityButtons() {
 // =============================
 
 document.querySelector(".save-button").addEventListener("click", async () => {
-  const auditor = document.getElementById("auditor").value;
-  const ncvs = document.getElementById("ncvs").value;
-  const modelName = document.getElementById("model-name").value;
-  const styleNumber = document.getElementById("style-number").value;
-  const ftt = document.getElementById("fttOutput").innerText.replace("%", "").trim();
-  const qtyInspect = document.getElementById("qtyInspectOutput").innerText; // Ambil nilai dari output
-
-  if (!auditor || !ncvs || !modelName || !styleNumber || !ftt || !qtyInspect) {
-    alert("Semua data harus diisi!");
+  const fttOutputElement = document.getElementById("fttOutput");
+  if (!fttOutputElement || !fttOutputElement.innerText.trim()) {
+    alert("FTT value is missing!");
     return;
   }
+  const ftt = fttOutputElement.innerText.replace("%", "").trim();
+
+  console.log("FTT Value (before sending):", ftt);
 
   const data = {
-    auditor,
-    ncvs,
-    modelName,
-    styleNumber,
+    auditor: document.getElementById("auditor").value,
+    ncvs: document.getElementById("ncvs").value,
+    modelName: document.getElementById("model-name").value,
+    styleNumber: document.getElementById("style-number").value,
     ftt: ftt + "%",
-    qtyInspect: parseInt(qtyInspect, 10),
+    qtyInspect: parseInt(document.getElementById("qtyInspectOutput").innerText, 10),
     reworkKanan: parseInt(document.getElementById("right-counter").innerText, 10),
     reworkKiri: parseInt(document.getElementById("left-counter").innerText, 10),
   };
