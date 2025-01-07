@@ -234,6 +234,9 @@ function setupQuantityButtons() {
 // =============================
 // 10. Kirim Data ke Google Sheets via Web App
 // =============================
+// =============================
+// 10. Kirim Data ke Google Sheets via Web App
+// =============================
 document.querySelector(".save-button").addEventListener("click", async () => {
   const fttElement = document.getElementById("fttOutput");
   const fttRaw = fttElement ? fttElement.innerText.replace("%", "").trim() : "0";
@@ -272,10 +275,45 @@ document.querySelector(".save-button").addEventListener("click", async () => {
 
     const result = await response.text();
     alert(result);
+
+    // Reset all fields after successful save
+    resetAllFields();
   } catch (error) {
     alert("Terjadi kesalahan saat menyimpan data.");
     console.error(error);
   }
 });
 
+// =============================
+// 11. Reset Data Setelah Simpan
+// =============================
+function resetAllFields() {
+  // Reset input form fields
+  document.getElementById("auditor").value = "";
+  document.getElementById("ncvs").value = "";
+  document.getElementById("model-name").value = "";
+  document.getElementById("style-number").value = "";
+
+  // Reset counters and output sections
+  document.getElementById("qtyInspectOutput").textContent = "0";
+  document.getElementById("left-counter").textContent = "0";
+  document.getElementById("right-counter").textContent = "0";
+  document.getElementById("fttOutput").textContent = "0%";
+
+  // Reset defect summary
+  const summaryList = document.getElementById("summary-list");
+  summaryList.innerHTML = ""; // Clear the summary section
+
+  // Reset defect counts
+  for (const defect in defectCounts) {
+    defectCounts[defect] = 0; // Reset defect counters
+  }
+
+  // Reset global counters
+  totalInspected = 0;
+  totalReworkLeft = 0;
+  totalReworkRight = 0;
+
+  console.log("All fields have been reset.");
+}
 
