@@ -244,6 +244,12 @@ document.querySelector(".save-button").addEventListener("click", async () => {
     return;
   }
 
+  const summaryItems = document.querySelectorAll(".summary-item");
+  const defects = Array.from(summaryItems).map(item => {
+    const [type, count] = item.textContent.split(":");
+    return { type: type.trim(), count: parseInt(count.trim(), 10) };
+  });
+
   const data = {
     auditor: document.getElementById("auditor").value,
     ncvs: document.getElementById("ncvs").value,
@@ -253,6 +259,7 @@ document.querySelector(".save-button").addEventListener("click", async () => {
     qtyInspect: parseInt(document.getElementById("qtyInspectOutput").innerText, 10),
     reworkKanan: parseInt(document.getElementById("right-counter").innerText, 10),
     reworkKiri: parseInt(document.getElementById("left-counter").innerText, 10),
+    defects, // Tambahkan array defects
   };
 
   try {
