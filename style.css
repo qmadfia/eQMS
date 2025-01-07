@@ -172,6 +172,20 @@ h1:hover {
     font-size:20px;
     color: #333;
 }
+.section {
+    margin-bottom: 0;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: linear-gradient(145deg, #ffffff, #f3f3f3);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.section:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(-3px);
+}
 
 .counter.low-ftt {
     background-color: #f8d7da;
