@@ -458,6 +458,7 @@ h1:hover {
     grid-column: 1 / 2;
     text-align: center;
     margin: px 0;
+    gap: 15px;
 }
 
 .control-button {
