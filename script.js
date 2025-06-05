@@ -706,7 +706,7 @@ async function saveData() {
     saveButton.textContent = "MENYIMPAN...";
 
     try {
-        const response = await fetch("https://script.google.com/macros/s/AKfycbxTRHNPQfH0Dg_4r1EJTmeRdr_qJMZaEADTn4ek5PvK4BeYYc9eT_Zp4EXHgkpeZUyQ/exec", {
+        const response = await fetch("https://script.google.com/macros/s/AKfycbz6MSvAqN2vhsasQ-fK_2hxgOkeue3zlc5TsfyLISX8VydruDi5CdTsDgmyPXozv3SB/exec", {
             method: "POST",
             body: JSON.stringify(dataToSend),
         });
