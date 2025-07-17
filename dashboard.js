@@ -1,5 +1,5 @@
 // PENTING: Ganti dengan URL Web App Google Apps Script Anda
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz6MSvAqN2vhsasQ-fK_2hxgOkeue3zlc5TsfyLISX8VydruDi5CdTsDgmyPXozv3SB/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxn-5o2ABoVSZvSMWoDYx0T7VHTkbx98750LjqI-RI8YGzgA6NASgKgsbJJa9z7dIsO/exec';
 
 // Global variables
 let allInspections = [];
