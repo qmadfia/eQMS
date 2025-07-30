@@ -1,6 +1,9 @@
 // ===========================================
 // 1. Deklarasi Variabel Global dan DOM References (Modifikasi)
 // ===========================================
+// --- IMPOR DATABASE DARI FILE TERPISAH ---
+// Pastikan path './databasemodel.js' sudah benar sesuai lokasi file Anda.
+import { styleModelDatabase } from './databasemodel.js';
 let totalInspected = 0;
 // Variabel lama ini masih berguna untuk tampilan UI, tapi tidak untuk kalkulasi final
 let totalReworkLeft = 0;
@@ -47,7 +50,8 @@ let reworkButtons;
 let gradeInputButtons;
 let ncvsSelect;
 let auditorSelect;
-
+let modelNameInput;
+let styleNumberInput;
 // Data mapping Auditor ke NCVS
 const auditorNcvsMap = {
     "Badrowi": ["101", "102", "103", "104", "105", "106", "107", "108", "109", "110", "111", "112", "113", "114", "115", "116"],
@@ -682,7 +686,7 @@ function handleReworkClick(button) {
     // Panggil fungsi untuk menonaktifkan tombol yang baru saja diklik secara permanen untuk siklus ini
     updateReworkButtonStates();
     // Nonaktifkan kembali Rework Section (karena tidak ada defect yang sedang dipilih)
-    toggleButtonGroup(reworkButtons, false); 
+    toggleButtonGroup(reworkButtons, false);    
     // --- MODIFIKASI SELESAI ---
     
     // Aktifkan Qty Section karena status kembali "bersih"
@@ -699,6 +703,24 @@ function handleGradeClick(button) {
     const gradeCategory = Array.from(button.classList).find(cls => cls.endsWith('-grade'));
     if (!gradeCategory) return;
 
+    // --- MODIFIKASI DIMULAI ---
+    // Jika tombol adalah B-Grade atau C-Grade, tampilkan konfirmasi
+    if (gradeCategory === 'b-grade' || gradeCategory === 'c-grade') {
+        // Simpan referensi ke tombol dan kategori grade untuk digunakan di callback popup
+        showConfirmationPopup(gradeCategory, () => {
+            // Callback jika pengguna memilih 'YA'
+            processGradeClick(button, gradeCategory);
+        });
+        return; // Hentikan eksekusi handleGradeClick sampai konfirmasi diterima
+    }
+    // --- MODIFIKASI SELESAI ---
+
+    // Untuk A-Grade dan R-Grade, langsung proses
+    processGradeClick(button, gradeCategory);
+}
+
+// --- FUNGSI BARU: Fungsi pembantu untuk memproses klik grade setelah konfirmasi ---
+function processGradeClick(button, gradeCategory) {
     // Jika item ini adalah R-Grade dan memiliki cacat yang tercatat...
     if (gradeCategory === 'r-grade' && currentInspectionPairs.length > 0) {
         // Ambil posisi rework yang unik dari pasangan cacat saat ini
@@ -730,6 +752,55 @@ function handleGradeClick(button) {
     setTimeout(() => {
         initButtonStates();
     }, 150);
+}
+
+
+// --- FUNGSI BARU: Menampilkan Pop-up Konfirmasi ---
+function showConfirmationPopup(grade, onConfirmCallback) {
+    const confirmationText = `Apakah Anda menemukan defect ${grade.toUpperCase()}?`;
+
+    // Buat elemen popup dinamis
+    const popupOverlay = document.createElement('div');
+    popupOverlay.className = 'confirmation-overlay'; // Tambahkan class untuk styling CSS
+
+    const popupContent = document.createElement('div');
+    popupContent.className = 'confirmation-content';
+
+    const message = document.createElement('p');
+    message.textContent = confirmationText;
+
+    const buttonContainer = document.createElement('div');
+    buttonContainer.className = 'confirmation-buttons';
+
+    const backButton = document.createElement('button');
+    backButton.textContent = 'Kembali';
+    backButton.className = 'button-back'; // Class untuk styling
+
+    const confirmButton = document.createElement('button');
+    confirmButton.textContent = 'YA';
+    confirmButton.className = 'button-confirm'; // Class untuk styling
+
+    buttonContainer.appendChild(backButton);
+    buttonContainer.appendChild(confirmButton);
+
+    popupContent.appendChild(message);
+    popupContent.appendChild(buttonContainer);
+    popupOverlay.appendChild(popupContent);
+
+    document.body.appendChild(popupOverlay); // Tambahkan ke body
+
+    // Event listener untuk tombol 'Kembali'
+    backButton.addEventListener('click', () => {
+        document.body.removeChild(popupOverlay); // Hapus popup
+        console.log("Aksi dibatalkan oleh pengguna.");
+        // Tidak perlu melakukan apa-apa lagi, karena callback tidak dipanggil
+    });
+
+    // Event listener untuk tombol 'YA'
+    confirmButton.addEventListener('click', () => {
+        document.body.removeChild(popupOverlay); // Hapus popup
+        onConfirmCallback(); // Panggil callback untuk melanjutkan proses grade
+    });
 }
 
 
@@ -820,7 +891,7 @@ async function saveData() {
     // --- MODIFIKASI SELESAI ---
 
     try {
-        const response = await fetch("https://script.google.com/macros/s/AKfycbz6MSvAqN2vhsasQ-fK_2hxgOkeue3zlc5TsfyLISX8VydruDi5CdTsDgmyPXozv3SB/exec", {
+        const response = await fetch("https://script.google.com/macros/s/AKfycbwp9jX0u4u6qKtP3HoBKg2-Bi0Hcn0vCBh4p3TnFhjIsg4-bUp3F6dlM2GGIMUPop8X/exec", {
             method: "POST",
             body: JSON.stringify(dataToSend),
         });
@@ -955,6 +1026,12 @@ function resetAllFields() {
         styleNumberInput.value = "";
         styleNumberInput.classList.remove('invalid-input');
     }
+    
+        // Reset input Model Name dan pastikan aktif kembali
+    if (modelNameInput) {
+        modelNameInput.value = "";
+        modelNameInput.disabled = false; // Penting: aktifkan kembali
+    }
 
     // Reset data internal utama
     for (const categoryKey in qtyInspectOutputs) {
@@ -987,6 +1064,38 @@ function resetAllFields() {
     
     console.log("Semua field dan data internal telah berhasil direset.");
 }
+
+// ===========================================
+// FUNGSI BARU: Auto-fill Model Name berdasarkan Style Number
+// ===========================================
+function autoFillModelName() {
+    // Pastikan elemen input sudah diinisialisasi
+    if (!styleNumberInput || !modelNameInput) {
+        console.error("Elemen Style Number atau Model Name tidak ditemukan.");
+        return;
+    }
+
+    // Ambil nilai dari input Style Number, bersihkan spasi, dan ubah ke huruf besar
+    // agar cocok dengan kunci di styleModelDatabase (jika kunci Anda huruf besar).
+    const enteredStyleNumber = styleNumberInput.value.trim().toUpperCase();
+    
+    // Cari model yang cocok di database
+    const matchedModel = styleModelDatabase[enteredStyleNumber];
+
+    if (matchedModel) {
+        // Jika ditemukan kecocokan, isi input Model Name
+        modelNameInput.value = matchedModel;
+        // Nonaktifkan input Model Name agar tidak diubah secara manual
+        modelNameInput.disabled = true;
+    } else {
+        // Jika tidak ditemukan kecocokan, kosongkan input Model Name
+        modelNameInput.value = "";
+        // Aktifkan kembali input Model Name agar auditor bisa mengetik manual
+        modelNameInput.disabled = false;
+    }
+}
+
+
 
 // ===========================================
 // 16. Inisialisasi Aplikasi dan Event Listeners (Dilengkapi dengan loadFromLocalStorage)
@@ -1034,23 +1143,21 @@ function initApp() {
         });
     }
 
+    // Pastikan Anda menginisialisasi DOM references untuk input Model Name dan Style Number di sini:
+    modelNameInput = document.getElementById("model-name");
+    styleNumberInput = document.getElementById("style-number");
+
     // Event listener untuk input form lainnya
-    const modelNameInput = document.getElementById("model-name");
-    const styleNumberInput = document.getElementById("style-number");
-    
     if (modelNameInput) {
         modelNameInput.addEventListener('input', saveToLocalStorage);
     }
     
     if (styleNumberInput) {
-        styleNumberInput.addEventListener('input', saveToLocalStorage);
-    }
-
-    // Cek apakah elemen output ditemukan
-    for (const category in outputElements) {
-        if (!outputElements[category]) {
-            console.error(`INIT ERROR: Elemen output dengan ID '${category.replace('-grade', '-counter')}' tidak ditemukan di HTML!`);
-        }
+        // Saat auditor mengetik di Style Number, panggil fungsi autoFillModelName
+        styleNumberInput.addEventListener('input', () => {
+            saveToLocalStorage(); // Auto-save perubahan input
+            autoFillModelName(); // Panggil fungsi auto-fill
+        });
     }
 
     // Setup Event Listeners untuk tombol (defect, rework, grade)
