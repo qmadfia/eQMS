@@ -1384,10 +1384,36 @@ Apabila terdapat kendala teknis, silakan hubungi nomor berikut: 088972745194.`
 📦 Data Handling & Penyimpanan
 1. Memastikan seluruh data input tersimpan dengan benar di localStorage
 2. Mengimplementasikan validasi localStorage agar data tetap tersimpan meski browser ditutup atau di-refresh
-3. Mngoptimasi keamanan dan volume data input API
-4. Mngoptimasi batas permintaan (request limits) pada Vercel
+3. Mengoptimasi keamanan dan volume data input API
+4. Mengoptimasi batas permintaan (request limits) pada Vercel
 5. Menerapkan rate limiting pada Vercel Functions
 6. Menyimpan nilai yang tepat untuk Rework Left, Right, dan Pairs ke dalam database`
+        },
+{  
+            date: "07-31-2025", 
+            text: `🛠️ FTT Sampling App Update v.2025.07 – Dashboard Enhancement & Maintenance
+
+📊 Statistical Dashboard Upgrade
+1. Menambahkan filter: Start/End Date, Auditor, NCVS, Model, Style Number
+2. Mengimplementasikan bar, pie, dan line chart untuk FTT, defect, dan grade
+3. Menampilkan Avg. FTT, Rework Rate, dan A-Grade Ratio (%, 2 desimal)
+4. Menyesuaikan label, axis, dan format tanggal pada chart
+5. Membatasi jumlah data point dan menambahkan opsi rentang waktu dinamis
+
+📄 Full Inspection Data
+1. Menambahkan fitur sort, filter, dan quick filter
+2. Merapikan struktur, alignment, dan default view tabel
+
+⚙️ Functional & UI Maintenance
+1. Memformat seluruh metrik ke persen, presisi 2 desimal
+2. Menyempurnakan spacing antar section dan konsistensi judul
+3. Menambahkan input validation saat user mengakses menu B-Grade atau C-Grade
+
+🧱 Code Structure & Integration
+1. Modularisasi HTML, CSS, JS untuk maintainability
+2. Menghubungkan dashboard ke halaman utama aplikasi
+3. Menambahkan tombol “Back to Main Page”
+4. Optimasi load data dan refactor script untuk performa lebih baik`
         },
     ];
     let currentAnnouncementIndex = 0;
