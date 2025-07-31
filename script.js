@@ -1408,6 +1408,7 @@ Apabila terdapat kendala teknis, silakan hubungi nomor berikut: 088972745194.`
 1. Memformat seluruh metrik ke persen, presisi 2 desimal
 2. Menyempurnakan spacing antar section dan konsistensi judul
 3. Menambahkan input validation saat user mengakses menu B-Grade atau C-Grade
+4. Menambahkan fitur auto-fill pada field model name berdasarkan input style number
 
 🧱 Code Structure & Integration
 1. Modularisasi HTML, CSS, JS untuk maintainability
