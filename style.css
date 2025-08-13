@@ -118,6 +118,7 @@ h1:hover {
 #ncvs option.used-ncvs {
     color: red;
     font-weight: bold;
+    background: linear-gradient(135deg, #ffebeb, #ffebeb);
     /* Anda bisa menambahkan gaya lain di sini jika diperlukan */
     /* background-color: #ffebeb; */
 }
@@ -1313,3 +1314,4 @@ h1:hover {
     100% { transform: rotate(360deg); }
     
   
+
