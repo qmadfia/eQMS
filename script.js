@@ -78,7 +78,7 @@ const STORAGE_KEYS = {
     QTY_SAMPLE_SET: 'qtySampleSet'
 };
 
-const MAX_INSPECTION_LIMIT = 50;
+const MAX_INSPECTION_LIMIT = 300;
 
 // ===========================================
 // 2. Fungsi localStorage Komprehensif (Modifikasi)
@@ -1492,4 +1492,5 @@ Apabila terdapat kendala teknis, silakan hubungi nomor berikut: 088972745194.`
         }
     }
 });
+
 
