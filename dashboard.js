@@ -15,8 +15,9 @@ let currentLimitView = 'today'; // Default tampilan awal tabel adalah 'today'
 let currentAuditorTableFilter = 'all'; // Default auditor untuk tabel adalah 'all'
 
 // Auditor mappings for plants
-const plant1Auditors = ['Badrowi', 'Sopan Sopian']; // Adjust with your Plant 1 auditors
-const plant2Auditors = ['Iksan']; // Adjust with your Plant 2 auditors
+const plant1Auditors = ['Badrowi', 'Sopan Sopian', 'Elita', 'Puji', 'Muadaroh', 'Yaffie', 'Anin'];  
+const plant2Auditors = ['Iksan', 'Inda', 'Inggit', 'Yusuf', 'Anin'];
+
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchData();
