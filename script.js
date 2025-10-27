@@ -1008,12 +1008,31 @@ function initApp() {
             saveToLocalStorage();
         });
     }
-
-    if (ncvsSelect) {
-        ncvsSelect.addEventListener('change', () => {
-            saveToLocalStorage();
-        });
-    }
+// Event listener untuk dropdown NCVS (existing code)
+if (ncvsSelect) {
+    ncvsSelect.addEventListener('change', () => {
+        saveToLocalStorage();
+    });
+    
+    // --- TAMBAHKAN CODE BARU INI ---
+    // Event listener untuk menampilkan notifikasi saat NCVS yang sudah diinput dipilih
+    ncvsSelect.addEventListener('change', () => {
+        const selectedNcvs = ncvsSelect.value;
+        const selectedAuditor = auditorSelect ? auditorSelect.value : '';
+        
+        if (selectedNcvs && selectedAuditor) {
+            // Dapatkan data NCVS yang sudah digunakan untuk auditor ini pada hari ini
+            const usedNcvsForToday = getUsedNcvsData();
+            const usedNcvsBySelectedAuditor = usedNcvsForToday[selectedAuditor] || [];
+            
+            // Cek apakah NCVS yang dipilih sudah digunakan oleh auditor ini
+            if (usedNcvsBySelectedAuditor.includes(selectedNcvs)) {
+                alert(`Perhatian: NCVS ${selectedNcvs} telah diinput oleh ${selectedAuditor} pada hari ini.`);
+            }
+        }
+    });
+    // --- AKHIR CODE BARU ---
+}
 
     modelNameInput = document.getElementById("model-name");
     styleNumberInput = document.getElementById("style-number");
@@ -1146,6 +1165,7 @@ function getUsedNcvsData() {
 
     const todayDate = getTodayDateString();
 
+    // Reset data jika tanggal di localStorage bukan hari ini
     if (!usedNcvsPerDay[todayDate]) {
         usedNcvsPerDay = {
             [todayDate]: {}
@@ -1166,10 +1186,12 @@ function markNcvsAsUsed(auditor, ncvs) {
         usedNcvsForToday[auditor] = [];
     }
 
+    // Pastikan NCVS belum ada di daftar sebelum menambahkannya
     if (!usedNcvsForToday[auditor].includes(ncvs)) {
         usedNcvsForToday[auditor].push(ncvs);
     }
 
+    // Simpan kembali data yang diperbarui ke localStorage
     const allUsedNcvsData = JSON.parse(localStorage.getItem(USED_NCVS_STORAGE_KEY) || '{}');
     allUsedNcvsData[todayDate] = usedNcvsForToday;
     localStorage.setItem(USED_NCVS_STORAGE_KEY, JSON.stringify(allUsedNcvsData));
@@ -1183,19 +1205,31 @@ function updateNcvsOptions(selectedAuditor) {
     defaultOption.textContent = "Pilih NCVS";
     ncvsSelect.appendChild(defaultOption);
 
+    // --- MODIFIKASI DIMULAI ---
+    // Dapatkan data NCVS yang sudah digunakan untuk auditor yang dipilih pada hari ini
     const usedNcvsForToday = getUsedNcvsData();
     const usedNcvsBySelectedAuditor = usedNcvsForToday[selectedAuditor] || [];
+    // --- MODIFIKASI SELESAI ---
 
     if (selectedAuditor && auditorNcvsMap[selectedAuditor]) {
         const ncvsList = auditorNcvsMap[selectedAuditor];
         ncvsList.forEach(ncvs => {
             const option = document.createElement('option');
             option.value = ncvs;
-            option.textContent = ncvs;
-
-            if (usedNcvsBySelectedAuditor.includes(ncvs)) {
+            
+            // --- MODIFIKASI DIMULAI ---
+            // Cek apakah NCVS ini sudah digunakan oleh auditor yang dipilih
+            const isUsedByThisAuditor = usedNcvsBySelectedAuditor.includes(ncvs);
+            
+            if (isUsedByThisAuditor) {
+                // Tambahkan keterangan dalam kurung
+                option.textContent = `${ncvs} (NCVS telah diinput)`;
+                // Tetap tambahkan class untuk styling warna merah (untuk device yang support)
                 option.classList.add('used-ncvs');
+            } else {
+                option.textContent = ncvs;
             }
+            // --- MODIFIKASI SELESAI ---
 
             ncvsSelect.appendChild(option);
         });
@@ -1346,4 +1380,3 @@ Apabila terdapat kendala teknis, silakan hubungi nomor berikut: 088972745194.`
         }
     }
 });
-
